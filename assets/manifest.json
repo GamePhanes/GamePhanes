@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "gamephanes-core-assets-v1",
-  "description": "Reproducible procedural assets used by the first GamePhanes example.",
+  "description": "Reproducible procedural assets and captured runtime media for the GamePhanes showcase.",
   "assets": [
     {
       "id": "platformer_player_procedural",
@@ -37,6 +37,86 @@
         "rendered_by": "examples/platformer-basic/scripts/main.gd",
         "dimensions": [640, 360]
       }
+    },
+    {
+      "id": "neon_relay_procedural",
+      "type": "procedural",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": { "rendered_by": "examples/neon-relay/scripts/main.gd", "dimensions": [960, 540], "style": "neon sci-fi platformer" }
+    },
+    {
+      "id": "last_signal_procedural",
+      "type": "procedural",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": { "rendered_by": "examples/last-signal/scripts/main.gd", "dimensions": [960, 540], "style": "tactical radio-map survival" }
+    },
+    {
+      "id": "gravity_lab_procedural",
+      "type": "procedural",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": { "rendered_by": "examples/gravity-lab/scripts/main.gd", "dimensions": [960, 540], "style": "clean cyan science facility" }
+    },
+    {
+      "id": "tiny_bastion_procedural",
+      "type": "procedural",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": { "rendered_by": "examples/tiny-bastion/scripts/main.gd", "dimensions": [960, 540], "style": "miniature storybook defense" }
+    },
+    {
+      "id": "rift_arena_procedural_3d",
+      "type": "model_3d",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": { "rendered_by": "examples/rift-arena/scripts/main.gd", "dimensions": [960, 540], "style": "violet low-poly 3D arena" }
+    },
+    {
+      "id": "neon_relay_runtime_capture",
+      "type": "texture_2d",
+      "source": "generated",
+      "license": "MIT",
+      "files": ["showcase/neon-relay.png"],
+      "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture" }
+    },
+    {
+      "id": "last_signal_runtime_capture",
+      "type": "texture_2d",
+      "source": "generated",
+      "license": "MIT",
+      "files": ["showcase/last-signal.png"],
+      "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture" }
+    },
+    {
+      "id": "gravity_lab_runtime_capture",
+      "type": "texture_2d",
+      "source": "generated",
+      "license": "MIT",
+      "files": ["showcase/gravity-lab.png"],
+      "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture" }
+    },
+    {
+      "id": "tiny_bastion_runtime_capture",
+      "type": "texture_2d",
+      "source": "generated",
+      "license": "MIT",
+      "files": ["showcase/tiny-bastion.png"],
+      "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture" }
+    },
+    {
+      "id": "rift_arena_runtime_capture",
+      "type": "texture_2d",
+      "source": "generated",
+      "license": "MIT",
+      "files": ["showcase/rift-arena.png"],
+      "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture" }
     }
   ]
 }

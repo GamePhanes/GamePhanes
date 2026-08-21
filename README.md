@@ -4,9 +4,9 @@
 >
 > 一个开源的 Godot 游戏编码智能体环境，帮助 Agent 构建、试玩、测试并修复游戏。
 
-[Project homepage / 项目主页](https://gamephanes.github.io/) · [Architecture / 架构](docs/architecture.md) · [Example task / 示例任务](benchmark/tasks/platformer-basic.json)
+[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#five-game-showcase--五款游戏展示) · [Architecture / 架构](docs/architecture.md)
 
-![GamePhanes platformer playtest](docs/assets/platformer-demo.png)
+![Neon Relay running in GamePhanes](docs/assets/neon-relay.png)
 
 ## What is GamePhanes? / 项目简介
 
@@ -27,7 +27,31 @@ The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 - Godot headless import and runtime execution / Godot headless 导入和运行；
 - Structured runtime events over NDJSON logs / 基于 NDJSON 日志的结构化运行时事件；
 - Deterministic assertions and scoring without an LLM judge / 不依赖 LLM Judge 的确定性断言与评分报告；
-- A procedural 2D platformer example with no external assets / 一个无外部素材的程序化 2D 平台跳跃示例。
+- Five polished 2D/3D showcase slices with external Playtests / 五款带独立 Playtest 的精致 2D/3D 游戏切片。
+
+## Five-game Showcase / 五款游戏展示
+
+These are runnable Godot reference projects, not static mockups. Together they exercise movement, combat, physics state, resource strategy, wave simulation, 3D rendering, external input, and deterministic evaluation.
+
+它们是真正可运行的 Godot 参考工程，不是静态概念图。五款游戏共同覆盖移动、战斗、物理状态、资源策略、波次模拟、3D 渲染、外部输入和确定性评测。
+
+| Game / 游戏 | Runtime capture / 实机画面 | Verified loop / 已验证闭环 |
+|---|---|---|
+| [Neon Relay](examples/neon-relay) | ![Neon Relay](docs/assets/neon-relay.png) | Run, jump, collect three shards, finish / 奔跑、跳跃、收集三枚碎片、抵达终点 |
+| [Last Signal](examples/last-signal) | ![Last Signal](docs/assets/last-signal.png) | Reposition, pulse, clear four threats / 移动、脉冲攻击、清除四个威胁 |
+| [Gravity Lab](examples/gravity-lab) | ![Gravity Lab](docs/assets/gravity-lab.png) | Flip gravity, stabilize core, unlock exit / 反转重力、稳定核心、解锁出口 |
+| [Tiny Bastion](examples/tiny-bastion) | ![Tiny Bastion](docs/assets/tiny-bastion.png) | Build towers, start wave, defend keep / 建塔、开启波次、守住城堡 |
+| [Rift Arena](examples/rift-arena) | ![Rift Arena](docs/assets/rift-arena.png) | Move in 3D, strike warden, stabilize rift / 3D 移动、攻击守卫、稳定裂隙 |
+
+All five currently pass `22/22` deterministic assertions with zero protocol errors.
+
+五款游戏目前全部通过 `22/22` 项确定性断言，协议错误为零。
+
+```powershell
+npm run showcase:validate
+$env:GAMEPHANES_GODOT = "C:\path\to\godot.exe"
+npm run showcase:run
+```
 
 ## Quick Start / 快速开始
 
@@ -99,9 +123,9 @@ node ./bin/gamephanes.js assets validate ./assets/manifest.json
 node ./bin/gamephanes.js assets list ./assets/manifest.json
 ```
 
-Each manifest entry records an asset ID, type, source, license, files, and runtime metadata. The first example uses reproducible procedural assets, so it does not depend on external downloads.
+Each manifest entry records an asset ID, type, source, license, files, and runtime metadata. The showcase uses reproducible procedural visuals and versioned runtime captures, so it does not depend on external downloads.
 
-每个 Manifest 条目记录资产 ID、类型、来源、许可证、文件和运行时元数据。当前示例使用可复现的程序化资产，因此不依赖外部下载。
+每个 Manifest 条目记录资产 ID、类型、来源、许可证、文件和运行时元数据。Showcase 使用可复现的程序化视觉与有版本的实机截图，因此不依赖外部下载。
 
 The asset pipeline is intentionally layered:
 
@@ -162,7 +186,7 @@ GamePhanes 当前以 evaluation-first 为边界，尚未接入具体大模型、
 - `M0 - Environment`：Task contract, Godot runner, event protocol, rule evaluator / 任务契约、Godot runner、事件协议、规则评测；
 - `M1 - Coding Agent`：Controlled file tools and repair loop / 受控文件工具、Godot 项目检查、实现与修复循环；
 - `M2 - Playtest`：Input DSL, screenshots, Node state, time-series assertions / 键鼠动作 DSL、截图、Node 状态和时间序列断言；
-- `M3 - GamePhanes-Bench`：10 verified 2D core tasks and baselines / 10 个经过人工验证的 2D 核心任务和 baseline；
+- `M3 - GamePhanes-Bench`：Five showcase slices available; expand toward 10 core tasks and baselines / 已提供五款展示切片，继续扩展到 10 个核心任务和 baseline；
 - `M4 - Project State`：Scene/Script/Resource Artifact Graph and long-task ablations / Scene/Script/Resource Artifact Graph 与长任务消融；
 - `M5 - Assets and 3D`：Asset retrieval, adaptation, animation, and Godot 3D / 资产检索、适配、动画和 Godot 3D。
 

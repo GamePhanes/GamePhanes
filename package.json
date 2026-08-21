@@ -20,6 +20,8 @@
     "assets:validate": "node ./bin/gamephanes.js assets validate ./assets/manifest.json",
     "assets:list": "node ./bin/gamephanes.js assets list ./assets/manifest.json",
     "demo": "node ./bin/gamephanes.js run ./benchmark/tasks/platformer-basic.json",
+    "showcase:validate": "node ./bin/gamephanes.js validate ./benchmark/tasks/neon-relay.json && node ./bin/gamephanes.js validate ./benchmark/tasks/last-signal.json && node ./bin/gamephanes.js validate ./benchmark/tasks/gravity-lab.json && node ./bin/gamephanes.js validate ./benchmark/tasks/tiny-bastion.json && node ./bin/gamephanes.js validate ./benchmark/tasks/rift-arena.json",
+    "showcase:run": "node ./bin/gamephanes.js run ./benchmark/tasks/neon-relay.json && node ./bin/gamephanes.js run ./benchmark/tasks/last-signal.json && node ./bin/gamephanes.js run ./benchmark/tasks/gravity-lab.json && node ./bin/gamephanes.js run ./benchmark/tasks/tiny-bastion.json && node ./bin/gamephanes.js run ./benchmark/tasks/rift-arena.json",
     "site": "node ./scripts/serve-docs.js",
     "test": "node --test"
   },

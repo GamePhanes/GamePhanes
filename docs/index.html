@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#090d12">
     <meta property="og:title" content="GamePhanes - Build. Play. Prove.">
     <meta property="og:description" content="An open-source game coding agent environment and benchmark for Godot.">
-    <meta property="og:image" content="https://gamephanes.github.io/assets/platformer-demo.png">
+    <meta property="og:image" content="https://gamephanes.github.io/assets/neon-relay.png">
     <meta property="og:type" content="website">
     <title>GamePhanes - Build. Play. Prove.</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -21,6 +21,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a href="#workflow" data-i18n="navWorkflow">Workflow</a>
+        <a href="#showcase" data-i18n="navShowcase">Showcase</a>
         <a href="#benchmark" data-i18n="navBenchmark">Benchmark</a>
         <a href="architecture.md" data-i18n="navArchitecture">Architecture</a>
         <button class="language-switch" type="button" data-lang-toggle aria-label="Switch language" aria-pressed="false"><span>中文</span><span aria-hidden="true"> / </span><span>EN</span></button>
@@ -30,7 +31,7 @@
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="assets/platformer-demo.png" alt="A GamePhanes platformer playtest with the player jumping toward a coin" data-i18n-alt="heroImageAlt">
+        <img class="hero-image" src="assets/neon-relay.png" alt="Neon Relay running inside the GamePhanes playtest environment" data-i18n-alt="heroImageAlt">
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-inner">
           <p class="eyebrow" data-i18n="heroEyebrow">Open-source autonomous game engineering</p>
@@ -45,7 +46,7 @@
         <div class="run-strip" aria-label="Latest verified run" data-i18n-aria="runLabel">
           <div>
             <span class="run-label" data-i18n="latestRun">LATEST RUN</span>
-            <strong>platformer_basic_001</strong>
+            <strong>showcase_rift_arena_001</strong>
           </div>
           <div><span class="status-dot"></span><strong data-i18n="buildPass">BUILD PASS</strong></div>
           <div><span class="status-dot"></span><strong data-i18n="runtimePass">RUNTIME PASS</strong></div>
@@ -62,11 +63,42 @@
           <p class="section-lead" data-i18n="proofLead">GamePhanes launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.</p>
         </div>
         <div class="metric-grid section-inner">
-          <div class="metric"><strong>5/5</strong><span data-i18n="metricAssertions">Assertions passed</span></div>
-          <div class="metric"><strong>1.19s</strong><span data-i18n="metricRuntime">Playtest runtime</span></div>
+          <div class="metric"><strong>22/22</strong><span data-i18n="metricAssertions">Assertions passed</span></div>
+          <div class="metric"><strong>5</strong><span data-i18n="metricSlices">Playable slices</span></div>
           <div class="metric"><strong>0</strong><span data-i18n="metricErrors">Protocol errors</span></div>
           <div class="metric"><strong>100%</strong><span data-i18n="metricScore">Functional score</span></div>
         </div>
+      </section>
+
+      <section class="showcase" id="showcase" aria-labelledby="showcase-title">
+        <div class="section-inner showcase-heading">
+          <p class="section-kicker" data-i18n="showcaseKicker">Five games. Five proof surfaces.</p>
+          <h2 id="showcase-title" data-i18n="showcaseTitle">Not mockups. Running Godot projects.</h2>
+          <p class="section-lead" data-i18n="showcaseLead">Each slice has a distinct art direction, playable loop, external harness, and deterministic score.</p>
+        </div>
+        <div class="section-inner showcase-grid">
+          <article class="showcase-item showcase-featured">
+            <img src="assets/neon-relay.png" alt="Neon Relay gameplay" loading="lazy">
+            <div class="showcase-copy"><span data-i18n="neonGenre">Momentum platformer</span><h3>Neon Relay</h3><p data-i18n="neonCopy">Sprint through an electric skyline, phase-jump, and chain three energy shards into the relay.</p><a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/neon-relay" data-i18n="viewProject">View project</a></div>
+          </article>
+          <article class="showcase-item">
+            <img src="assets/last-signal.png" alt="Last Signal gameplay" loading="lazy">
+            <div class="showcase-copy"><span data-i18n="signalGenre">Tactical survival</span><h3>Last Signal</h3><p data-i18n="signalCopy">Reposition a field transmitter and burn threats from a living radio map.</p><a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/last-signal" data-i18n="viewProject">View project</a></div>
+          </article>
+          <article class="showcase-item">
+            <img src="assets/gravity-lab.png" alt="Gravity Lab gameplay" loading="lazy">
+            <div class="showcase-copy"><span data-i18n="gravityGenre">Physics puzzle</span><h3>Gravity Lab</h3><p data-i18n="gravityCopy">Reverse polarity, stabilize an energy core, and unlock the sealed chamber.</p><a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/gravity-lab" data-i18n="viewProject">View project</a></div>
+          </article>
+          <article class="showcase-item">
+            <img src="assets/tiny-bastion.png" alt="Tiny Bastion gameplay" loading="lazy">
+            <div class="showcase-copy"><span data-i18n="bastionGenre">Micro tower defense</span><h3>Tiny Bastion</h3><p data-i18n="bastionCopy">Spend carefully, place two towers, and hold the miniature keep until dawn.</p><a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/tiny-bastion" data-i18n="viewProject">View project</a></div>
+          </article>
+          <article class="showcase-item">
+            <img src="assets/rift-arena.png" alt="Rift Arena 3D gameplay" loading="lazy">
+            <div class="showcase-copy"><span data-i18n="riftGenre">3D arena combat</span><h3>Rift Arena</h3><p data-i18n="riftCopy">Enter a low-poly breach, strike its warden, and stabilize the dimensional ring.</p><a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/rift-arena" data-i18n="viewProject">View project</a></div>
+          </article>
+        </div>
+        <div class="section-inner showcase-proof"><span>5 PROJECTS</span><span>5 EXTERNAL HARNESSES</span><span>22 ASSERTIONS</span><strong data-i18n="showcaseVerified">ALL VERIFIED</strong></div>
       </section>
 
       <section class="workflow" id="workflow" aria-labelledby="workflow-title">
@@ -168,6 +200,6 @@
         <span id="copyright">2026</span>
       </div>
     </footer>
-    <script src="site.js?v=asset-engineering"></script>
+    <script src="site.js?v=showcase-five"></script>
   </body>
 </html>

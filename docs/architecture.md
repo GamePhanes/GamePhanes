@@ -97,3 +97,17 @@ Candidate projects and benchmark-owned harnesses must remain separate.
 The local runner intentionally does not claim these container-level guarantees yet.
 
 当前本地 runner 有意不宣称具备上述容器级安全保证。
+
+## Showcase Matrix / 展示矩阵
+
+The first public suite deliberately varies genre and rendering mode while keeping the same task, harness, event, and report contracts.
+
+首批公开展示有意覆盖不同游戏类型和渲染模式，同时复用同一套任务、Harness、事件和报告契约。
+
+| Project / 工程 | Core system / 核心系统 | Evidence / 验证证据 |
+|---|---|---|
+| Neon Relay | 2D movement and collection / 2D 移动与收集 | jump velocity, shards, distance / 跳跃速度、碎片、距离 |
+| Last Signal | targeting and combat / 索敌与战斗 | shots, defeated threats / 射击、消灭威胁 |
+| Gravity Lab | stateful puzzle / 状态解谜 | polarity, core height, exit / 极性、核心高度、出口 |
+| Tiny Bastion | resources and waves / 资源与波次 | towers, kills, base health / 防御塔、击杀、基地生命 |
+| Rift Arena | procedural 3D combat / 程序化 3D 战斗 | hits, enemy health, stability / 命中、敌人生命、稳定度 |

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "showcase_rift_arena_001",
+  "title": "Rift Arena",
+  "description": "Enter a 3D arena, strike the rift warden, and stabilize the breach.",
+  "project": { "path": "../../examples/rift-arena" },
+  "requirements": [
+    { "id": "movement_3d", "description": "The player can move in the 3D arena." },
+    { "id": "combat_3d", "description": "Rift strikes damage the warden." },
+    { "id": "stability", "description": "Defeating the warden stabilizes the rift." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/rift-arena.gd",
+    "timeout_seconds": 20,
+    "assertions": [
+      { "id": "ready", "event": "game_ready", "field": "enemy_health", "operator": "==", "value": 3 },
+      { "id": "hit", "event": "warden_hit", "field": "hits", "operator": ">=", "value": 1 },
+      { "id": "stabilized", "event": "rift_stabilized", "field": "hits", "operator": "==", "value": 3 },
+      { "id": "complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}

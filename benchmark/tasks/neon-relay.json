@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "showcase_neon_relay_001",
+  "title": "Neon Relay",
+  "description": "Run a neon course, jump, collect three energy shards, and synchronize the relay.",
+  "project": { "path": "../../examples/neon-relay" },
+  "requirements": [
+    { "id": "runner_moves", "description": "The runner moves through the course." },
+    { "id": "runner_jumps", "description": "The runner performs a phase jump." },
+    { "id": "relay_sync", "description": "Three shards are collected before reaching the relay." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/neon-relay.gd",
+    "timeout_seconds": 15,
+    "assertions": [
+      { "id": "ready", "event": "game_ready", "operator": "exists" },
+      { "id": "jump", "event": "player_jumped", "field": "velocity_y", "operator": "<", "value": 0 },
+      { "id": "shards", "event": "relay_finished", "field": "shards", "operator": "==", "value": 3 },
+      { "id": "distance", "event": "relay_finished", "field": "distance", "operator": ">", "value": 700 },
+      { "id": "complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}

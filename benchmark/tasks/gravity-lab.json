@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "showcase_gravity_lab_001",
+  "title": "Gravity Lab",
+  "description": "Invert chamber polarity, stabilize the suspended core, and cross the unlocked exit.",
+  "project": { "path": "../../examples/gravity-lab" },
+  "requirements": [
+    { "id": "polarity", "description": "The player can invert chamber gravity." },
+    { "id": "core", "description": "The core reaches the upper stabilizer." },
+    { "id": "exit", "description": "A stabilized core unlocks the chamber exit." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/gravity-lab.gd",
+    "timeout_seconds": 15,
+    "assertions": [
+      { "id": "flip", "event": "gravity_flipped", "field": "inverted", "operator": "==", "value": true },
+      { "id": "core", "event": "core_stabilized", "field": "exit_open", "operator": "==", "value": true },
+      { "id": "exit", "event": "chamber_completed", "field": "player_x", "operator": ">", "value": 820 },
+      { "id": "complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}
