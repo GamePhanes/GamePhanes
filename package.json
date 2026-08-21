@@ -2,13 +2,13 @@
   "name": "@gamebuddy/core",
   "version": "0.1.0",
   "description": "An open-source game coding agent environment and benchmark for Godot.",
-  "homepage": "https://allegame.github.io/gamebuddy/",
+  "homepage": "https://gamephanes.github.io/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlleGame/gamebuddy.git"
+    "url": "git+https://github.com/GamePhanes/GamePhanes.git"
   },
   "bugs": {
-    "url": "https://github.com/AlleGame/gamebuddy/issues"
+    "url": "https://github.com/GamePhanes/GamePhanes/issues"
   },
   "type": "module",
   "bin": {

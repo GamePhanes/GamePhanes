@@ -2,7 +2,7 @@
 
 > An open-source game coding agent environment that builds, plays, tests, and repairs Godot games.
 
-[Project homepage](https://allegame.github.io/gamebuddy/) · [Architecture](docs/architecture.md) · [Example task](benchmark/tasks/platformer-basic.json)
+[Project homepage](https://gamephanes.github.io/) · [Architecture](docs/architecture.md) · [Example task](benchmark/tasks/platformer-basic.json)
 
 ![GameBuddy platformer playtest](docs/assets/platformer-demo.png)
 
