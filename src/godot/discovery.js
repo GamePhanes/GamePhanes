@@ -10,6 +10,7 @@ function executableNames() {
 export function findGodot(explicitPath, env = process.env) {
   const candidates = [];
   if (explicitPath) candidates.push(path.resolve(explicitPath));
+  if (env.GAMEPHANES_GODOT) candidates.push(path.resolve(env.GAMEPHANES_GODOT));
   if (env.GAMEBUDDY_GODOT) candidates.push(path.resolve(env.GAMEBUDDY_GODOT));
 
   const pathEntries = (env.PATH ?? "").split(path.delimiter).filter(Boolean);

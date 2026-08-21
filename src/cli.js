@@ -7,12 +7,12 @@ import { findGodot } from "./godot/discovery.js";
 import { runGodotTask } from "./godot/runner.js";
 import { loadTask, resolveTaskPath } from "./core/task.js";
 
-const HELP = `GameBuddy - build, playtest, and evaluate Godot games
+const HELP = `GamePhanes - build, playtest, and evaluate Godot games
 
 Usage:
-  gamebuddy doctor [--godot PATH]
-  gamebuddy validate <task.json>
-  gamebuddy run <task.json> [--godot PATH] [--report PATH]
+  gamephanes doctor [--godot PATH]
+  gamephanes validate <task.json>
+  gamephanes run <task.json> [--godot PATH] [--report PATH]
 `;
 
 function parseOptions(args, definitions) {
@@ -30,7 +30,7 @@ async function doctor(args) {
     node: { ok: true, version: process.version },
     godot: godotPath
       ? { ok: true, path: godotPath }
-      : { ok: false, message: "Set GAMEBUDDY_GODOT or pass --godot PATH." },
+      : { ok: false, message: "Set GAMEPHANES_GODOT or pass --godot PATH." },
   };
   printJson(result);
   if (!godotPath) process.exitCode = 1;
@@ -56,7 +56,7 @@ async function run(args) {
   const projectPath = resolveTaskPath(taskDirectory, task.project.path, "project");
   const harnessPath = resolveTaskPath(taskDirectory, task.evaluation.harness, "harness");
   const godotPath = findGodot(values.godot);
-  if (!godotPath) throw new Error("Godot was not found. Set GAMEBUDDY_GODOT or pass --godot PATH.");
+  if (!godotPath) throw new Error("Godot was not found. Set GAMEPHANES_GODOT or pass --godot PATH.");
 
   const execution = await runGodotTask({
     godotPath,

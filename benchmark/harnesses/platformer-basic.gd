@@ -1,6 +1,6 @@
 extends SceneTree
 
-const EVENT_PREFIX := "GAMEBUDDY_EVENT "
+const EVENT_PREFIX := "GAMEPHANES_EVENT "
 
 var game: Node
 var start_x := 0.0

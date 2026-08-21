@@ -1,4 +1,4 @@
-# GameBuddy
+# GamePhanes
 
 > An open-source game coding agent environment that builds, plays, tests, and repairs Godot games.
 >
@@ -6,13 +6,13 @@
 
 [Project homepage / 项目主页](https://gamephanes.github.io/) · [Architecture / 架构](docs/architecture.md) · [Example task / 示例任务](benchmark/tasks/platformer-basic.json)
 
-![GameBuddy platformer playtest](docs/assets/platformer-demo.png)
+![GamePhanes platformer playtest](docs/assets/platformer-demo.png)
 
-## What is GameBuddy? / 项目简介
+## What is GamePhanes? / 项目简介
 
-GameBuddy is designed around a verifiable engineering loop rather than one-shot code generation.
+GamePhanes is designed around a verifiable engineering loop rather than one-shot code generation.
 
-GameBuddy 不把“生成代码”当作终点，而是围绕可验证的工程闭环设计：
+GamePhanes 不把“生成代码”当作终点，而是围绕可验证的工程闭环设计：
 
 ```text
 Understand -> Plan -> Build -> Run -> Play -> Observe -> Repair -> Evaluate
@@ -38,9 +38,9 @@ Requirements / 环境要求：
 
 ```powershell
 npm test
-node ./bin/gamebuddy.js validate ./benchmark/tasks/platformer-basic.json
-node ./bin/gamebuddy.js doctor --godot C:\path\to\godot.exe
-node ./bin/gamebuddy.js run ./benchmark/tasks/platformer-basic.json `
+node ./bin/gamephanes.js validate ./benchmark/tasks/platformer-basic.json
+node ./bin/gamephanes.js doctor --godot C:\path\to\godot.exe
+node ./bin/gamephanes.js run ./benchmark/tasks/platformer-basic.json `
   --godot C:\path\to\godot.exe `
   --report ./reports/platformer-basic.json
 ```
@@ -48,7 +48,7 @@ node ./bin/gamebuddy.js run ./benchmark/tasks/platformer-basic.json `
 Or set the environment variable / 也可以设置环境变量：
 
 ```powershell
-$env:GAMEBUDDY_GODOT = "C:\path\to\godot.exe"
+$env:GAMEPHANES_GODOT = "C:\path\to\godot.exe"
 npm run demo
 ```
 
@@ -90,9 +90,9 @@ Supported operators / 当前支持的断言操作符：`exists`、`==`、`!=`、
 
 ## Why External Harnesses? / 为什么使用外部 Harness？
 
-Test logic does not live inside candidate game code. GameBuddy:
+Test logic does not live inside candidate game code. GamePhanes:
 
-测试逻辑不放在候选游戏代码中。GameBuddy 会：
+测试逻辑不放在候选游戏代码中。GamePhanes 会：
 
 1. Copy the candidate Godot project into a temporary directory / 将候选 Godot 工程复制到临时目录；
 2. Inject a benchmark-owned harness / 把 benchmark 管理的 harness 注入临时副本；
@@ -107,7 +107,7 @@ This keeps ground-truth tests separate from Agent artifacts and leaves the origi
 ## Repository Layout / 仓库结构
 
 ```text
-gamebuddy/
+gamephanes/
 ├── benchmark/
 │   ├── harnesses/       # Independent Playtest drivers / 独立 Playtest 驱动
 │   └── tasks/           # Reproducible task specs / 可复现任务规范
@@ -127,16 +127,16 @@ The local runner isolates project files and execution time; it is not an OS-leve
 
 当前 runner 提供的是临时工程副本和执行时间限制，并非操作系统级安全沙箱。Godot 子进程仍继承当前用户权限和网络访问能力。运行不受信任的 Agent 工程时，应使用容器或权限隔离的 worker。
 
-GameBuddy is currently evaluation-first. It does not yet include a specific LLM, automatic coding loop, Artifact Graph, screenshot understanding, or asset generation.
+GamePhanes is currently evaluation-first. It does not yet include a specific LLM, automatic coding loop, Artifact Graph, screenshot understanding, or asset generation.
 
-GameBuddy 当前以 evaluation-first 为边界，尚未接入具体大模型、自动编码循环、Artifact Graph、截图理解或资产生成。
+GamePhanes 当前以 evaluation-first 为边界，尚未接入具体大模型、自动编码循环、Artifact Graph、截图理解或资产生成。
 
 ## Roadmap / 路线图
 
 - `M0 - Environment`：Task contract, Godot runner, event protocol, rule evaluator / 任务契约、Godot runner、事件协议、规则评测；
 - `M1 - Coding Agent`：Controlled file tools and repair loop / 受控文件工具、Godot 项目检查、实现与修复循环；
 - `M2 - Playtest`：Input DSL, screenshots, Node state, time-series assertions / 键鼠动作 DSL、截图、Node 状态和时间序列断言；
-- `M3 - GameBuddy-Bench`：10 verified 2D core tasks and baselines / 10 个经过人工验证的 2D 核心任务和 baseline；
+- `M3 - GamePhanes-Bench`：10 verified 2D core tasks and baselines / 10 个经过人工验证的 2D 核心任务和 baseline；
 - `M4 - Project State`：Scene/Script/Resource Artifact Graph and long-task ablations / Scene/Script/Resource Artifact Graph 与长任务消融；
 - `M5 - Assets and 3D`：Asset retrieval, adaptation, animation, and Godot 3D / 资产检索、适配、动画和 Godot 3D。
 

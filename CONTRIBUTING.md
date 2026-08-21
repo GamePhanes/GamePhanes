@@ -1,8 +1,8 @@
-# Contributing to GameBuddy / 参与 GameBuddy 贡献
+# Contributing to GamePhanes / 参与 GamePhanes 贡献
 
-GameBuddy is building its execution and evaluation foundation. Contributions are most useful when they improve reproducibility, observable game behavior, or benchmark integrity.
+GamePhanes is building its execution and evaluation foundation. Contributions are most useful when they improve reproducibility, observable game behavior, or benchmark integrity.
 
-GameBuddy 正在建设执行与评测基础设施。能够提升可复现性、游戏行为可观测性或 benchmark 完整性的贡献最有价值。
+GamePhanes 正在建设执行与评测基础设施。能够提升可复现性、游戏行为可观测性或 benchmark 完整性的贡献最有价值。
 
 ## Local Setup / 本地设置
 
@@ -17,9 +17,9 @@ npm run validate
 npm run site
 ```
 
-Set `GAMEBUDDY_GODOT` or pass `--godot PATH` before running the demo benchmark.
+Set `GAMEPHANES_GODOT` or pass `--godot PATH` before running the demo benchmark.
 
-运行 demo benchmark 前，请设置 `GAMEBUDDY_GODOT` 或传入 `--godot PATH`。
+运行 demo benchmark 前，请设置 `GAMEPHANES_GODOT` 或传入 `--godot PATH`。
 
 ## Pull Requests / Pull Request
 

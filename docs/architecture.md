@@ -1,4 +1,4 @@
-# GameBuddy Architecture / GameBuddy 架构
+# GamePhanes Architecture / GamePhanes 架构
 
 ## Design Principles / 设计原则
 
@@ -30,12 +30,12 @@ Rule evaluator -> JSON report / 规则评测器 -> JSON 报告
 
 ## Event Protocol / 事件协议
 
-Godot harnesses write one JSON object per line with the `GAMEBUDDY_EVENT ` prefix.
+Godot harnesses write one JSON object per line with the `GAMEPHANES_EVENT ` prefix.
 
-Godot harness 每行输出一个 JSON 对象，并使用 `GAMEBUDDY_EVENT ` 作为前缀：
+Godot harness 每行输出一个 JSON 对象，并使用 `GAMEPHANES_EVENT ` 作为前缀：
 
 ```text
-GAMEBUDDY_EVENT {"type":"player_jumped","velocity_y":-310.0}
+GAMEPHANES_EVENT {"type":"player_jumped","velocity_y":-310.0}
 ```
 
 Engine logs may appear before, after, or between events. The parser only consumes prefixed lines and reports malformed protocol messages separately.

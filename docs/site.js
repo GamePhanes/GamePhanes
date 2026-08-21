@@ -3,7 +3,7 @@ const translations = {
     navWorkflow: "Workflow",
     navBenchmark: "Benchmark",
     navArchitecture: "Architecture",
-    heroImageAlt: "A GameBuddy platformer playtest with the player jumping toward a coin",
+    heroImageAlt: "A GamePhanes platformer playtest with the player jumping toward a coin",
     heroEyebrow: "Open-source autonomous game engineering",
     heroStatement: "Build. Play. Prove.",
     heroCopy: "A Godot-first coding agent environment that turns game requirements into runnable projects, real playtests, and reproducible evidence.",
@@ -16,12 +16,12 @@ const translations = {
     scoreLabel: " SCORE",
     proofKicker: "Evidence over claims",
     proofTitle: "A game is not done when the code looks right.",
-    proofLead: "GameBuddy launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.",
+    proofLead: "GamePhanes launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.",
     metricAssertions: "Assertions passed",
     metricRuntime: "Playtest runtime",
     metricErrors: "Protocol errors",
     metricScore: "Functional score",
-    workflowLabel: "GameBuddy workflow",
+    workflowLabel: "GamePhanes workflow",
     workflowKicker: "Closed-loop engineering",
     workflowTitle: "From intent to verified behavior.",
     workflowUnderstand: "Understand",
@@ -58,14 +58,14 @@ const translations = {
     milestoneTasks: "10 verified tasks",
     closingKicker: "MIT licensed. Godot-first. Built in public.",
     closingTitle: "Help build the benchmark games can actually pass.",
-    closingButton: "Explore GameBuddy on GitHub",
+    closingButton: "Explore GamePhanes on GitHub",
     footerTagline: "Open-source autonomous game engineering."
   },
   zh: {
     navWorkflow: "工作流",
     navBenchmark: "评测基准",
     navArchitecture: "架构",
-    heroImageAlt: "GameBuddy 平台跳跃 Playtest，玩家正在跳向金币",
+    heroImageAlt: "GamePhanes 平台跳跃 Playtest，玩家正在跳向金币",
     heroEyebrow: "开源自主游戏工程",
     heroStatement: "构建 · 试玩 · 证明",
     heroCopy: "面向 Godot 的游戏编码智能体环境，把游戏需求转化为可运行工程、真实试玩和可复现证据。",
@@ -78,12 +78,12 @@ const translations = {
     scoreLabel: " 得分",
     proofKicker: "证据胜过描述",
     proofTitle: "代码看起来正确，不代表游戏已经完成。",
-    proofLead: "GameBuddy 启动工程、执行真实输入、观测运行时状态，并在报告成功前检查确定性断言。",
+    proofLead: "GamePhanes 启动工程、执行真实输入、观测运行时状态，并在报告成功前检查确定性断言。",
     metricAssertions: "断言通过",
     metricRuntime: "试玩耗时",
     metricErrors: "协议错误",
     metricScore: "功能得分",
-    workflowLabel: "GameBuddy 工作流",
+    workflowLabel: "GamePhanes 工作流",
     workflowKicker: "闭环游戏工程",
     workflowTitle: "从意图到经过验证的行为。",
     workflowUnderstand: "理解",
@@ -120,7 +120,7 @@ const translations = {
     milestoneTasks: "10 个验证任务",
     closingKicker: "MIT 许可证 · Godot 优先 · 开源共建",
     closingTitle: "一起构建真正能通过评测的游戏。",
-    closingButton: "在 GitHub 探索 GameBuddy",
+    closingButton: "在 GitHub 探索 GamePhanes",
     footerTagline: "开源自主游戏工程。"
   }
 };
@@ -129,7 +129,7 @@ const languageButton = document.querySelector("[data-lang-toggle]");
 
 function readSavedLanguage() {
   try {
-    return window.localStorage.getItem("gamebuddy-language");
+    return window.localStorage.getItem("gamephanes-language");
   } catch {
     return null;
   }
@@ -137,7 +137,7 @@ function readSavedLanguage() {
 
 function saveLanguage(language) {
   try {
-    window.localStorage.setItem("gamebuddy-language", language);
+    window.localStorage.setItem("gamephanes-language", language);
   } catch {
     // Language switching still works when storage is unavailable.
   }

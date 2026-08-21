@@ -6,13 +6,18 @@ import { parseEvents } from "../src/evaluation/protocol.js";
 test("parseEvents extracts structured events from noisy engine logs", () => {
   const output = [
     "Godot Engine 4.x",
-    'GAMEBUDDY_EVENT {"type":"jump","state":{"velocity_y":-240}}',
+    'GAMEPHANES_EVENT {"type":"jump","state":{"velocity_y":-240}}',
     "debug text",
   ].join("\n");
   const result = parseEvents(output);
   assert.equal(result.events.length, 1);
   assert.equal(result.events[0].state.velocity_y, -240);
   assert.deepEqual(result.protocolErrors, []);
+});
+
+test("parseEvents still accepts the legacy GameBuddy event prefix", () => {
+  const result = parseEvents('GAMEBUDDY_EVENT {"type":"legacy_ready"}');
+  assert.equal(result.events[0].type, "legacy_ready");
 });
 
 test("evaluateAssertions supports nested fields and numeric comparisons", () => {

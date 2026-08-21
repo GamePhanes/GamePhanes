@@ -5,9 +5,9 @@ import { parseEvents } from "../evaluation/protocol.js";
 import { runProcess } from "../runtime/process.js";
 
 function prepareSandbox(projectPath, harnessPath) {
-  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "gamebuddy-"));
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "gamephanes-"));
   fs.cpSync(projectPath, sandbox, { recursive: true });
-  const harnessDirectory = path.join(sandbox, ".gamebuddy");
+  const harnessDirectory = path.join(sandbox, ".gamephanes");
   fs.rmSync(harnessDirectory, { recursive: true, force: true });
   fs.mkdirSync(harnessDirectory, { recursive: true });
   fs.copyFileSync(harnessPath, path.join(harnessDirectory, "harness.gd"));
@@ -29,7 +29,7 @@ export async function runGodotTask({ godotPath, projectPath, harnessPath, timeou
 
     const playtest = await runProcess(
       godotPath,
-      ["--headless", "--path", sandbox, "--script", "res://.gamebuddy/harness.gd"],
+      ["--headless", "--path", sandbox, "--script", "res://.gamephanes/harness.gd"],
       { timeoutMs: timeoutSeconds * 1000 },
     );
     const parsed = parseEvents(`${playtest.stdout}\n${playtest.stderr}`);

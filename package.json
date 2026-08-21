@@ -1,5 +1,5 @@
 {
-  "name": "@gamebuddy/core",
+  "name": "@gamephanes/core",
   "version": "0.1.0",
   "description": "An open-source game coding agent environment and benchmark for Godot.",
   "homepage": "https://gamephanes.github.io/",
@@ -12,12 +12,12 @@
   },
   "type": "module",
   "bin": {
-    "gamebuddy": "./bin/gamebuddy.js"
+    "gamephanes": "./bin/gamephanes.js"
   },
   "scripts": {
-    "doctor": "node ./bin/gamebuddy.js doctor",
-    "validate": "node ./bin/gamebuddy.js validate ./benchmark/tasks/platformer-basic.json",
-    "demo": "node ./bin/gamebuddy.js run ./benchmark/tasks/platformer-basic.json",
+    "doctor": "node ./bin/gamephanes.js doctor",
+    "validate": "node ./bin/gamephanes.js validate ./benchmark/tasks/platformer-basic.json",
+    "demo": "node ./bin/gamephanes.js run ./benchmark/tasks/platformer-basic.json",
     "site": "node ./scripts/serve-docs.js",
     "test": "node --test"
   },
