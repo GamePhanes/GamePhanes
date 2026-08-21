@@ -126,7 +126,22 @@ const translations = {
 };
 
 const languageButton = document.querySelector("[data-lang-toggle]");
-const savedLanguage = window.localStorage.getItem("gamebuddy-language");
+
+function readSavedLanguage() {
+  try {
+    return window.localStorage.getItem("gamebuddy-language");
+  } catch {
+    return null;
+  }
+}
+
+function saveLanguage(language) {
+  try {
+    window.localStorage.setItem("gamebuddy-language", language);
+  } catch {
+    // Language switching still works when storage is unavailable.
+  }
+}
 
 function setLanguage(language) {
   const dictionary = translations[language];
@@ -146,10 +161,10 @@ function setLanguage(language) {
   if (languageButton) {
     languageButton.setAttribute("aria-pressed", String(language === "zh"));
   }
-  window.localStorage.setItem("gamebuddy-language", language);
+  saveLanguage(language);
 }
 
-setLanguage(savedLanguage === "zh" ? "zh" : "en");
+setLanguage(readSavedLanguage() === "zh" ? "zh" : "en");
 languageButton?.addEventListener("click", () => {
   const nextLanguage = document.documentElement.lang === "zh-CN" ? "en" : "zh";
   setLanguage(nextLanguage);
