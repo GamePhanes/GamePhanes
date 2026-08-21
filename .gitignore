@@ -1,5 +1,12 @@
-node_modules/
+# Godot editor/import cache (recreated automatically).
+.godot/
+
+# GamePhanes reports and local environment files.
 reports/
-.gamephanes/
-*.log
+.env
+.env.*
+
+# Node dependencies and OS metadata.
+node_modules/
 .DS_Store
+Thumbs.db
