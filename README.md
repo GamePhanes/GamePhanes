@@ -35,13 +35,13 @@ These are runnable Godot reference projects, not static mockups. Together they e
 
 它们是真正可运行的 Godot 参考工程，不是静态概念图。五款游戏共同覆盖移动、战斗、物理状态、资源策略、波次模拟、3D 渲染、外部输入和确定性评测。
 
-| Game / 游戏 | Runtime capture / 实机画面 | Verified loop / 已验证闭环 |
+| Game / 游戏 | Play online / 在线试玩 | Verified loop / 已验证闭环 |
 |---|---|---|
-| [Neon Relay](examples/neon-relay) | ![Neon Relay](docs/assets/neon-relay.png) | Run, jump, collect three shards, finish / 奔跑、跳跃、收集三枚碎片、抵达终点 |
-| [Last Signal](examples/last-signal) | ![Last Signal](docs/assets/last-signal.png) | Reposition, pulse, clear four threats / 移动、脉冲攻击、清除四个威胁 |
-| [Gravity Lab](examples/gravity-lab) | ![Gravity Lab](docs/assets/gravity-lab.png) | Flip gravity, stabilize core, unlock exit / 反转重力、稳定核心、解锁出口 |
-| [Tiny Bastion](examples/tiny-bastion) | ![Tiny Bastion](docs/assets/tiny-bastion.png) | Build towers, start wave, defend keep / 建塔、开启波次、守住城堡 |
-| [Rift Arena](examples/rift-arena) | ![Rift Arena](docs/assets/rift-arena.png) | Move in 3D, strike warden, stabilize rift / 3D 移动、攻击守卫、稳定裂隙 |
+| [Neon Relay](examples/neon-relay) | [Play / 试玩](https://gamephanes.github.io/play/neon-relay/) | Run, jump, collect three shards, finish / 奔跑、跳跃、收集三枚碎片、抵达终点 |
+| [Last Signal](examples/last-signal) | [Play / 试玩](https://gamephanes.github.io/play/last-signal/) | Reposition, pulse, clear four threats / 移动、脉冲攻击、清除四个威胁 |
+| [Gravity Lab](examples/gravity-lab) | [Play / 试玩](https://gamephanes.github.io/play/gravity-lab/) | Flip gravity, stabilize core, unlock exit / 反转重力、稳定核心、解锁出口 |
+| [Tiny Bastion](examples/tiny-bastion) | [Play / 试玩](https://gamephanes.github.io/play/tiny-bastion/) | Build towers, start wave, defend keep / 建塔、开启波次、守住城堡 |
+| [Rift Arena](examples/rift-arena) | [Play / 试玩](https://gamephanes.github.io/play/rift-arena/) | Move in 3D, strike warden, stabilize rift / 3D 移动、攻击守卫、稳定裂隙 |
 
 All five currently pass `22/22` deterministic assertions with zero protocol errors.
 
@@ -52,6 +52,17 @@ npm run showcase:validate
 $env:GAMEPHANES_GODOT = "C:\path\to\godot.exe"
 npm run showcase:run
 ```
+
+Export all five browser builds / 导出五款浏览器版本：
+
+```powershell
+$env:GAMEPHANES_GODOT = "C:\path\to\godot.exe"
+npm run showcase:export-web
+```
+
+The Web export uses Godot's non-threaded template so it runs on GitHub Pages without custom cross-origin headers. A shared engine runtime keeps the five published builds compact; each game retains its own versioned `.pck` package.
+
+Web 导出使用 Godot 无线程模板，因此无需自定义跨域响应头即可在 GitHub Pages 运行。五款游戏共用一份引擎运行时，并分别保留可版本化的 `.pck` 游戏包，以控制发布体积。
 
 ## Quick Start / 快速开始
 

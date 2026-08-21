@@ -16,14 +16,48 @@ var collected := [false, false, false]
 var trail: Array[Vector2] = []
 var title_label: Label
 var status_label: Label
+var web_message_callback
+var web_actions := {}
+var web_just_pressed := {}
 
 
 func _ready() -> void:
+	setup_web_input()
 	title_label = make_label(Vector2(42, 28), 25, Color("f3f7ff"))
 	title_label.text = "NEON RELAY"
 	status_label = make_label(Vector2(744, 34), 16, Color("7af7d0"))
 	update_status()
 	queue_redraw()
+
+
+func setup_web_input() -> void:
+	if not OS.has_feature("web"):
+		return
+	var window = JavaScriptBridge.get_interface("window")
+	web_message_callback = JavaScriptBridge.create_callback(_on_web_message)
+	window.addEventListener("message", web_message_callback)
+	window.parent.postMessage("gamephanes-ready", window.location.origin)
+
+
+func _on_web_message(arguments: Array) -> void:
+	var event = arguments[0]
+	var window = JavaScriptBridge.get_interface("window")
+	if str(event.origin) != str(window.location.origin):
+		return
+	var parts := str(event.data).split("|")
+	if parts.size() != 3 or parts[0] != "gamephanes-input" or not InputMap.has_action(parts[1]):
+		return
+	web_actions[parts[1]] = parts[2] == "1"
+	if parts[2] == "1":
+		web_just_pressed[parts[1]] = true
+
+
+func action_pressed(action: StringName) -> bool:
+	return Input.is_action_pressed(action) or web_actions.get(String(action), false)
+
+
+func action_just_pressed(action: StringName) -> bool:
+	return Input.is_action_just_pressed(action) or web_just_pressed.get(String(action), false)
 
 
 func make_label(at: Vector2, size: int, color: Color) -> Label:
@@ -37,9 +71,13 @@ func make_label(at: Vector2, size: int, color: Color) -> Label:
 
 func _physics_process(delta: float) -> void:
 	elapsed += delta
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction := 0.0
+	if action_pressed("move_left"):
+		direction -= 1.0
+	if action_pressed("move_right"):
+		direction += 1.0
 	player_x = clampf(player_x + direction * MOVE_SPEED * delta, 42.0, 918.0)
-	if Input.is_action_just_pressed("jump") and is_on_ground():
+	if action_just_pressed("jump") and is_on_ground():
 		velocity_y = -JUMP_SPEED
 	velocity_y += GRAVITY * delta
 	player_y += velocity_y * delta
@@ -56,6 +94,7 @@ func _physics_process(delta: float) -> void:
 	trail.push_front(Vector2(player_x, player_y))
 	if trail.size() > 12:
 		trail.pop_back()
+	web_just_pressed.clear()
 	queue_redraw()
 
 
@@ -109,4 +148,3 @@ func _draw() -> void:
 		draw_rect(Rect2(292, 194, 376, 110), Color(0.02, 0.04, 0.1, 0.94), true)
 		draw_rect(Rect2(292, 194, 376, 110), Color("55f7d0"), false, 2)
 		draw_string(ThemeDB.fallback_font, Vector2(360, 245), "RELAY SYNCHRONIZED", HORIZONTAL_ALIGNMENT_LEFT, -1, 22, Color("f5f7ff"))
-

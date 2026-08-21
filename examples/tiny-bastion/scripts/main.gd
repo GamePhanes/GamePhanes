@@ -13,9 +13,13 @@ var enemy_progress := [0.0, -0.18, -0.36, -0.54, -0.72]
 var gold := 90
 var pulse := 0.0
 var status_label: Label
+var web_message_callback
+var web_actions := {}
+var web_just_pressed := {}
 
 
 func _ready() -> void:
+	setup_web_input()
 	var title := Label.new()
 	title.position = Vector2(34, 24)
 	title.text = "TINY BASTION"
@@ -30,14 +34,40 @@ func _ready() -> void:
 	update_status()
 
 
+func setup_web_input() -> void:
+	if not OS.has_feature("web"):
+		return
+	var window = JavaScriptBridge.get_interface("window")
+	web_message_callback = JavaScriptBridge.create_callback(_on_web_message)
+	window.addEventListener("message", web_message_callback)
+	window.parent.postMessage("gamephanes-ready", window.location.origin)
+
+
+func _on_web_message(arguments: Array) -> void:
+	var event = arguments[0]
+	var window = JavaScriptBridge.get_interface("window")
+	if str(event.origin) != str(window.location.origin):
+		return
+	var parts := str(event.data).split("|")
+	if parts.size() != 3 or parts[0] != "gamephanes-input" or not InputMap.has_action(parts[1]):
+		return
+	web_actions[parts[1]] = parts[2] == "1"
+	if parts[2] == "1":
+		web_just_pressed[parts[1]] = true
+
+
+func action_just_pressed(action: StringName) -> bool:
+	return Input.is_action_just_pressed(action) or web_just_pressed.get(String(action), false)
+
+
 func _physics_process(delta: float) -> void:
 	elapsed += delta
-	if Input.is_action_just_pressed("build_tower") and towers_built < TOWER_SLOTS.size() and gold >= 30:
+	if action_just_pressed("build_tower") and towers_built < TOWER_SLOTS.size() and gold >= 30:
 		towers_built += 1
 		gold -= 30
 		pulse = 1.0
 		update_status()
-	if Input.is_action_just_pressed("start_wave") and towers_built > 0:
+	if action_just_pressed("start_wave") and towers_built > 0:
 		wave_started = true
 	if wave_started and not victory:
 		wave_time += delta
@@ -52,6 +82,7 @@ func _physics_process(delta: float) -> void:
 		if enemies_defeated == enemy_progress.size():
 			victory = true
 	pulse = maxf(0, pulse - delta * 2)
+	web_just_pressed.clear()
 	queue_redraw()
 
 

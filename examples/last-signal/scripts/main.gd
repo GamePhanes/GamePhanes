@@ -10,9 +10,13 @@ var elapsed := 0.0
 var muzzle_flash := 0.0
 var last_target := Vector2.ZERO
 var status_label: Label
+var web_message_callback
+var web_actions := {}
+var web_just_pressed := {}
 
 
 func _ready() -> void:
+	setup_web_input()
 	var title := Label.new()
 	title.position = Vector2(34, 24)
 	title.text = "LAST SIGNAL"
@@ -27,21 +31,61 @@ func _ready() -> void:
 	update_status()
 
 
+func setup_web_input() -> void:
+	if not OS.has_feature("web"):
+		return
+	var window = JavaScriptBridge.get_interface("window")
+	web_message_callback = JavaScriptBridge.create_callback(_on_web_message)
+	window.addEventListener("message", web_message_callback)
+	window.parent.postMessage("gamephanes-ready", window.location.origin)
+
+
+func _on_web_message(arguments: Array) -> void:
+	var event = arguments[0]
+	var window = JavaScriptBridge.get_interface("window")
+	if str(event.origin) != str(window.location.origin):
+		return
+	var parts := str(event.data).split("|")
+	if parts.size() != 3 or parts[0] != "gamephanes-input" or not InputMap.has_action(parts[1]):
+		return
+	web_actions[parts[1]] = parts[2] == "1"
+	if parts[2] == "1":
+		web_just_pressed[parts[1]] = true
+
+
+func action_pressed(action: StringName) -> bool:
+	return Input.is_action_pressed(action) or web_actions.get(String(action), false)
+
+
+func action_just_pressed(action: StringName) -> bool:
+	return Input.is_action_just_pressed(action) or web_just_pressed.get(String(action), false)
+
+
 func _physics_process(delta: float) -> void:
 	elapsed += delta
-	var movement := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var movement := Vector2.ZERO
+	if action_pressed("move_left"):
+		movement.x -= 1.0
+	if action_pressed("move_right"):
+		movement.x += 1.0
+	if action_pressed("move_up"):
+		movement.y -= 1.0
+	if action_pressed("move_down"):
+		movement.y += 1.0
+	movement = movement.normalized()
 	player_position += movement * 155.0 * delta
 	player_position.x = clampf(player_position.x, 70, 890)
 	player_position.y = clampf(player_position.y, 115, 465)
 	for index in enemies.size():
 		var direction: Vector2 = (player_position - enemies[index]).normalized()
 		enemies[index] += direction * (18.0 + index * 2.0) * delta
-	if Input.is_action_just_pressed("fire") and not enemies.is_empty():
+	if action_just_pressed("fire") and not enemies.is_empty():
 		fire_pulse()
 	muzzle_flash = maxf(0.0, muzzle_flash - delta * 4.0)
 	if enemies.is_empty():
 		victory = true
 		signal_charge = minf(100.0, signal_charge + delta * 34.0)
+	web_just_pressed.clear()
 	queue_redraw()
 
 
@@ -97,4 +141,3 @@ func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(34, 505), "WASD  REPOSITION     SPACE  EMIT PULSE", HORIZONTAL_ALIGNMENT_LEFT, -1, 14, Color("82776b"))
 	if victory:
 		draw_string(ThemeDB.fallback_font, Vector2(372, 102), "CHANNEL SECURED", HORIZONTAL_ALIGNMENT_LEFT, -1, 20, Color("ffe1a8"))
-

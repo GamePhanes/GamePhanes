@@ -435,12 +435,41 @@ h2 {
   font-size: 14px;
 }
 
-.showcase-copy a {
+.showcase-actions {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
   margin-top: auto;
-  color: var(--yellow);
-  border-bottom: 1px solid #7f6929;
+}
+
+.showcase-actions a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 4px;
   font-size: 13px;
   font-weight: 800;
+}
+
+.showcase-actions .play-link {
+  padding: 0 16px;
+  color: var(--ink);
+  background: var(--mint);
+}
+
+.showcase-actions .play-link:hover,
+.showcase-actions .play-link:focus-visible {
+  background: #78e0b8;
+}
+
+.showcase-actions .project-link {
+  padding: 0 2px;
+  color: var(--yellow);
+  border-bottom: 1px solid #7f6929;
 }
 
 .showcase-proof {
@@ -897,7 +926,7 @@ footer {
   }
 
   .showcase-copy {
-    min-height: 230px;
+    min-height: 250px;
     padding: 24px;
   }
 

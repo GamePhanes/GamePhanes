@@ -11,11 +11,45 @@ var player_mesh: MeshInstance3D
 var enemy_mesh: MeshInstance3D
 var rift_ring: MeshInstance3D
 var status_label: Label
+var web_message_callback
+var web_actions := {}
+var web_just_pressed := {}
 
 
 func _ready() -> void:
+	setup_web_input()
 	build_world()
 	build_hud()
+
+
+func setup_web_input() -> void:
+	if not OS.has_feature("web"):
+		return
+	var window = JavaScriptBridge.get_interface("window")
+	web_message_callback = JavaScriptBridge.create_callback(_on_web_message)
+	window.addEventListener("message", web_message_callback)
+	window.parent.postMessage("gamephanes-ready", window.location.origin)
+
+
+func _on_web_message(arguments: Array) -> void:
+	var event = arguments[0]
+	var window = JavaScriptBridge.get_interface("window")
+	if str(event.origin) != str(window.location.origin):
+		return
+	var parts := str(event.data).split("|")
+	if parts.size() != 3 or parts[0] != "gamephanes-input" or not InputMap.has_action(parts[1]):
+		return
+	web_actions[parts[1]] = parts[2] == "1"
+	if parts[2] == "1":
+		web_just_pressed[parts[1]] = true
+
+
+func action_pressed(action: StringName) -> bool:
+	return Input.is_action_pressed(action) or web_actions.get(String(action), false)
+
+
+func action_just_pressed(action: StringName) -> bool:
+	return Input.is_action_just_pressed(action) or web_just_pressed.get(String(action), false)
 
 
 func material(color: Color, emission := Color(0, 0, 0, 1), energy := 0.0) -> StandardMaterial3D:
@@ -114,7 +148,15 @@ func build_hud() -> void:
 
 func _physics_process(delta: float) -> void:
 	elapsed += delta
-	var movement := Vector3(Input.get_axis("move_left", "move_right"), 0, Input.get_axis("move_forward", "move_back"))
+	var movement := Vector3.ZERO
+	if action_pressed("move_left"):
+		movement.x -= 1.0
+	if action_pressed("move_right"):
+		movement.x += 1.0
+	if action_pressed("move_forward"):
+		movement.z -= 1.0
+	if action_pressed("move_back"):
+		movement.z += 1.0
 	if movement.length() > 1:
 		movement = movement.normalized()
 	player_position += movement * 3.2 * delta
@@ -125,7 +167,7 @@ func _physics_process(delta: float) -> void:
 	enemy_mesh.position.y = 0.72 + sin(elapsed * 3.0) * 0.12
 	enemy_mesh.rotation.y += delta * 1.4
 	rift_ring.rotation.z += delta * 0.65
-	if Input.is_action_just_pressed("attack") and enemy_health > 0:
+	if action_just_pressed("attack") and enemy_health > 0:
 		hits += 1
 		enemy_health -= 1
 		rift_stability += 27.0
@@ -137,6 +179,7 @@ func _physics_process(delta: float) -> void:
 	attack_flash = maxf(0, attack_flash - delta * 3.0)
 	var scale_boost := 1.0 + attack_flash * 0.24
 	player_mesh.scale = Vector3.ONE * scale_boost
+	web_just_pressed.clear()
 
 
 func update_status() -> void:

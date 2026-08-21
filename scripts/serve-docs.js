@@ -13,12 +13,17 @@ const mimeTypes = {
   ".md": "text/markdown; charset=utf-8",
   ".png": "image/png",
   ".svg": "image/svg+xml",
+  ".wasm": "application/wasm",
+  ".pck": "application/octet-stream",
 };
 
 const server = http.createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
   const requestedPath = pathname === "/" ? "index.html" : pathname.slice(1);
-  const filePath = path.resolve(root, requestedPath);
+  const requestedFilePath = path.resolve(root, requestedPath);
+  const filePath = fs.existsSync(requestedFilePath) && fs.statSync(requestedFilePath).isDirectory()
+    ? path.join(requestedFilePath, "index.html")
+    : requestedFilePath;
 
   if (!filePath.startsWith(`${root}${path.sep}`) || !fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
     response.writeHead(404, { "content-type": "text/plain; charset=utf-8" });

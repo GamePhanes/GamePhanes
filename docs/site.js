@@ -35,6 +35,7 @@ const translations = {
     bastionCopy: "Spend carefully, place two towers, and hold the miniature keep until dawn.",
     riftGenre: "3D arena combat",
     riftCopy: "Enter a low-poly breach, strike its warden, and stabilize the dimensional ring.",
+    playNow: "Play now",
     viewProject: "View project",
     showcaseVerified: "ALL VERIFIED",
     workflowLabel: "GamePhanes workflow",
@@ -121,6 +122,7 @@ const translations = {
     bastionCopy: "合理分配资源，建造两座防御塔，守住黎明前的微型城堡。",
     riftGenre: "3D 竞技场战斗",
     riftCopy: "进入低多边形裂隙，击败守卫并稳定维度环。",
+    playNow: "在线试玩",
     viewProject: "查看工程",
     showcaseVerified: "全部验证通过",
     workflowLabel: "GamePhanes 工作流",
@@ -205,6 +207,9 @@ function setLanguage(language) {
   document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
     const value = dictionary[element.dataset.i18nAria];
     if (value) element.setAttribute("aria-label", value);
+  });
+  document.querySelectorAll("[data-play-link]").forEach((element) => {
+    element.href = language === "zh" ? `${element.dataset.playLink}?lang=zh` : element.dataset.playLink;
   });
   if (languageButton) {
     languageButton.setAttribute("aria-pressed", String(language === "zh"));

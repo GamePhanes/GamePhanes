@@ -9,9 +9,13 @@ var exit_open := false
 var completed := false
 var elapsed := 0.0
 var status_label: Label
+var web_message_callback
+var web_actions := {}
+var web_just_pressed := {}
 
 
 func _ready() -> void:
+	setup_web_input()
 	var title := Label.new()
 	title.position = Vector2(34, 24)
 	title.text = "GRAVITY LAB / CHAMBER 04"
@@ -26,10 +30,45 @@ func _ready() -> void:
 	update_status()
 
 
+func setup_web_input() -> void:
+	if not OS.has_feature("web"):
+		return
+	var window = JavaScriptBridge.get_interface("window")
+	web_message_callback = JavaScriptBridge.create_callback(_on_web_message)
+	window.addEventListener("message", web_message_callback)
+	window.parent.postMessage("gamephanes-ready", window.location.origin)
+
+
+func _on_web_message(arguments: Array) -> void:
+	var event = arguments[0]
+	var window = JavaScriptBridge.get_interface("window")
+	if str(event.origin) != str(window.location.origin):
+		return
+	var parts := str(event.data).split("|")
+	if parts.size() != 3 or parts[0] != "gamephanes-input" or not InputMap.has_action(parts[1]):
+		return
+	web_actions[parts[1]] = parts[2] == "1"
+	if parts[2] == "1":
+		web_just_pressed[parts[1]] = true
+
+
+func action_pressed(action: StringName) -> bool:
+	return Input.is_action_pressed(action) or web_actions.get(String(action), false)
+
+
+func action_just_pressed(action: StringName) -> bool:
+	return Input.is_action_just_pressed(action) or web_just_pressed.get(String(action), false)
+
+
 func _physics_process(delta: float) -> void:
 	elapsed += delta
-	player_x = clampf(player_x + Input.get_axis("move_left", "move_right") * 170.0 * delta, 62.0, 900.0)
-	if Input.is_action_just_pressed("toggle_gravity"):
+	var direction := 0.0
+	if action_pressed("move_left"):
+		direction -= 1.0
+	if action_pressed("move_right"):
+		direction += 1.0
+	player_x = clampf(player_x + direction * 170.0 * delta, 62.0, 900.0)
+	if action_just_pressed("toggle_gravity"):
 		gravity_inverted = not gravity_inverted
 		polarity_changes += 1
 		update_status()
@@ -41,6 +80,7 @@ func _physics_process(delta: float) -> void:
 		update_status()
 	if exit_open and player_x > 820.0:
 		completed = true
+	web_just_pressed.clear()
 	queue_redraw()
 
 
@@ -82,4 +122,3 @@ func _draw() -> void:
 	draw_string(ThemeDB.fallback_font, Vector2(446, 116), "CORE LIFT", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("6daebe"))
 	if completed:
 		draw_string(ThemeDB.fallback_font, Vector2(720, 108), "TEST PASSED", HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color("75ecba"))
-

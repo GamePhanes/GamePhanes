@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#090d12">
+    <title>{{TITLE}} - Play on GamePhanes</title>
+    <link rel="stylesheet" href="../player.css">
+  </head>
+  <body data-controls-en="{{CONTROLS_EN}}" data-controls-zh="{{CONTROLS_ZH}}" data-touch-controls="{{TOUCH_CONTROLS}}">
+    <header class="player-header">
+      <a class="back-link" href="../../#showcase" data-label="back">Back to showcase</a>
+      <div class="game-identity">
+        <span>GAMEPHANES / PLAY</span>
+        <h1>{{TITLE}}</h1>
+      </div>
+      <p class="controls-copy" data-controls-copy>{{CONTROLS_EN}}</p>
+      <div class="player-actions">
+        <button type="button" data-reload aria-label="Reload game" title="Reload game">↻</button>
+        <button type="button" data-fullscreen aria-label="Enter fullscreen" title="Enter fullscreen">⛶</button>
+      </div>
+    </header>
+    <main class="player-main">
+      <section class="game-stage" data-stage>
+        <div class="loading-state" data-loading>
+          <span class="loading-mark">GP</span>
+          <strong data-label="loading">Loading game...</strong>
+        </div>
+        <iframe id="game-frame" src="game.html" title="{{TITLE}} game" allow="autoplay; fullscreen" data-game-frame></iframe>
+      </section>
+      <nav class="touch-controls" data-touch-controls-container aria-label="Touch game controls"></nav>
+    </main>
+    <script src="../player.js"></script>
+  </body>
+</html>
