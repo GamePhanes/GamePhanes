@@ -133,6 +133,41 @@ a {
   font-size: 13px;
 }
 
+.loading-state strong {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.loading-progress {
+  width: min(260px, 66vw);
+  height: 7px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: #26313a;
+  accent-color: var(--mint);
+}
+
+.loading-progress::-webkit-progress-bar {
+  background: #26313a;
+}
+
+.loading-progress::-webkit-progress-value {
+  background: var(--mint);
+}
+
+.loading-progress::-moz-progress-bar {
+  background: var(--mint);
+}
+
+.loading-detail {
+  min-height: 40px;
+  max-width: min(360px, 78vw);
+  color: #8f9da8;
+  text-align: center;
+  line-height: 1.5;
+}
+
 .loading-state.is-hidden {
   display: none;
 }

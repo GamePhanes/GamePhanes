@@ -15,11 +15,14 @@ test("Web showcase uses one shared runtime and six playable packages", () => {
   for (const game of manifest.games) {
     const gameDir = path.join(playRoot, game.slug);
     const shell = fs.readFileSync(path.join(gameDir, "game.html"), "utf8");
+    const player = fs.readFileSync(path.join(gameDir, "index.html"), "utf8");
     assert.ok(fs.statSync(path.join(gameDir, "game.pck")).size > 0);
     assert.ok(fs.existsSync(path.join(gameDir, "index.html")));
+    assert.match(player, /data-loading-progress/);
     assert.match(shell, /"mainPack":"game\.pck"/);
     assert.match(shell, /\.\.\/runtime\/game\.js/);
     assert.equal(fs.existsSync(path.join(gameDir, "game.wasm")), false);
   }
   assert.equal(manifest.games[0].slug, "starfall-protocol");
+  assert.match(fs.readFileSync(path.join(playRoot, "player.js"), "utf8"), /status-progress/);
 });

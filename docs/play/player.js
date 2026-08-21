@@ -3,12 +3,35 @@ const language = query.get("lang") === "zh" ? "zh" : "en";
 const frame = document.querySelector("[data-game-frame]");
 const stage = document.querySelector("[data-stage]");
 const loading = document.querySelector("[data-loading]");
+const loadingTitle = document.querySelector("[data-loading-title]");
+const loadingProgress = document.querySelector("[data-loading-progress]");
+const loadingDetail = document.querySelector("[data-loading-detail]");
 const controlsContainer = document.querySelector("[data-touch-controls-container]");
 let gameReady = false;
+let progressTimer;
+let loadingStartedAt = performance.now();
 
 const labels = {
-  en: { back: "Back to showcase", loading: "Loading game...", reload: "Reload game", fullscreen: "Enter fullscreen", controls: "Touch game controls" },
-  zh: { back: "返回游戏展示", loading: "正在加载游戏...", reload: "重新开始", fullscreen: "进入全屏", controls: "触屏游戏控制" },
+  en: {
+    back: "Back to showcase",
+    loading: "Loading Godot engine...",
+    firstLoad: "First launch downloads about 10 MB. Keep this page open.",
+    slowLoad: "The network is slow, but the download is still progressing.",
+    preparing: "Preparing engine",
+    reload: "Reload game",
+    fullscreen: "Enter fullscreen",
+    controls: "Touch game controls",
+  },
+  zh: {
+    back: "返回游戏展示",
+    loading: "正在加载 Godot 引擎...",
+    firstLoad: "首次启动需下载约 10 MB，请保持页面打开。",
+    slowLoad: "当前网络较慢，游戏仍在继续下载。",
+    preparing: "正在准备引擎",
+    reload: "重新开始",
+    fullscreen: "进入全屏",
+    controls: "触屏游戏控制",
+  },
 };
 
 document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
@@ -16,6 +39,8 @@ document.querySelectorAll("[data-label]").forEach((element) => {
   element.textContent = labels[language][element.dataset.label];
 });
 document.querySelector("[data-controls-copy]").textContent = document.body.dataset[language === "zh" ? "controlsZh" : "controlsEn"];
+loadingTitle.textContent = labels[language].loading;
+loadingDetail.textContent = labels[language].firstLoad;
 
 const reloadButton = document.querySelector("[data-reload]");
 const fullscreenButton = document.querySelector("[data-fullscreen]");
@@ -28,11 +53,37 @@ controlsContainer.setAttribute("aria-label", labels[language].controls);
 frame.addEventListener("load", () => {
   frame.contentWindow?.focus();
   frame.contentDocument?.getElementById("canvas")?.focus();
+  startProgressPolling();
 });
+
+function startProgressPolling() {
+  window.clearInterval(progressTimer);
+  progressTimer = window.setInterval(() => {
+    if (gameReady) return;
+    let innerProgress;
+    try {
+      innerProgress = frame.contentDocument?.getElementById("status-progress");
+    } catch {
+      return;
+    }
+    const current = Number(innerProgress?.value);
+    const total = Number(innerProgress?.max);
+    if (current > 0 && total > 0) {
+      const percent = Math.min(100, Math.round(current / total * 100));
+      loadingProgress.value = current;
+      loadingProgress.max = total;
+      loadingTitle.textContent = `${labels[language].preparing} ${percent}%`;
+      loadingDetail.textContent = `${(current / 1_000_000).toFixed(1)} / ${(total / 1_000_000).toFixed(1)} MB`;
+    } else if (performance.now() - loadingStartedAt > 90_000) {
+      loadingDetail.textContent = labels[language].slowLoad;
+    }
+  }, 250);
+}
 
 window.addEventListener("message", (event) => {
   if (event.origin !== window.location.origin || event.source !== frame.contentWindow || event.data !== "gamephanes-ready") return;
   gameReady = true;
+  window.clearInterval(progressTimer);
   loading.classList.add("is-hidden");
   document.querySelectorAll(".touch-control").forEach((button) => {
     button.disabled = false;
@@ -41,6 +92,11 @@ window.addEventListener("message", (event) => {
 
 reloadButton.addEventListener("click", () => {
   gameReady = false;
+  loadingStartedAt = performance.now();
+  loadingProgress.removeAttribute("value");
+  loadingProgress.removeAttribute("max");
+  loadingTitle.textContent = labels[language].loading;
+  loadingDetail.textContent = labels[language].firstLoad;
   loading.classList.remove("is-hidden");
   document.querySelectorAll(".touch-control").forEach((button) => {
     button.disabled = true;

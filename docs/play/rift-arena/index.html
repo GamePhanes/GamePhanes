@@ -24,7 +24,9 @@
       <section class="game-stage" data-stage>
         <div class="loading-state" data-loading>
           <span class="loading-mark">GP</span>
-          <strong data-label="loading">Loading game...</strong>
+          <strong data-loading-title>Loading Godot engine...</strong>
+          <progress class="loading-progress" data-loading-progress></progress>
+          <span class="loading-detail" data-loading-detail aria-live="polite"></span>
         </div>
         <iframe id="game-frame" src="game.html" title="Rift Arena game" allow="autoplay; fullscreen" data-game-frame></iframe>
       </section>
