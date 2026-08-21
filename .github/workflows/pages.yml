@@ -1,5 +1,7 @@
 name: Deploy homepage
 
+# The repository Pages source is configured as GitHub Actions.
+
 on:
   push:
     branches: [main]
