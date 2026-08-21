@@ -83,6 +83,22 @@ nav a:focus-visible {
   color: var(--text);
 }
 
+.language-switch {
+  padding: 9px 0;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.language-switch:hover,
+.language-switch:focus-visible {
+  color: var(--text);
+}
+
 .nav-action {
   padding: 9px 15px;
   border: 1px solid #43505c;

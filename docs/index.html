@@ -20,87 +20,88 @@
         <span>GameBuddy</span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#workflow">Workflow</a>
-        <a href="#benchmark">Benchmark</a>
-        <a href="architecture.md">Architecture</a>
+        <a href="#workflow" data-i18n="navWorkflow">Workflow</a>
+        <a href="#benchmark" data-i18n="navBenchmark">Benchmark</a>
+        <a href="architecture.md" data-i18n="navArchitecture">Architecture</a>
+        <button class="language-switch" type="button" data-lang-toggle aria-label="Switch language" aria-pressed="false"><span>中文</span><span aria-hidden="true"> / </span><span>EN</span></button>
         <a class="nav-action" href="https://github.com/GamePhanes/GamePhanes">GitHub</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <img class="hero-image" src="assets/platformer-demo.png" alt="A GameBuddy platformer playtest with the player jumping toward a coin">
+        <img class="hero-image" src="assets/platformer-demo.png" alt="A GameBuddy platformer playtest with the player jumping toward a coin" data-i18n-alt="heroImageAlt">
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-inner">
-          <p class="eyebrow">Open-source autonomous game engineering</p>
+          <p class="eyebrow" data-i18n="heroEyebrow">Open-source autonomous game engineering</p>
           <h1 id="hero-title">GameBuddy</h1>
-          <p class="hero-statement">Build. Play. Prove.</p>
-          <p class="hero-copy">A Godot-first coding agent environment that turns game requirements into runnable projects, real playtests, and reproducible evidence.</p>
+          <p class="hero-statement" data-i18n="heroStatement">Build. Play. Prove.</p>
+          <p class="hero-copy" data-i18n="heroCopy">A Godot-first coding agent environment that turns game requirements into runnable projects, real playtests, and reproducible evidence.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes">View on GitHub</a>
-            <a class="button button-secondary" href="#benchmark">See the benchmark</a>
+            <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes" data-i18n="viewGithub">View on GitHub</a>
+            <a class="button button-secondary" href="#benchmark" data-i18n="seeBenchmark">See the benchmark</a>
           </div>
         </div>
-        <div class="run-strip" aria-label="Latest verified run">
+        <div class="run-strip" aria-label="Latest verified run" data-i18n-aria="runLabel">
           <div>
-            <span class="run-label">LATEST RUN</span>
+            <span class="run-label" data-i18n="latestRun">LATEST RUN</span>
             <strong>platformer_basic_001</strong>
           </div>
-          <div><span class="status-dot"></span><strong>BUILD PASS</strong></div>
-          <div><span class="status-dot"></span><strong>RUNTIME PASS</strong></div>
-          <div><strong class="score">1.00</strong><span class="run-label"> SCORE</span></div>
+          <div><span class="status-dot"></span><strong data-i18n="buildPass">BUILD PASS</strong></div>
+          <div><span class="status-dot"></span><strong data-i18n="runtimePass">RUNTIME PASS</strong></div>
+          <div><strong class="score">1.00</strong><span class="run-label" data-i18n="scoreLabel"> SCORE</span></div>
         </div>
       </section>
 
       <section class="proof-band" id="benchmark" aria-labelledby="proof-title">
         <div class="section-inner proof-layout">
           <div>
-            <p class="section-kicker">Evidence over claims</p>
-            <h2 id="proof-title">A game is not done when the code looks right.</h2>
+            <p class="section-kicker" data-i18n="proofKicker">Evidence over claims</p>
+            <h2 id="proof-title" data-i18n="proofTitle">A game is not done when the code looks right.</h2>
           </div>
-          <p class="section-lead">GameBuddy launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.</p>
+          <p class="section-lead" data-i18n="proofLead">GameBuddy launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.</p>
         </div>
         <div class="metric-grid section-inner">
-          <div class="metric"><strong>5/5</strong><span>Assertions passed</span></div>
-          <div class="metric"><strong>1.19s</strong><span>Playtest runtime</span></div>
-          <div class="metric"><strong>0</strong><span>Protocol errors</span></div>
-          <div class="metric"><strong>100%</strong><span>Functional score</span></div>
+          <div class="metric"><strong>5/5</strong><span data-i18n="metricAssertions">Assertions passed</span></div>
+          <div class="metric"><strong>1.19s</strong><span data-i18n="metricRuntime">Playtest runtime</span></div>
+          <div class="metric"><strong>0</strong><span data-i18n="metricErrors">Protocol errors</span></div>
+          <div class="metric"><strong>100%</strong><span data-i18n="metricScore">Functional score</span></div>
         </div>
       </section>
 
       <section class="workflow" id="workflow" aria-labelledby="workflow-title">
         <div class="section-inner">
-          <p class="section-kicker">Closed-loop engineering</p>
-          <h2 id="workflow-title">From intent to verified behavior.</h2>
-          <ol class="flow" aria-label="GameBuddy workflow">
-            <li><span>01</span><strong>Understand</strong><small>Requirements</small></li>
-            <li><span>02</span><strong>Build</strong><small>Godot project</small></li>
-            <li><span>03</span><strong>Run</strong><small>Headless engine</small></li>
-            <li><span>04</span><strong>Play</strong><small>Real inputs</small></li>
-            <li><span>05</span><strong>Observe</strong><small>State + logs</small></li>
-            <li><span>06</span><strong>Repair</strong><small>Evidence-guided</small></li>
+          <p class="section-kicker" data-i18n="workflowKicker">Closed-loop engineering</p>
+          <h2 id="workflow-title" data-i18n="workflowTitle">From intent to verified behavior.</h2>
+          <ol class="flow" aria-label="GameBuddy workflow" data-i18n-aria="workflowLabel">
+            <li><span>01</span><strong data-i18n="workflowUnderstand">Understand</strong><small data-i18n="workflowRequirements">Requirements</small></li>
+            <li><span>02</span><strong data-i18n="workflowBuild">Build</strong><small data-i18n="workflowProject">Godot project</small></li>
+            <li><span>03</span><strong data-i18n="workflowRun">Run</strong><small data-i18n="workflowHeadless">Headless engine</small></li>
+            <li><span>04</span><strong data-i18n="workflowPlay">Play</strong><small data-i18n="workflowInputs">Real inputs</small></li>
+            <li><span>05</span><strong data-i18n="workflowObserve">Observe</strong><small data-i18n="workflowState">State + logs</small></li>
+            <li><span>06</span><strong data-i18n="workflowRepair">Repair</strong><small data-i18n="workflowEvidence">Evidence-guided</small></li>
           </ol>
         </div>
       </section>
 
       <section class="systems" aria-labelledby="systems-title">
         <div class="section-inner systems-heading">
-          <p class="section-kicker">Designed for agents</p>
-          <h2 id="systems-title">The missing runtime layer for game coding agents.</h2>
+          <p class="section-kicker" data-i18n="systemsKicker">Designed for agents</p>
+          <h2 id="systems-title" data-i18n="systemsTitle">The missing runtime layer for game coding agents.</h2>
         </div>
         <div class="system-row">
           <div class="system-index">01</div>
-          <div><h3>Sandboxed project copies</h3><p>Every evaluation runs against a temporary copy, leaving the original candidate project unchanged.</p></div>
+          <div><h3 data-i18n="systemSandboxTitle">Sandboxed project copies</h3><p data-i18n="systemSandboxCopy">Every evaluation runs against a temporary copy, leaving the original candidate project unchanged.</p></div>
           <code>prepareSandbox(project)</code>
         </div>
         <div class="system-row">
           <div class="system-index">02</div>
-          <div><h3>External playtest harnesses</h3><p>Benchmark-owned drivers load the game, perform actions, and emit structured runtime evidence.</p></div>
+          <div><h3 data-i18n="systemHarnessTitle">External playtest harnesses</h3><p data-i18n="systemHarnessCopy">Benchmark-owned drivers load the game, perform actions, and emit structured runtime evidence.</p></div>
           <code>GAMEBUDDY_EVENT {...}</code>
         </div>
         <div class="system-row">
           <div class="system-index">03</div>
-          <div><h3>Deterministic assertions</h3><p>Movement, velocity, score, health, and other state can be evaluated without an opaque model judge.</p></div>
+          <div><h3 data-i18n="systemAssertionsTitle">Deterministic assertions</h3><p data-i18n="systemAssertionsCopy">Movement, velocity, score, health, and other state can be evaluated without an opaque model judge.</p></div>
           <code>velocity_y &lt; 0</code>
         </div>
       </section>
@@ -108,9 +109,9 @@
       <section class="report-band" aria-labelledby="report-title">
         <div class="section-inner report-layout">
           <div>
-            <p class="section-kicker">Machine-readable proof</p>
-            <h2 id="report-title">Every run ends with a report.</h2>
-            <p class="section-lead">Store it, compare it, or use failures as the next repair prompt.</p>
+            <p class="section-kicker" data-i18n="reportKicker">Machine-readable proof</p>
+            <h2 id="report-title" data-i18n="reportTitle">Every run ends with a report.</h2>
+            <p class="section-lead" data-i18n="reportLead">Store it, compare it, or use failures as the next repair prompt.</p>
           </div>
           <pre aria-label="Example GameBuddy report"><code>{
   "task_id": "platformer_basic_001",
@@ -124,22 +125,22 @@
 
       <section class="roadmap" aria-labelledby="roadmap-title">
         <div class="section-inner">
-          <p class="section-kicker">Roadmap</p>
-          <h2 id="roadmap-title">Small core. Serious trajectory.</h2>
+          <p class="section-kicker" data-i18n="roadmapKicker">Roadmap</p>
+          <h2 id="roadmap-title" data-i18n="roadmapTitle">Small core. Serious trajectory.</h2>
           <div class="roadmap-line">
-            <div class="milestone active"><span>M0</span><strong>Environment</strong><small>Available now</small></div>
-            <div class="milestone"><span>M1</span><strong>Coding Agent</strong><small>Repair loop</small></div>
-            <div class="milestone"><span>M2</span><strong>Playtest DSL</strong><small>Vision + state</small></div>
-            <div class="milestone"><span>M3</span><strong>GameBuddy-Bench</strong><small>10 verified tasks</small></div>
+            <div class="milestone active"><span>M0</span><strong data-i18n="milestoneEnvironment">Environment</strong><small data-i18n="milestoneNow">Available now</small></div>
+            <div class="milestone"><span>M1</span><strong data-i18n="milestoneAgent">Coding Agent</strong><small data-i18n="milestoneRepair">Repair loop</small></div>
+            <div class="milestone"><span>M2</span><strong data-i18n="milestonePlaytest">Playtest DSL</strong><small data-i18n="milestoneVision">Vision + state</small></div>
+            <div class="milestone"><span>M3</span><strong>GameBuddy-Bench</strong><small data-i18n="milestoneTasks">10 verified tasks</small></div>
           </div>
         </div>
       </section>
 
       <section class="closing" aria-labelledby="closing-title">
         <div class="section-inner">
-          <p class="section-kicker">MIT licensed. Godot-first. Built in public.</p>
-          <h2 id="closing-title">Help build the benchmark games can actually pass.</h2>
-          <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes">Explore GameBuddy on GitHub</a>
+          <p class="section-kicker" data-i18n="closingKicker">MIT licensed. Godot-first. Built in public.</p>
+          <h2 id="closing-title" data-i18n="closingTitle">Help build the benchmark games can actually pass.</h2>
+          <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes" data-i18n="closingButton">Explore GameBuddy on GitHub</a>
         </div>
       </section>
     </main>
@@ -147,7 +148,7 @@
     <footer>
       <div class="section-inner footer-inner">
         <span>GameBuddy</span>
-        <span>Open-source autonomous game engineering.</span>
+        <span data-i18n="footerTagline">Open-source autonomous game engineering.</span>
         <span id="copyright">2026</span>
       </div>
     </footer>
