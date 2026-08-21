@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "gamephanes-core-assets-v1",
+  "description": "Reproducible procedural assets used by the first GamePhanes example.",
+  "assets": [
+    {
+      "id": "platformer_player_procedural",
+      "type": "character_2d",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": {
+        "rendered_by": "examples/platformer-basic/scripts/main.gd",
+        "animations": ["idle", "run", "jump"],
+        "pivot": [0.5, 1.0],
+        "collision": "rectangle"
+      }
+    },
+    {
+      "id": "platformer_coin_procedural",
+      "type": "texture_2d",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": {
+        "rendered_by": "examples/platformer-basic/scripts/main.gd",
+        "collision": "circle"
+      }
+    },
+    {
+      "id": "platformer_arena_procedural",
+      "type": "procedural",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": {
+        "rendered_by": "examples/platformer-basic/scripts/main.gd",
+        "dimensions": [640, 360]
+      }
+    }
+  ]
+}

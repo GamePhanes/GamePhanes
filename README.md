@@ -88,6 +88,32 @@ Each task declares a candidate project, requirements, external harness, and rule
 
 Supported operators / 当前支持的断言操作符：`exists`、`==`、`!=`、`>`、`>=`、`<`、`<=`、`includes`。
 
+## Asset Engineering / 资产工程
+
+GamePhanes treats assets as versioned, inspectable engineering artifacts rather than untracked downloads.
+
+GamePhanes 将资产视为有版本、可检查的工程产物，而不是临时下载的文件：
+
+```powershell
+node ./bin/gamephanes.js assets validate ./assets/manifest.json
+node ./bin/gamephanes.js assets list ./assets/manifest.json
+```
+
+Each manifest entry records an asset ID, type, source, license, files, and runtime metadata. The first example uses reproducible procedural assets, so it does not depend on external downloads.
+
+每个 Manifest 条目记录资产 ID、类型、来源、许可证、文件和运行时元数据。当前示例使用可复现的程序化资产，因此不依赖外部下载。
+
+The asset pipeline is intentionally layered:
+
+资产流水线分为四层：
+
+1. Procedural fallback / 程序化兜底：确保 Benchmark 在没有外部资产时仍可运行；
+2. Curated packs / 固定资产包：使用明确许可、可版本化和可再分发的素材；
+3. Generated variants / 生成式变体：为角色、纹理、音频和 3D 内容提供可替换来源；
+4. Agent adaptation / Agent 适配：完成格式转换、SpriteSheet、碰撞体、Pivot、动画和 Godot 导入验证。
+
+See [`assets/manifest.json`](assets/manifest.json) for the current contract / 当前契约见 [`assets/manifest.json`](assets/manifest.json)。
+
 ## Why External Harnesses? / 为什么使用外部 Harness？
 
 Test logic does not live inside candidate game code. GamePhanes:

@@ -28,6 +28,21 @@ Temporary project copy / 临时工程副本
 Rule evaluator -> JSON report / 规则评测器 -> JSON 报告
 ```
 
+## Asset Layer / 资产层
+
+Assets enter the system through a versioned manifest before an Agent can place them in a scene.
+
+资产必须先通过版本化 Manifest 进入系统，Agent 才能把它们放入场景：
+
+```text
+AssetSpec -> Manifest -> Resolve -> Normalize -> Import -> Validate
+资产需求 -> Manifest -> 解析 -> 标准化 -> 导入 -> 验证
+```
+
+The manifest keeps source and license metadata next to the asset identity. Procedural assets may have no files; curated, generated, adapted, and user assets must declare their files and remain inside the manifest directory.
+
+Manifest 将来源与许可证元数据和资产身份放在一起。程序化资产可以没有文件；固定、生成、适配和用户资产必须声明文件，且文件路径不能逃出 Manifest 所在目录。
+
 ## Event Protocol / 事件协议
 
 Godot harnesses write one JSON object per line with the `GAMEPHANES_EVENT ` prefix.

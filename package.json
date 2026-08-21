@@ -17,6 +17,8 @@
   "scripts": {
     "doctor": "node ./bin/gamephanes.js doctor",
     "validate": "node ./bin/gamephanes.js validate ./benchmark/tasks/platformer-basic.json",
+    "assets:validate": "node ./bin/gamephanes.js assets validate ./assets/manifest.json",
+    "assets:list": "node ./bin/gamephanes.js assets list ./assets/manifest.json",
     "demo": "node ./bin/gamephanes.js run ./benchmark/tasks/platformer-basic.json",
     "site": "node ./scripts/serve-docs.js",
     "test": "node --test"

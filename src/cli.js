@@ -6,6 +6,7 @@ import { evaluateAssertions } from "./evaluation/evaluator.js";
 import { findGodot } from "./godot/discovery.js";
 import { runGodotTask } from "./godot/runner.js";
 import { loadTask, resolveTaskPath } from "./core/task.js";
+import { loadManifest } from "./assets/manifest.js";
 
 const HELP = `GamePhanes - build, playtest, and evaluate Godot games
 
@@ -13,6 +14,8 @@ Usage:
   gamephanes doctor [--godot PATH]
   gamephanes validate <task.json>
   gamephanes run <task.json> [--godot PATH] [--report PATH]
+  gamephanes assets validate <manifest.json>
+  gamephanes assets list <manifest.json>
 `;
 
 function parseOptions(args, definitions) {
@@ -94,12 +97,36 @@ async function run(args) {
   if (report.total_score < 1) process.exitCode = 2;
 }
 
+function assets(args) {
+  const [subcommand, manifestPath] = args;
+  if (!subcommand || !manifestPath || !["validate", "list"].includes(subcommand)) {
+    throw new Error("assets expects validate or list followed by a manifest file");
+  }
+  const { manifest, manifestPath: absolutePath } = loadManifest(manifestPath);
+  if (subcommand === "list") {
+    printJson({
+      valid: true,
+      manifest_id: manifest.id,
+      manifest_path: absolutePath,
+      assets: manifest.assets.map(({ id, type, source, license }) => ({ id, type, source, license })),
+    });
+    return;
+  }
+  printJson({
+    valid: true,
+    manifest_id: manifest.id,
+    manifest_path: absolutePath,
+    asset_count: manifest.assets.length,
+  });
+}
+
 export async function main(args) {
   const [command, ...rest] = args;
   switch (command) {
     case "doctor": return doctor(rest);
     case "validate": return validate(rest);
     case "run": return run(rest);
+    case "assets": return assets(rest);
     case "help":
     case "--help":
     case "-h":
