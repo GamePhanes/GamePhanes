@@ -1,0 +1,29 @@
+{
+  "name": "@gamebuddy/core",
+  "version": "0.1.0",
+  "description": "An open-source game coding agent environment and benchmark for Godot.",
+  "homepage": "https://allegame.github.io/gamebuddy/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlleGame/gamebuddy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlleGame/gamebuddy/issues"
+  },
+  "type": "module",
+  "bin": {
+    "gamebuddy": "./bin/gamebuddy.js"
+  },
+  "scripts": {
+    "doctor": "node ./bin/gamebuddy.js doctor",
+    "validate": "node ./bin/gamebuddy.js validate ./benchmark/tasks/platformer-basic.json",
+    "demo": "node ./bin/gamebuddy.js run ./benchmark/tasks/platformer-basic.json",
+    "site": "node ./scripts/serve-docs.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "private": true
+}

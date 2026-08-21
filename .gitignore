@@ -1,0 +1,5 @@
+node_modules/
+reports/
+.gamebuddy/
+*.log
+.DS_Store

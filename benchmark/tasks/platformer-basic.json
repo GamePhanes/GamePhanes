@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "platformer_basic_001",
+  "title": "Basic Platformer Movement",
+  "description": "Verify that the player can move, jump, collect a coin, and update the score.",
+  "project": {
+    "path": "../../examples/platformer-basic"
+  },
+  "requirements": [
+    {
+      "id": "player_move",
+      "description": "The player moves to the right when the move_right action is pressed."
+    },
+    {
+      "id": "player_jump",
+      "description": "The player has upward velocity after the jump action is pressed."
+    },
+    {
+      "id": "coin_collect",
+      "description": "Touching the coin increments the score."
+    }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/platformer-basic.gd",
+    "timeout_seconds": 15,
+    "assertions": [
+      {
+        "id": "game_ready",
+        "event": "game_ready",
+        "operator": "exists"
+      },
+      {
+        "id": "player_moved",
+        "event": "player_moved",
+        "field": "delta_x",
+        "operator": ">",
+        "value": 30
+      },
+      {
+        "id": "player_jumped",
+        "event": "player_jumped",
+        "field": "velocity_y",
+        "operator": "<",
+        "value": 0
+      },
+      {
+        "id": "coin_collected",
+        "event": "coin_collected",
+        "field": "score",
+        "operator": ">=",
+        "value": 1
+      },
+      {
+        "id": "playtest_complete",
+        "event": "playtest_complete",
+        "field": "success",
+        "operator": "==",
+        "value": true
+      }
+    ]
+  }
+}

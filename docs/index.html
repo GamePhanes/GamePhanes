@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="GameBuddy builds, plays, tests, and repairs Godot games with deterministic evidence.">
+    <meta name="theme-color" content="#090d12">
+    <meta property="og:title" content="GameBuddy - Build. Play. Prove.">
+    <meta property="og:description" content="An open-source game coding agent environment and benchmark for Godot.">
+    <meta property="og:image" content="https://allegame.github.io/gamebuddy/assets/platformer-demo.png">
+    <meta property="og:type" content="website">
+    <title>GameBuddy - Build. Play. Prove.</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="GameBuddy home">
+        <span class="brand-mark" aria-hidden="true">GB</span>
+        <span>GameBuddy</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#workflow">Workflow</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="architecture.md">Architecture</a>
+        <a class="nav-action" href="https://github.com/AlleGame/gamebuddy">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="assets/platformer-demo.png" alt="A GameBuddy platformer playtest with the player jumping toward a coin">
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="eyebrow">Open-source autonomous game engineering</p>
+          <h1 id="hero-title">GameBuddy</h1>
+          <p class="hero-statement">Build. Play. Prove.</p>
+          <p class="hero-copy">A Godot-first coding agent environment that turns game requirements into runnable projects, real playtests, and reproducible evidence.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/AlleGame/gamebuddy">View on GitHub</a>
+            <a class="button button-secondary" href="#benchmark">See the benchmark</a>
+          </div>
+        </div>
+        <div class="run-strip" aria-label="Latest verified run">
+          <div>
+            <span class="run-label">LATEST RUN</span>
+            <strong>platformer_basic_001</strong>
+          </div>
+          <div><span class="status-dot"></span><strong>BUILD PASS</strong></div>
+          <div><span class="status-dot"></span><strong>RUNTIME PASS</strong></div>
+          <div><strong class="score">1.00</strong><span class="run-label"> SCORE</span></div>
+        </div>
+      </section>
+
+      <section class="proof-band" id="benchmark" aria-labelledby="proof-title">
+        <div class="section-inner proof-layout">
+          <div>
+            <p class="section-kicker">Evidence over claims</p>
+            <h2 id="proof-title">A game is not done when the code looks right.</h2>
+          </div>
+          <p class="section-lead">GameBuddy launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.</p>
+        </div>
+        <div class="metric-grid section-inner">
+          <div class="metric"><strong>5/5</strong><span>Assertions passed</span></div>
+          <div class="metric"><strong>1.19s</strong><span>Playtest runtime</span></div>
+          <div class="metric"><strong>0</strong><span>Protocol errors</span></div>
+          <div class="metric"><strong>100%</strong><span>Functional score</span></div>
+        </div>
+      </section>
+
+      <section class="workflow" id="workflow" aria-labelledby="workflow-title">
+        <div class="section-inner">
+          <p class="section-kicker">Closed-loop engineering</p>
+          <h2 id="workflow-title">From intent to verified behavior.</h2>
+          <ol class="flow" aria-label="GameBuddy workflow">
+            <li><span>01</span><strong>Understand</strong><small>Requirements</small></li>
+            <li><span>02</span><strong>Build</strong><small>Godot project</small></li>
+            <li><span>03</span><strong>Run</strong><small>Headless engine</small></li>
+            <li><span>04</span><strong>Play</strong><small>Real inputs</small></li>
+            <li><span>05</span><strong>Observe</strong><small>State + logs</small></li>
+            <li><span>06</span><strong>Repair</strong><small>Evidence-guided</small></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="systems" aria-labelledby="systems-title">
+        <div class="section-inner systems-heading">
+          <p class="section-kicker">Designed for agents</p>
+          <h2 id="systems-title">The missing runtime layer for game coding agents.</h2>
+        </div>
+        <div class="system-row">
+          <div class="system-index">01</div>
+          <div><h3>Sandboxed project copies</h3><p>Every evaluation runs against a temporary copy, leaving the original candidate project unchanged.</p></div>
+          <code>prepareSandbox(project)</code>
+        </div>
+        <div class="system-row">
+          <div class="system-index">02</div>
+          <div><h3>External playtest harnesses</h3><p>Benchmark-owned drivers load the game, perform actions, and emit structured runtime evidence.</p></div>
+          <code>GAMEBUDDY_EVENT {...}</code>
+        </div>
+        <div class="system-row">
+          <div class="system-index">03</div>
+          <div><h3>Deterministic assertions</h3><p>Movement, velocity, score, health, and other state can be evaluated without an opaque model judge.</p></div>
+          <code>velocity_y &lt; 0</code>
+        </div>
+      </section>
+
+      <section class="report-band" aria-labelledby="report-title">
+        <div class="section-inner report-layout">
+          <div>
+            <p class="section-kicker">Machine-readable proof</p>
+            <h2 id="report-title">Every run ends with a report.</h2>
+            <p class="section-lead">Store it, compare it, or use failures as the next repair prompt.</p>
+          </div>
+          <pre aria-label="Example GameBuddy report"><code>{
+  "task_id": "platformer_basic_001",
+  "build_success": true,
+  "runtime_success": true,
+  "functional_score": 1,
+  "total_score": 1
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="roadmap" aria-labelledby="roadmap-title">
+        <div class="section-inner">
+          <p class="section-kicker">Roadmap</p>
+          <h2 id="roadmap-title">Small core. Serious trajectory.</h2>
+          <div class="roadmap-line">
+            <div class="milestone active"><span>M0</span><strong>Environment</strong><small>Available now</small></div>
+            <div class="milestone"><span>M1</span><strong>Coding Agent</strong><small>Repair loop</small></div>
+            <div class="milestone"><span>M2</span><strong>Playtest DSL</strong><small>Vision + state</small></div>
+            <div class="milestone"><span>M3</span><strong>GameBuddy-Bench</strong><small>10 verified tasks</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closing-title">
+        <div class="section-inner">
+          <p class="section-kicker">MIT licensed. Godot-first. Built in public.</p>
+          <h2 id="closing-title">Help build the benchmark games can actually pass.</h2>
+          <a class="button button-primary" href="https://github.com/AlleGame/gamebuddy">Explore GameBuddy on GitHub</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="section-inner footer-inner">
+        <span>GameBuddy</span>
+        <span>Open-source autonomous game engineering.</span>
+        <span id="copyright">2026</span>
+      </div>
+    </footer>
+    <script src="site.js"></script>
+  </body>
+</html>
