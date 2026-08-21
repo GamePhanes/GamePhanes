@@ -396,6 +396,17 @@ h2 {
   grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.65fr);
 }
 
+.showcase-item.golden-demo {
+  border-color: #c8a75a;
+  box-shadow: inset 0 3px 0 #f2cf76;
+}
+
+.showcase-copy h3 small {
+  color: #9ca9ae;
+  font-size: 0.58em;
+  font-weight: 500;
+}
+
 .showcase-item img {
   width: 100%;
   height: 100%;

@@ -4,9 +4,9 @@
 >
 > 一个开源的 Godot 游戏编码智能体环境，帮助 Agent 构建、试玩、测试并修复游戏。
 
-[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#five-game-showcase--五款游戏展示) · [Architecture / 架构](docs/architecture.md)
+[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md)
 
-![Neon Relay running in GamePhanes](docs/assets/neon-relay.png)
+![Starfall Protocol running in GamePhanes](docs/assets/starfall-protocol.png)
 
 ## What is GamePhanes? / 项目简介
 
@@ -27,25 +27,56 @@ The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 - Godot headless import and runtime execution / Godot headless 导入和运行；
 - Structured runtime events over NDJSON logs / 基于 NDJSON 日志的结构化运行时事件；
 - Deterministic assertions and scoring without an LLM judge / 不依赖 LLM Judge 的确定性断言与评分报告；
-- Five polished 2D/3D showcase slices with external Playtests / 五款带独立 Playtest 的精致 2D/3D 游戏切片。
+- Six polished 2D/3D showcase slices with external Playtests / 六款带独立 Playtest 的精致 2D/3D 游戏切片。
 
-## Five-game Showcase / 五款游戏展示
+## Golden Demo / 黄金 Demo
+
+**Starfall Protocol / 星坠协议** is the reference vertical slice for the GamePhanes coding agent. It is an original 2D top-down action game designed for an 8–12 minute session: clear a data-driven encounter, choose one of three upgrades, then defeat the Oracle boss. Its visuals are procedural and MIT-licensed; no third-party code or game assets are copied.
+
+**Starfall Protocol / 星坠协议** 是 GamePhanes Coding Agent 的黄金 Demo。它是一款原创的 2D 俯视角动作游戏，单局约 8–12 分钟：清理数据驱动的敌群、从三项协议中选择升级，再击败 Oracle Boss。视觉由程序化绘制，代码与工程采用 MIT 许可，不复制第三方代码或游戏资产。
+
+It is playable on the [homepage](https://gamephanes.github.io/#showcase) and has a standalone task with six deterministic assertions / 它可以在[主页](https://gamephanes.github.io/#showcase)直接试玩，并配有包含六项确定性断言的独立任务：
+
+```powershell
+node ./bin/gamephanes.js run ./benchmark/tasks/starfall-protocol.json --godot C:\path\to\godot.exe
+```
+
+## Showcase / 游戏展示
 
 These are runnable Godot reference projects, not static mockups. Together they exercise movement, combat, physics state, resource strategy, wave simulation, 3D rendering, external input, and deterministic evaluation.
 
-它们是真正可运行的 Godot 参考工程，不是静态概念图。五款游戏共同覆盖移动、战斗、物理状态、资源策略、波次模拟、3D 渲染、外部输入和确定性评测。
+它们是真正可运行的 Godot 参考工程，不是静态概念图。六款游戏共同覆盖移动、战斗、物理状态、资源策略、波次模拟、3D 渲染、外部输入和确定性评测。
 
 | Game / 游戏 | Play online / 在线试玩 | Verified loop / 已验证闭环 |
 |---|---|---|
+| [Starfall Protocol / 星坠协议](examples/starfall-protocol) | [Play / 试玩](https://gamephanes.github.io/play/starfall-protocol/) | Clear encounter, choose upgrade, defeat Oracle / 清理敌群、选择升级、击败 Oracle |
 | [Neon Relay](examples/neon-relay) | [Play / 试玩](https://gamephanes.github.io/play/neon-relay/) | Run, jump, collect three shards, finish / 奔跑、跳跃、收集三枚碎片、抵达终点 |
 | [Last Signal](examples/last-signal) | [Play / 试玩](https://gamephanes.github.io/play/last-signal/) | Reposition, pulse, clear four threats / 移动、脉冲攻击、清除四个威胁 |
 | [Gravity Lab](examples/gravity-lab) | [Play / 试玩](https://gamephanes.github.io/play/gravity-lab/) | Flip gravity, stabilize core, unlock exit / 反转重力、稳定核心、解锁出口 |
 | [Tiny Bastion](examples/tiny-bastion) | [Play / 试玩](https://gamephanes.github.io/play/tiny-bastion/) | Build towers, start wave, defend keep / 建塔、开启波次、守住城堡 |
 | [Rift Arena](examples/rift-arena) | [Play / 试玩](https://gamephanes.github.io/play/rift-arena/) | Move in 3D, strike warden, stabilize rift / 3D 移动、攻击守卫、稳定裂隙 |
 
-All five currently pass `22/22` deterministic assertions with zero protocol errors.
+All six currently pass `28/28` deterministic assertions with zero protocol errors.
 
-五款游戏目前全部通过 `22/22` 项确定性断言，协议错误为零。
+六款游戏目前全部通过 `28/28` 项确定性断言，协议错误为零。
+
+## Godot Reference Decomposition / Godot 代表性拆解
+
+There is no single official ranking of the "five most popular Godot games". We use five representative patterns from widely discussed Godot releases as design references, not as a popularity claim:
+
+官方没有统一的“Godot 最火五款游戏”排行榜。这里选择社区中具有代表性的五类作品作为设计参考，不把它们表述为严格热度排名：
+
+| Reference pattern / 参考方向 | What GamePhanes learns / 对 Agent 的启发 |
+|---|---|
+| Brotato-style arena loop | Dense combat, auto-targeting, short upgrade decisions / 高密度战斗、自动索敌、短局升级选择 |
+| Dome Keeper-style pressure cycle | Gather, return, spend, survive / 采集、返回、消费、承压循环 |
+| Cassette Beasts-style data content | Data-driven actors, skills, tags, and content expansion / 角色、技能、标签和内容数据驱动 |
+| Buckshot Roulette-style feedback | Risk, pacing, anticipation, and strong audiovisual feedback / 风险、节奏、预期和强视听反馈 |
+| The Case of the Golden Idol-style observation | Events, clues, causal chains, and inspectable state / 事件、线索、因果链和可观测状态 |
+
+Starfall Protocol compresses these lessons into one small, testable slice: a state machine, data libraries, authored feedback pass, asset manifest, external harness, and repair-ready evidence all ship together.
+
+Starfall Protocol 将这些经验压缩进一个可验证的小切片：状态机、数据库、反馈层、资产 Manifest、外部 Harness 和可用于修复的证据一起交付。
 
 ```powershell
 npm run showcase:validate
@@ -53,16 +84,16 @@ $env:GAMEPHANES_GODOT = "C:\path\to\godot.exe"
 npm run showcase:run
 ```
 
-Export all five browser builds / 导出五款浏览器版本：
+Export all six browser builds / 导出六款浏览器版本：
 
 ```powershell
 $env:GAMEPHANES_GODOT = "C:\path\to\godot.exe"
 npm run showcase:export-web
 ```
 
-The Web export uses Godot's non-threaded template so it runs on GitHub Pages without custom cross-origin headers. A shared engine runtime keeps the five published builds compact; each game retains its own versioned `.pck` package.
+The Web export uses Godot's non-threaded template so it runs on GitHub Pages without custom cross-origin headers. A shared engine runtime keeps the six published builds compact; each game retains its own versioned `.pck` package.
 
-Web 导出使用 Godot 无线程模板，因此无需自定义跨域响应头即可在 GitHub Pages 运行。五款游戏共用一份引擎运行时，并分别保留可版本化的 `.pck` 游戏包，以控制发布体积。
+Web 导出使用 Godot 无线程模板，因此无需自定义跨域响应头即可在 GitHub Pages 运行。六款游戏共用一份引擎运行时，并分别保留可版本化的 `.pck` 游戏包，以控制发布体积。
 
 ## Quick Start / 快速开始
 
@@ -197,7 +228,7 @@ GamePhanes 当前以 evaluation-first 为边界，尚未接入具体大模型、
 - `M0 - Environment`：Task contract, Godot runner, event protocol, rule evaluator / 任务契约、Godot runner、事件协议、规则评测；
 - `M1 - Coding Agent`：Controlled file tools and repair loop / 受控文件工具、Godot 项目检查、实现与修复循环；
 - `M2 - Playtest`：Input DSL, screenshots, Node state, time-series assertions / 键鼠动作 DSL、截图、Node 状态和时间序列断言；
-- `M3 - GamePhanes-Bench`：Five showcase slices available; expand toward 10 core tasks and baselines / 已提供五款展示切片，继续扩展到 10 个核心任务和 baseline；
+- `M3 - GamePhanes-Bench`：Six showcase slices including the Golden Demo; expand toward 10 core tasks and baselines / 已提供包含黄金 Demo 在内的六款展示切片，继续扩展到 10 个核心任务和 baseline；
 - `M4 - Project State`：Scene/Script/Resource Artifact Graph and long-task ablations / Scene/Script/Resource Artifact Graph 与长任务消融；
 - `M5 - Assets and 3D`：Asset retrieval, adaptation, animation, and Godot 3D / 资产检索、适配、动画和 Godot 3D。
 

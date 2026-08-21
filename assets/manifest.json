@@ -79,6 +79,14 @@
       "metadata": { "rendered_by": "examples/rift-arena/scripts/main.gd", "dimensions": [960, 540], "style": "violet low-poly 3D arena" }
     },
     {
+      "id": "starfall_protocol_procedural",
+      "type": "procedural",
+      "source": "procedural",
+      "license": "MIT",
+      "files": [],
+      "metadata": { "rendered_by": "examples/starfall-protocol/scripts/main.gd", "dimensions": [960, 540], "style": "cinematic sci-fi action vertical slice" }
+    },
+    {
       "id": "neon_relay_runtime_capture",
       "type": "texture_2d",
       "source": "generated",
@@ -117,6 +125,14 @@
       "license": "MIT",
       "files": ["showcase/rift-arena.png"],
       "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture" }
+    },
+    {
+      "id": "starfall_protocol_runtime_capture",
+      "type": "texture_2d",
+      "source": "generated",
+      "license": "MIT",
+      "files": ["showcase/starfall-protocol.png"],
+      "metadata": { "generated_by": "scripts/capture-showcase.gd", "kind": "runtime_capture", "role": "golden_demo" }
     }
   ]
 }

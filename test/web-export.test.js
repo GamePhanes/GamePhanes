@@ -7,9 +7,9 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const playRoot = path.join(root, "docs", "play");
 
-test("Web showcase uses one shared runtime and five playable packages", () => {
+test("Web showcase uses one shared runtime and six playable packages", () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(playRoot, "manifest.json"), "utf8"));
-  assert.equal(manifest.games.length, 5);
+  assert.equal(manifest.games.length, 6);
   assert.ok(fs.statSync(path.join(playRoot, "runtime", "game.wasm")).size > 1_000_000);
 
   for (const game of manifest.games) {
@@ -21,4 +21,5 @@ test("Web showcase uses one shared runtime and five playable packages", () => {
     assert.match(shell, /\.\.\/runtime\/game\.js/);
     assert.equal(fs.existsSync(path.join(gameDir, "game.wasm")), false);
   }
+  assert.equal(manifest.games[0].slug, "starfall-protocol");
 });

@@ -18,6 +18,15 @@ const sharedRuntimeFiles = [
 
 const games = [
   {
+    slug: "starfall-protocol",
+    title: "Starfall Protocol / 星坠协议",
+    controls: { en: "WASD move, Shift dash, Space fire, E select", zh: "WASD 移动，Shift 冲刺，空格射击，E 选择" },
+    touch: directionPad("Fire", "射击", "move_up", "move_down", "fire").concat([
+      { actionName: "dash", code: "ShiftLeft", key: "Shift", label: "DASH", labelZh: "冲刺", ariaEn: "Dash", ariaZh: "冲刺", action: true },
+      { actionName: "interact", code: "KeyE", key: "e", label: "SELECT", labelZh: "选择", ariaEn: "Select upgrade", ariaZh: "选择升级", action: true },
+    ]),
+  },
+  {
     slug: "neon-relay",
     title: "Neon Relay",
     controls: { en: "A / D to move, Space to jump", zh: "A / D 移动，空格跳跃" },

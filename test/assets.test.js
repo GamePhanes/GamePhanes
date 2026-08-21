@@ -5,11 +5,11 @@ import { loadManifest, validateManifest } from "../src/assets/manifest.js";
 
 test("loadManifest validates procedural assets and versioned runtime captures", () => {
   const result = loadManifest(path.resolve("assets/manifest.json"));
-  assert.equal(result.manifest.assets.length, 13);
+  assert.equal(result.manifest.assets.length, 15);
   assert.equal(result.manifest.assets[0].source, "procedural");
-  const capture = result.manifest.assets.find((asset) => asset.id === "rift_arena_runtime_capture");
+  const capture = result.manifest.assets.find((asset) => asset.id === "starfall_protocol_runtime_capture");
   assert.equal(capture.source, "generated");
-  assert.deepEqual(capture.files, ["showcase/rift-arena.png"]);
+  assert.deepEqual(capture.files, ["showcase/starfall-protocol.png"]);
 });
 
 test("validateManifest rejects duplicate IDs and unsupported sources", () => {

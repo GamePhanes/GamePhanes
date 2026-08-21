@@ -8,6 +8,23 @@
 4. **One agent, structured tools first / 单 Agent，结构化工具优先**：首版保持单一控制循环，按需增加工具，而不是预设大量角色。
 5. **Godot-first, engine-neutral contracts / Godot 优先、契约保持引擎中立**：执行器聚焦 Godot，task、event 和 report contract 尽量不绑定引擎内部格式。
 
+## Golden Demo Contract / 黄金 Demo 契约
+
+`Starfall Protocol / 星坠协议` is the quality reference for generated games. It is deliberately small enough to run in one benchmark task, but wide enough to expose the systems an Agent must coordinate:
+
+`Starfall Protocol / 星坠协议` 是生成游戏的质量参考。它足够小，可以放进一个 Benchmark 任务；又足够完整，能够暴露 Agent 必须协同的系统：
+
+- **State machine / 状态机**: intro, combat, upgrade, boss, victory are explicit phases.
+- **Data-driven content / 数据驱动内容**: enemy and upgrade libraries define balance-facing content separately from the loop.
+- **Feedback pass / 反馈层**: projectiles, particles, hit flashes, floating text, HUD bars, and screen shake make state legible.
+- **Asset contract / 资产契约**: procedural visuals and runtime captures are recorded in `assets/manifest.json`.
+- **Playtest evidence / Playtest 证据**: the external harness drives inputs and checks six events without reading private benchmark code.
+- **Repair loop / 修复闭环**: every failed assertion points to a named event and field, so an Agent can patch the smallest responsible system.
+
+The target is not to imitate a commercial game's code or art. The target is to reproduce the underlying engineering properties: a readable loop, authored feedback, inspectable state, and evidence that survives a clean rerun.
+
+目标不是模仿商业游戏的代码或美术，而是复现底层工程能力：清晰的玩法循环、经过设计的反馈、可检查的状态，以及在干净环境中重复通过的证据。
+
 ## Current Runtime Flow / 当前运行流程
 
 ```text
@@ -111,3 +128,4 @@ The first public suite deliberately varies genre and rendering mode while keepin
 | Gravity Lab | stateful puzzle / 状态解谜 | polarity, core height, exit / 极性、核心高度、出口 |
 | Tiny Bastion | resources and waves / 资源与波次 | towers, kills, base health / 防御塔、击杀、基地生命 |
 | Rift Arena | procedural 3D combat / 程序化 3D 战斗 | hits, enemy health, stability / 命中、敌人生命、稳定度 |
+| Starfall Protocol | golden 2D action vertical slice / 黄金 2D 动作切片 | encounter, upgrade, boss, victory / 敌群、升级、Boss、胜利 |

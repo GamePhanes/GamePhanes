@@ -1,6 +1,12 @@
 {
   "games": [
     {
+      "slug": "starfall-protocol",
+      "title": "Starfall Protocol / 星坠协议",
+      "path": "./starfall-protocol/",
+      "pack_bytes": 20776
+    },
+    {
       "slug": "neon-relay",
       "title": "Neon Relay",
       "path": "./neon-relay/",
