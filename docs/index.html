@@ -6,7 +6,7 @@
     <meta name="description" content="GamePhanes is Godot-first evaluation and rollout infrastructure for game coding agents.">
     <meta name="theme-color" content="#090d12">
     <meta property="og:title" content="GamePhanes - Evaluation infrastructure for game coding agents">
-    <meta property="og:description" content="Run agent-built games, test real interactions, and capture reproducible behavioral evidence.">
+    <meta property="og:description" content="Run agent-modified games, return runtime feedback, and capture reproducible repair evidence.">
     <meta property="og:image" content="https://gamephanes.github.io/assets/starfall-protocol.png">
     <meta property="og:type" content="website">
     <title>GamePhanes - Evaluation infrastructure for game coding agents</title>
@@ -36,8 +36,8 @@
         <div class="hero-inner">
           <p class="eyebrow" data-i18n="heroEyebrow">Game coding agent infrastructure</p>
           <h1 id="hero-title">GamePhanes</h1>
-          <p class="hero-statement" data-i18n="heroStatement">Evaluate behavior. Capture rollouts.</p>
-          <p class="hero-copy" data-i18n="heroCopy">Godot-first evaluation infrastructure for game coding agents, designed for private tasks, hidden grading, and training-ready repair trajectories.</p>
+          <p class="hero-statement" data-i18n="heroStatement">Code. Run. Receive feedback. Repair.</p>
+          <p class="hero-copy" data-i18n="heroCopy">Godot-first runtime feedback infrastructure for game coding agents. The game is the executable test surface, not the agent's gameplay policy.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes" data-i18n="viewGithub">View on GitHub</a>
             <a class="button button-secondary" href="#benchmark" data-i18n="seeBenchmark">See the benchmark</a>
@@ -60,7 +60,7 @@
             <p class="section-kicker" data-i18n="proofKicker">Evidence over claims</p>
             <h2 id="proof-title" data-i18n="proofTitle">A game is not done when the code looks right.</h2>
           </div>
-          <p class="section-lead" data-i18n="proofLead">GamePhanes launches the project, performs real inputs, observes runtime state, and checks deterministic assertions before reporting success.</p>
+          <p class="section-lead" data-i18n="proofLead">GamePhanes launches the agent-modified project, probes it with evaluator-controlled inputs, observes runtime state, and returns deterministic feedback for repair.</p>
         </div>
         <div class="metric-grid section-inner">
           <div class="metric"><strong>28/28</strong><span data-i18n="metricAssertions">Assertions passed</span></div>
@@ -74,7 +74,7 @@
         <div class="section-inner showcase-heading">
           <p class="section-kicker" data-i18n="showcaseKicker">One golden demo. Five reference surfaces.</p>
           <h2 id="showcase-title" data-i18n="showcaseTitle">Not mockups. Running Godot projects.</h2>
-          <p class="section-lead" data-i18n="showcaseLead">Each slice has a distinct art direction, playable loop, external harness, and deterministic score.</p>
+          <p class="section-lead" data-i18n="showcaseLead">Each slice is a runnable feedback environment with an external harness, observable state, and deterministic score.</p>
         </div>
         <div class="section-inner showcase-grid">
           <article class="showcase-item showcase-featured golden-demo">
@@ -108,12 +108,12 @@
       <section class="workflow" id="workflow" aria-labelledby="workflow-title">
         <div class="section-inner">
           <p class="section-kicker" data-i18n="workflowKicker">Closed-loop engineering</p>
-          <h2 id="workflow-title" data-i18n="workflowTitle">From intent to verified behavior.</h2>
+          <h2 id="workflow-title" data-i18n="workflowTitle">From code change to actionable feedback.</h2>
           <ol class="flow" aria-label="GamePhanes workflow" data-i18n-aria="workflowLabel">
             <li><span>01</span><strong data-i18n="workflowUnderstand">Understand</strong><small data-i18n="workflowRequirements">Requirements</small></li>
             <li><span>02</span><strong data-i18n="workflowBuild">Build</strong><small data-i18n="workflowProject">Godot project</small></li>
             <li><span>03</span><strong data-i18n="workflowRun">Run</strong><small data-i18n="workflowHeadless">Headless engine</small></li>
-            <li><span>04</span><strong data-i18n="workflowPlay">Play</strong><small data-i18n="workflowInputs">Real inputs</small></li>
+            <li><span>04</span><strong data-i18n="workflowPlay">Exercise</strong><small data-i18n="workflowInputs">Evaluator probe</small></li>
             <li><span>05</span><strong data-i18n="workflowObserve">Observe</strong><small data-i18n="workflowState">State + logs</small></li>
             <li><span>06</span><strong data-i18n="workflowRepair">Repair</strong><small data-i18n="workflowEvidence">Evidence-guided</small></li>
           </ol>
@@ -123,7 +123,7 @@
       <section class="systems" aria-labelledby="systems-title">
         <div class="section-inner systems-heading">
           <p class="section-kicker" data-i18n="systemsKicker">Designed for agents</p>
-          <h2 id="systems-title" data-i18n="systemsTitle">Run the artifact. Test the interaction. Score the behavior.</h2>
+          <h2 id="systems-title" data-i18n="systemsTitle">Run the artifact. Return feedback. Enable repair.</h2>
         </div>
         <div class="system-row">
           <div class="system-index">01</div>

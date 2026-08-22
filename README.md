@@ -2,9 +2,9 @@
 
 > **Evaluation and rollout infrastructure for game coding agents.**
 >
-> A Godot-first execution layer for evaluating agent-built games through real runtime interaction and reproducible evidence.
+> A Godot-first runtime feedback layer for evaluating agent-modified games through real interaction and reproducible evidence.
 >
-> **面向游戏 Coding Agent 的评测与 Rollout 基础设施。** GamePhanes 通过真实运行时交互和可复现证据，评测 Agent 构建的游戏。
+> **面向游戏 Coding Agent 的运行时反馈、评测与 Rollout 基础设施。** GamePhanes 让 Agent 修改游戏工程，再通过真实运行时交互和可复现证据反馈代码是否工作。
 
 [Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Open-core boundary / 开源边界](docs/open-core.md)
 
@@ -12,18 +12,28 @@
 
 ## What is GamePhanes? / 项目简介
 
-Traditional code benchmarks stop at tests. Interactive software must also launch, accept input, change runtime state, and remain playable. GamePhanes evaluates that missing part of the engineering loop.
+Traditional code benchmarks stop at tests. Interactive software must also launch, accept input, change runtime state, and produce the intended user-visible result. GamePhanes supplies that missing runtime feedback loop for coding agents.
 
-传统代码 Benchmark 通常止于测试；交互软件还必须真正启动、响应输入、改变运行时状态并保持可玩。GamePhanes 评测的正是这个缺失环节：
+传统代码 Benchmark 通常止于测试；交互软件还必须真正启动、响应输入、改变运行时状态并呈现预期结果。GamePhanes 提供的正是这个缺失的运行时反馈环节：
 
 ```text
-Understand -> Plan -> Build -> Run -> Play -> Observe -> Repair -> Evaluate
-理解需求   -> 规划 -> 构建 -> 运行 -> 试玩 -> 观测 -> 修复 -> 评测
+Understand -> Plan -> Build -> Run -> Exercise -> Observe -> Repair -> Evaluate
+理解需求   -> 规划 -> 构建 -> 运行 -> 执行验证 -> 观测 -> 修复 -> 评测
 ```
 
-GamePhanes is agent-agnostic: it does not need to own the coding model or agent loop. An agent modifies a candidate project; GamePhanes runs the result, drives real interactions, records evidence, and produces a machine-readable score.
+GamePhanes is agent-agnostic: it does not need to own the coding model or agent loop. A coding agent modifies a candidate project; GamePhanes runs the result, drives evaluator-controlled interactions, records runtime feedback, and produces a machine-readable score for the next repair step.
 
-GamePhanes 不绑定具体模型或 Agent 框架。Coding Agent 修改候选工程后，GamePhanes 负责运行产物、执行真实交互、记录证据并生成机器可读的评分。
+GamePhanes 不绑定具体模型或 Agent 框架。Coding Agent 修改候选工程后，GamePhanes 负责运行产物、由评测器驱动真实交互、记录运行时反馈，并生成可用于下一轮修复的机器可读评分。
+
+### What it is, and what it is not / 它是什么，不是什么
+
+GamePhanes is for agents that write and repair interactive software. The agent action is a code edit, scene change, asset/config change, or debugging command. The game is the executable feedback surface: it exposes build errors, runtime logs, state transitions, screenshots, and assertion results.
+
+GamePhanes 面向的是“写游戏、改游戏、调试游戏”的 Coding Agent。Agent 的动作是代码修改、场景修改、资产或配置修改，以及调试命令；游戏是可执行的反馈面，暴露构建错误、运行时日志、状态变化、截图和断言结果。
+
+It is not a benchmark for an agent that controls a player and tries to win the game. Any keyboard or controller input in a harness is evaluator-controlled probing used to obtain feedback about the candidate code. The target trajectory is `edit -> run -> feedback -> diagnose -> repair`, not a gameplay policy trajectory.
+
+它不是让 Agent 控制玩家、追求通关的游戏操作 Benchmark。Harness 中的键盘或手柄输入由评测器控制，只用于探测候选代码并产生反馈；目标轨迹是“修改 -> 运行 -> 反馈 -> 诊断 -> 修复”，而不是游戏策略轨迹。
 
 The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 
@@ -79,9 +89,9 @@ node ./bin/gamephanes.js run ./benchmark/tasks/starfall-protocol.json --godot C:
 
 ## Showcase / 游戏展示
 
-These are runnable Godot reference projects, not static mockups. Together they exercise movement, combat, physics state, resource strategy, wave simulation, 3D rendering, external input, and deterministic evaluation.
+These are runnable Godot reference environments, not static mockups. Their gameplay systems are deliberately used as feedback surfaces: movement, combat, physics state, resource strategy, wave simulation, 3D rendering, external input, and deterministic evaluation all give a coding agent observable consequences after it changes the project.
 
-它们是真正可运行的 Godot 参考工程，不是静态概念图。六款游戏共同覆盖移动、战斗、物理状态、资源策略、波次模拟、3D 渲染、外部输入和确定性评测。
+它们是真正可运行的 Godot 参考环境，不是静态概念图。六款游戏把移动、战斗、物理状态、资源策略、波次模拟、3D 渲染、外部输入和确定性评测变成 Coding Agent 修改代码后可以收到的反馈。
 
 | Game / 游戏 | Play online / 在线试玩 | Verified loop / 已验证闭环 |
 |---|---|---|
