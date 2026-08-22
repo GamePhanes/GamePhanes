@@ -4,6 +4,15 @@
   "title": "Gravity Lab",
   "description": "Invert chamber polarity, stabilize the suspended core, and cross the unlocked exit.",
   "taxonomy": { "domain": "gameplay_systems", "subdomain": "physics", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "gravity-lab",
+    "version": "gamephanes-public==0.1",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "physics", "state-signals", "puzzle"],
+    "author": "GamePhanes",
+    "image": "gravity-lab.png",
+    "play_path": "play/gravity-lab/"
+  },
   "project": { "path": "../../examples/gravity-lab" },
   "requirements": [
     { "id": "polarity", "description": "The player can invert chamber gravity." },

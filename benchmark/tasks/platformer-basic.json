@@ -8,6 +8,14 @@
     "subdomain": "movement",
     "task_type": "reference_environment"
   },
+  "registry": {
+    "slug": "platformer-basic",
+    "version": "gamephanes-public==0.1",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "movement", "input", "scoring"],
+    "author": "GamePhanes",
+    "image": "platformer-demo.png"
+  },
   "project": {
     "path": "../../examples/platformer-basic"
   },

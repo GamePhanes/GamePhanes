@@ -4,6 +4,15 @@
   "title": "Last Signal",
   "description": "Reposition the field transmitter and clear four threats with directed pulses.",
   "taxonomy": { "domain": "gameplay_systems", "subdomain": "combat", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "last-signal",
+    "version": "gamephanes-public==0.1",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "combat", "input", "state"],
+    "author": "GamePhanes",
+    "image": "last-signal.png",
+    "play_path": "play/last-signal/"
+  },
   "project": { "path": "../../examples/last-signal" },
   "requirements": [
     { "id": "field_movement", "description": "The operator can reposition in the field." },

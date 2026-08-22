@@ -4,6 +4,15 @@
   "title": "Neon Relay",
   "description": "Run a neon course, jump, collect three energy shards, and synchronize the relay.",
   "taxonomy": { "domain": "gameplay_systems", "subdomain": "movement", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "neon-relay",
+    "version": "gamephanes-public==0.1",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "movement", "input", "platformer"],
+    "author": "GamePhanes",
+    "image": "neon-relay.png",
+    "play_path": "play/neon-relay/"
+  },
   "project": { "path": "../../examples/neon-relay" },
   "requirements": [
     { "id": "runner_moves", "description": "The runner moves through the course." },

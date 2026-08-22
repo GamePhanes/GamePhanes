@@ -4,6 +4,15 @@
   "title": "Rift Arena",
   "description": "Enter a 3D arena, strike the rift warden, and stabilize the breach.",
   "taxonomy": { "domain": "gameplay_systems", "subdomain": "combat", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "rift-arena",
+    "version": "gamephanes-public==0.1",
+    "difficulty": "unrated",
+    "tags": ["godot", "3d", "combat", "input", "runtime-evaluation"],
+    "author": "GamePhanes",
+    "image": "rift-arena.png",
+    "play_path": "play/rift-arena/"
+  },
   "project": { "path": "../../examples/rift-arena" },
   "requirements": [
     { "id": "movement_3d", "description": "The player can move in the 3D arena." },

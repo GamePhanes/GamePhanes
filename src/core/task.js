@@ -3,6 +3,7 @@ import path from "node:path";
 import { validateTaskTaxonomy } from "./taxonomy.js";
 
 const OPERATORS = new Set(["exists", "==", "!=", ">", ">=", "<", "<=", "includes"]);
+const DIFFICULTIES = new Set(["unrated", "easy", "medium", "hard", "expert"]);
 
 function requireString(value, field) {
   if (typeof value !== "string" || value.trim() === "") {
@@ -18,6 +19,40 @@ function requireArray(value, field) {
   return value;
 }
 
+function validateRegistryMetadata(input) {
+  if (input === undefined) return;
+  if (!input || typeof input !== "object" || Array.isArray(input)) {
+    throw new Error("registry must be an object");
+  }
+  requireString(input.slug, "registry.slug");
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(input.slug)) {
+    throw new Error("registry.slug must be a lowercase URL slug");
+  }
+  requireString(input.version, "registry.version");
+  if (!DIFFICULTIES.has(input.difficulty)) throw new Error("registry.difficulty is not supported");
+  requireString(input.author, "registry.author");
+  requireString(input.image, "registry.image");
+  if (input.image.includes("/") || input.image.includes("\\")) {
+    throw new Error("registry.image must be an asset filename");
+  }
+  if (input.play_path !== undefined) {
+    requireString(input.play_path, "registry.play_path");
+    if (!/^(?:[a-z0-9]+(?:-[a-z0-9]+)*\/)+$/.test(input.play_path)) {
+      throw new Error("registry.play_path must be a safe relative directory path");
+    }
+  }
+  const tags = requireArray(input.tags, "registry.tags");
+  const uniqueTags = new Set();
+  tags.forEach((tag, index) => {
+    requireString(tag, `registry.tags[${index}]`);
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(tag)) {
+      throw new Error(`registry.tags[${index}] must be a lowercase slug`);
+    }
+    if (uniqueTags.has(tag)) throw new Error(`registry.tags[${index}] must be unique`);
+    uniqueTags.add(tag);
+  });
+}
+
 export function validateTask(input) {
   if (!input || typeof input !== "object" || Array.isArray(input)) {
     throw new Error("task must be a JSON object");
@@ -30,6 +65,7 @@ export function validateTask(input) {
   requireString(input.title, "title");
   requireString(input.description, "description");
   validateTaskTaxonomy(input.taxonomy);
+  validateRegistryMetadata(input.registry);
   requireString(input.project?.path, "project.path");
   requireString(input.evaluation?.harness, "evaluation.harness");
 

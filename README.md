@@ -6,7 +6,7 @@
 >
 > **面向交互软件 Coding Agent 的 Terminal-Bench。** GamePhanes 将 Agent 放进游戏工程任务空间，记录 Terminal 轨迹，并通过真实运行时反馈评估结果。
 
-[Project homepage / 项目主页](https://gamephanes.github.io/) · [Task taxonomy / 任务分类](docs/taxonomy.md) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Trajectory contract / 轨迹契约](docs/trajectory.md) · [Open-core boundary / 开源边界](docs/open-core.md)
+[Project homepage / 项目主页](https://gamephanes.github.io/) · [Task registry / 任务库](https://gamephanes.github.io/registry/) · [Task taxonomy / 任务分类](docs/taxonomy.md) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Trajectory contract / 轨迹契约](docs/trajectory.md) · [Open-core boundary / 开源边界](docs/open-core.md)
 
 ![Starfall Protocol running in GamePhanes](docs/assets/starfall-protocol.png)
 
@@ -179,6 +179,10 @@ The example verifies game startup, movement, jumping, coin collection, and Playt
 Each task declares a candidate project, requirements, external harness, and rule assertions.
 
 每个任务明确声明候选工程、需求、外部测试 harness 和规则断言。
+
+Tasks with public `registry` metadata are published as browsable task pages by `npm run registry:build`. Each page exposes the exact instruction, run command, success criteria, runtime evidence, and public evaluator boundary.
+
+带公开 `registry` 元数据的任务可通过 `npm run registry:build` 生成独立任务页面；页面会展示准确 Instruction、运行命令、成功条件、运行时证据和公开评测边界。
 
 ```json
 {
