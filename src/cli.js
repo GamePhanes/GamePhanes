@@ -108,8 +108,12 @@ async function run(args) {
     timeoutSeconds: task.evaluation.timeout_seconds,
   });
   const evaluation = evaluateAssertions(task.evaluation.assertions, execution.events);
-  const buildSuccess = execution.validation.exitCode === 0 && !execution.validation.timedOut;
-  const runtimeSuccess = execution.playtest?.exitCode === 0 && !execution.playtest.timedOut;
+  const buildSuccess = execution.validation.exitCode === 0
+    && !execution.validation.timedOut
+    && !execution.validation.outputExceeded;
+  const runtimeSuccess = execution.playtest?.exitCode === 0
+    && !execution.playtest.timedOut
+    && !execution.playtest.outputExceeded;
   const totalScore = 0.2 * Number(buildSuccess) + 0.2 * Number(runtimeSuccess) + 0.6 * evaluation.score;
   const report = {
     schema_version: 1,
