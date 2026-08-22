@@ -11,6 +11,8 @@ const validTask = {
   registry: {
     slug: "sample-task",
     version: "test==0.1",
+    kind: "coding_challenge",
+    evaluator_visibility: "public_development",
     difficulty: "medium",
     tags: ["godot", "runtime"],
     author: "GamePhanes",

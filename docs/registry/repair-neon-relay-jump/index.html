@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Run a neon course, jump, collect three energy shards, and synchronize the relay.">
-    <title>Neon Relay - GamePhanes Registry</title>
+    <meta name="description" content="The runner can move and collect shards, but the phase jump no longer lifts the player. Restore the intended jump behavior without breaking shard collection or relay completion.">
+    <title>Repair Neon Relay Jump - GamePhanes Registry</title>
     <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../../styles.css">
   </head>
@@ -23,31 +23,31 @@
   </header>
     <main class="task-detail">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="../../">Home</a><span>/</span><a href="../">Registry</a><span>/</span><strong>neon-relay</strong>
+        <a href="../../">Home</a><span>/</span><a href="../">Registry</a><span>/</span><strong>repair-neon-relay-jump</strong>
       </nav>
       <header class="task-detail-header">
-        <h1>Neon Relay</h1>
-        <div class="task-version">gamephanes-public==0.1</div>
+        <h1>Repair Neon Relay Jump</h1>
+        <div class="task-version">gamephanes-development==0.1</div>
         <div class="task-source-links">
-          <a href="https://github.com/GamePhanes/GamePhanes/blob/main/benchmark/tasks/neon-relay.json">Task JSON</a>
-          <a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/neon-relay">Project source</a>
-          <button type="button" data-copy-text="showcase_neon_relay_001">Copy task ID</button>
+          <a href="https://github.com/GamePhanes/GamePhanes/blob/main/benchmark/tasks/repair-neon-relay-jump.json">Task JSON</a>
+          <a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/neon-relay-repair-jump">Project source</a>
+          <button type="button" data-copy-text="repair_neon_relay_jump_001">Copy task ID</button>
         </div>
         <div class="registry-badges">
       <span>Gameplay Systems</span>
       <span>Movement</span>
-      <span>Reference environment</span>
-      <span>Public evaluator</span>
-      <span>unrated</span>
+      <span>Coding challenge</span>
+      <span>Public development</span>
+      <span>medium</span>
     </div>
       </header>
 
       <section class="task-detail-section" aria-labelledby="usage-title">
         <h2 id="usage-title">Usage</h2>
         <div class="task-command">
-          <pre><code>node ./bin/gamephanes.js run ./benchmark/tasks/neon-relay.json \
+          <pre><code>node ./bin/gamephanes.js run ./benchmark/tasks/repair-neon-relay-jump.json \
   --godot /path/to/godot</code></pre>
-          <button type="button" data-copy-text="node ./bin/gamephanes.js run ./benchmark/tasks/neon-relay.json \
+          <button type="button" data-copy-text="node ./bin/gamephanes.js run ./benchmark/tasks/repair-neon-relay-jump.json \
   --godot /path/to/godot">Copy command</button>
         </div>
       </section>
@@ -55,27 +55,27 @@
       <section class="task-detail-section" aria-labelledby="demo-title">
         <h2 id="demo-title">Runtime evidence</h2>
         <div class="task-evidence">
-          <img src="../../assets/neon-relay.png" alt="Neon Relay runtime capture">
+          <img src="../../assets/neon-relay.png" alt="Repair Neon Relay Jump runtime capture">
           <div>
-            <p>This executable Godot project is the feedback surface for the task. Evaluator-controlled inputs probe the candidate project; the Coding Agent acts through terminal commands and code changes.</p>
-            <a class="button button-primary" href="../../play/neon-relay/">Play environment</a>
+            <p>This is a deliberately damaged starter project. The Coding Agent must diagnose and repair it through terminal commands and project edits; evaluator-controlled inputs probe the result.</p>
+            <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/neon-relay-repair-jump">View project</a>
           </div>
         </div>
       </section>
 
       <section class="task-detail-section task-instruction" aria-labelledby="instruction-title">
         <h2 id="instruction-title">Instruction</h2>
-        <p>Run a neon course, jump, collect three energy shards, and synchronize the relay.</p>
+        <p>The runner can move and collect shards, but the phase jump no longer lifts the player. Restore the intended jump behavior without breaking shard collection or relay completion.</p>
         <h3>Success criteria</h3>
-        <ul><li><strong>runner_moves</strong><span>The runner moves through the course.</span></li>
-<li><strong>runner_jumps</strong><span>The runner performs a phase jump.</span></li>
-<li><strong>relay_sync</strong><span>Three shards are collected before reaching the relay.</span></li></ul>
+        <ul><li><strong>jump_lifts_runner</strong><span>After the runner has moved, pressing the phase-jump input produces an upward velocity.</span></li>
+<li><strong>shards_remain_collectible</strong><span>The runner can still collect all three energy shards.</span></li>
+<li><strong>relay_remains_completable</strong><span>The runner can reach the relay after collecting all three shards.</span></li></ul>
       </section>
 
       <section class="task-detail-section" aria-labelledby="evaluation-title">
         <h2 id="evaluation-title">Evaluation contract</h2>
         <dl class="task-facts">
-          <div><dt>Task ID</dt><dd>showcase_neon_relay_001</dd></div>
+          <div><dt>Task ID</dt><dd>repair_neon_relay_jump_001</dd></div>
           <div><dt>Runtime</dt><dd>Godot 4.x</dd></div>
           <div><dt>Timeout</dt><dd>15 seconds</dd></div>
           <div><dt>Assertions</dt><dd>5 deterministic checks</dd></div>
@@ -86,11 +86,11 @@
 
       <section class="task-detail-section" aria-labelledby="tags-title">
         <h2 id="tags-title">Tags</h2>
-        <div class="registry-tags task-tags"><span>godot</span><span>2d</span><span>movement</span><span>input</span><span>platformer</span></div>
+        <div class="registry-tags task-tags"><span>godot</span><span>2d</span><span>bug-fix</span><span>movement</span><span>regression</span></div>
         <p class="task-author">Created by GamePhanes</p>
       </section>
 
-      <p class="reference-notice">PUBLIC REFERENCE ENVIRONMENT. THIS PAGE DOCUMENTS THE OPEN CONTRACT; SEALED STARTERS, HIDDEN ASSERTIONS, AND PRODUCTION ROLLOUTS ARE NOT PUBLISHED HERE.</p>
+      <p class="reference-notice">PUBLIC DEVELOPMENT CHALLENGE. THE EVALUATOR IS VISIBLE FOR AUTHORING AND INTEGRATION; THIS ENTRY IS NOT A SEALED BENCHMARK SCORE.</p>
     </main>
     <footer><div class="section-inner footer-inner"><span>GamePhanes</span><span>Terminal-Bench for interactive software coding agents.</span><span data-copyright></span></div></footer>
     <script src="../../registry.js"></script>

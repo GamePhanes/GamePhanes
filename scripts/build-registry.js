@@ -10,6 +10,7 @@ const registryDirectory = path.join(docsDirectory, "registry");
 const preferredOrder = [
   "starfall-protocol",
   "neon-relay",
+  "repair-neon-relay-jump",
   "last-signal",
   "gravity-lab",
   "tiny-bastion",
@@ -44,11 +45,15 @@ function taskCommand(fileName) {
 }
 
 function renderBadges(task) {
-  return `
-    <div class="registry-badges">
+  const kindLabel = task.registry.kind === "coding_challenge" ? "Coding challenge" : "Reference environment";
+  const visibilityLabel = task.registry.evaluator_visibility === "public_development"
+    ? "Public development"
+    : task.registry.evaluator_visibility === "sealed" ? "Sealed evaluator" : "Public evaluator";
+  return `<div class="registry-badges">
       <span>${escapeHtml(label(task.taxonomy.domain))}</span>
       <span>${escapeHtml(label(task.taxonomy.subdomain))}</span>
-      <span>${escapeHtml(label(task.taxonomy.task_type))}</span>
+      <span>${escapeHtml(kindLabel)}</span>
+      <span>${escapeHtml(visibilityLabel)}</span>
       <span>${escapeHtml(task.registry.difficulty)}</span>
     </div>`;
 }
@@ -110,7 +115,7 @@ function renderRegistryIndex(entries) {
             <h1>Public task environments</h1>
             <p>Each entry is a concrete, runnable task contract. The current catalog contains open reference environments; sealed coding challenges will use the same page structure with hidden evaluators.</p>
           </div>
-          <div class="registry-release"><strong>gamephanes-public==0.1</strong><span>${entries.length} reference environments</span></div>
+      <div class="registry-release"><strong>gamephanes-public==0.1</strong><span>${entries.length} published task entries</span></div>
         </div>
       </section>
       <section class="registry-catalog" aria-label="Public task environments">
@@ -175,7 +180,9 @@ function renderTaskDetail(entry) {
         <div class="task-evidence">
           <img src="../../assets/${escapeHtml(task.registry.image)}" alt="${escapeHtml(task.title)} runtime capture">
           <div>
-            <p>This executable Godot project is the feedback surface for the task. Evaluator-controlled inputs probe the candidate project; the Coding Agent acts through terminal commands and code changes.</p>
+            <p>${task.registry.kind === "coding_challenge"
+    ? "This is a deliberately damaged starter project. The Coding Agent must diagnose and repair it through terminal commands and project edits; evaluator-controlled inputs probe the result."
+    : "This executable Godot project is the feedback surface for the task. Evaluator-controlled inputs probe the candidate project; the Coding Agent acts through terminal commands and code changes."}</p>
             ${demoAction}
           </div>
         </div>
@@ -206,7 +213,9 @@ function renderTaskDetail(entry) {
         <p class="task-author">Created by ${escapeHtml(task.registry.author)}</p>
       </section>
 
-      <p class="reference-notice">PUBLIC REFERENCE ENVIRONMENT. THIS PAGE DOCUMENTS THE OPEN CONTRACT; SEALED STARTERS, HIDDEN ASSERTIONS, AND PRODUCTION ROLLOUTS ARE NOT PUBLISHED HERE.</p>
+      <p class="reference-notice">${task.registry.kind === "coding_challenge"
+    ? "PUBLIC DEVELOPMENT CHALLENGE. THE EVALUATOR IS VISIBLE FOR AUTHORING AND INTEGRATION; THIS ENTRY IS NOT A SEALED BENCHMARK SCORE."
+    : "PUBLIC REFERENCE ENVIRONMENT. THIS PAGE DOCUMENTS THE OPEN CONTRACT; SEALED STARTERS, HIDDEN ASSERTIONS, AND PRODUCTION ROLLOUTS ARE NOT PUBLISHED HERE."}</p>
     </main>
     <footer><div class="section-inner footer-inner"><span>GamePhanes</span><span>Terminal-Bench for interactive software coding agents.</span><span data-copyright></span></div></footer>
     <script src="../../registry.js"></script>

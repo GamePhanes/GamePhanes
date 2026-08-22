@@ -4,6 +4,8 @@ import { validateTaskTaxonomy } from "./taxonomy.js";
 
 const OPERATORS = new Set(["exists", "==", "!=", ">", ">=", "<", "<=", "includes"]);
 const DIFFICULTIES = new Set(["unrated", "easy", "medium", "hard", "expert"]);
+const REGISTRY_KINDS = new Set(["reference_environment", "coding_challenge"]);
+const EVALUATOR_VISIBILITY = new Set(["public_reference", "public_development", "sealed"]);
 
 function requireString(value, field) {
   if (typeof value !== "string" || value.trim() === "") {
@@ -29,6 +31,16 @@ function validateRegistryMetadata(input) {
     throw new Error("registry.slug must be a lowercase URL slug");
   }
   requireString(input.version, "registry.version");
+  if (!REGISTRY_KINDS.has(input.kind)) throw new Error("registry.kind is not supported");
+  if (!EVALUATOR_VISIBILITY.has(input.evaluator_visibility)) {
+    throw new Error("registry.evaluator_visibility is not supported");
+  }
+  if (input.kind === "reference_environment" && input.evaluator_visibility !== "public_reference") {
+    throw new Error("reference environments must use public_reference evaluation");
+  }
+  if (input.kind === "coding_challenge" && input.evaluator_visibility === "public_reference") {
+    throw new Error("coding challenges cannot use public_reference evaluation");
+  }
   if (!DIFFICULTIES.has(input.difficulty)) throw new Error("registry.difficulty is not supported");
   requireString(input.author, "registry.author");
   requireString(input.image, "registry.image");

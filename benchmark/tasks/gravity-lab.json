@@ -7,6 +7,8 @@
   "registry": {
     "slug": "gravity-lab",
     "version": "gamephanes-public==0.1",
+    "kind": "reference_environment",
+    "evaluator_visibility": "public_reference",
     "difficulty": "unrated",
     "tags": ["godot", "2d", "physics", "state-signals", "puzzle"],
     "author": "GamePhanes",

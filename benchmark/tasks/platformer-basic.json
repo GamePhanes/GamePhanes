@@ -11,6 +11,8 @@
   "registry": {
     "slug": "platformer-basic",
     "version": "gamephanes-public==0.1",
+    "kind": "reference_environment",
+    "evaluator_visibility": "public_reference",
     "difficulty": "unrated",
     "tags": ["godot", "2d", "movement", "input", "scoring"],
     "author": "GamePhanes",

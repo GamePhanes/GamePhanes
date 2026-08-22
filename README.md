@@ -6,7 +6,7 @@
 >
 > **面向交互软件 Coding Agent 的 Terminal-Bench。** GamePhanes 将 Agent 放进游戏工程任务空间，记录 Terminal 轨迹，并通过真实运行时反馈评估结果。
 
-[Project homepage / 项目主页](https://gamephanes.github.io/) · [Task registry / 任务库](https://gamephanes.github.io/registry/) · [Task taxonomy / 任务分类](docs/taxonomy.md) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Trajectory contract / 轨迹契约](docs/trajectory.md) · [Open-core boundary / 开源边界](docs/open-core.md)
+[Project homepage / 项目主页](https://gamephanes.github.io/) · [Task registry / 任务库](https://gamephanes.github.io/registry/) · [Task taxonomy / 任务分类](docs/taxonomy.md) · [Benchmark quality / 质量门槛](docs/benchmark-quality.md) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Trajectory contract / 轨迹契约](docs/trajectory.md) · [Open-core boundary / 开源边界](docs/open-core.md)
 
 ![Starfall Protocol running in GamePhanes](docs/assets/starfall-protocol.png)
 

@@ -7,6 +7,8 @@
   "registry": {
     "slug": "tiny-bastion",
     "version": "gamephanes-public==0.1",
+    "kind": "reference_environment",
+    "evaluator_visibility": "public_reference",
     "difficulty": "unrated",
     "tags": ["godot", "2d", "economy", "wave-simulation", "tower-defense"],
     "author": "GamePhanes",
