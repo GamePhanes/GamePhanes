@@ -1,23 +1,29 @@
 # GamePhanes
 
-> An open-source game coding agent environment that builds, plays, tests, and repairs Godot games.
+> **Evaluation and rollout infrastructure for game coding agents.**
 >
-> 一个开源的 Godot 游戏编码智能体环境，帮助 Agent 构建、试玩、测试并修复游戏。
+> A Godot-first execution layer for evaluating agent-built games through real runtime interaction and reproducible evidence.
+>
+> **面向游戏 Coding Agent 的评测与 Rollout 基础设施。** GamePhanes 通过真实运行时交互和可复现证据，评测 Agent 构建的游戏。
 
-[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md)
+[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Open-core boundary / 开源边界](docs/open-core.md)
 
 ![Starfall Protocol running in GamePhanes](docs/assets/starfall-protocol.png)
 
 ## What is GamePhanes? / 项目简介
 
-GamePhanes is designed around a verifiable engineering loop rather than one-shot code generation.
+Traditional code benchmarks stop at tests. Interactive software must also launch, accept input, change runtime state, and remain playable. GamePhanes evaluates that missing part of the engineering loop.
 
-GamePhanes 不把“生成代码”当作终点，而是围绕可验证的工程闭环设计：
+传统代码 Benchmark 通常止于测试；交互软件还必须真正启动、响应输入、改变运行时状态并保持可玩。GamePhanes 评测的正是这个缺失环节：
 
 ```text
 Understand -> Plan -> Build -> Run -> Play -> Observe -> Repair -> Evaluate
 理解需求   -> 规划 -> 构建 -> 运行 -> 试玩 -> 观测 -> 修复 -> 评测
 ```
+
+GamePhanes is agent-agnostic: it does not need to own the coding model or agent loop. An agent modifies a candidate project; GamePhanes runs the result, drives real interactions, records evidence, and produces a machine-readable score.
+
+GamePhanes 不绑定具体模型或 Agent 框架。Coding Agent 修改候选工程后，GamePhanes 负责运行产物、执行真实交互、记录证据并生成机器可读的评分。
 
 The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 
@@ -28,6 +34,36 @@ The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 - Structured runtime events over NDJSON logs / 基于 NDJSON 日志的结构化运行时事件；
 - Deterministic assertions and scoring without an LLM judge / 不依赖 LLM Judge 的确定性断言与评分报告；
 - Six polished 2D/3D showcase slices with external Playtests / 六款带独立 Playtest 的精致 2D/3D 游戏切片。
+
+## Open Core and Production Layer / 开源核心与生产层
+
+The public repository is the trust layer: task contracts, the local runner, example projects, reference harnesses, deterministic assertions, and a reproducible demo suite are open for inspection and extension.
+
+开源仓库承担“可信基础层”：任务契约、本地 Runner、示例工程、参考 Harness、确定性断言和可复现 Demo Suite 都可以检查与扩展。
+
+The production direction builds on that foundation with private task suites, hidden evaluators, versioned rollout traces, failure taxonomies, and customer-specific environments. These layers are intended for model evaluation, post-training data, and RL rather than being published as benchmark answers.
+
+生产层将在此基础上提供私有任务集、隐藏评测器、版本化 Rollout 轨迹、失败分类和客户定制环境，用于模型评测、后训练数据与 RL；这些内容不会作为公开 Benchmark 答案发布。
+
+| Layer / 层 | Public repository / 开源仓库 | Production direction / 生产方向 |
+|---|---|---|
+| Environment / 环境 | Runner, task schema, example projects / Runner、任务格式、示例工程 | Isolated workers, quotas, engine images / 隔离 Worker、资源配额、引擎镜像 |
+| Evaluation / 评测 | Reference harnesses and deterministic assertions / 参考 Harness 与确定性断言 | Hidden tasks, private evaluators, anti-overfitting checks / 隐藏任务、私有评测器、抗过拟合检查 |
+| Data / 数据 | Example reports and reproducible runs / 示例报告与可复现运行 | Successful and failed rollouts, repair trajectories, failure labels / 成功与失败 Rollout、修复轨迹、失败标签 |
+
+The detailed boundary is documented in [`docs/open-core.md`](docs/open-core.md). Public interfaces and scoring principles stay inspectable; private task content, answers, evaluator implementations, and production rollouts do not enter this repository.
+
+详细边界见 [`docs/open-core.md`](docs/open-core.md)。公开接口与评分原则保持可检查；私有任务内容、答案、评测实现和生产 Rollout 不进入本仓库。
+
+## Positioning and Related Work / 定位与相关工作
+
+[GameDevBench](https://arxiv.org/abs/2602.11103) and [GameCraft-Bench](https://arxiv.org/abs/2606.17861) have already established game-development agent benchmarking with large Godot task suites. GamePhanes does not claim to be the first game coding benchmark.
+
+[GameDevBench](https://arxiv.org/abs/2602.11103) 和 [GameCraft-Bench](https://arxiv.org/abs/2606.17861) 已经通过大规模 Godot 任务集建立了游戏开发 Agent Benchmark。GamePhanes 不宣称自己是首个游戏 Coding Benchmark。
+
+GamePhanes focuses on the infrastructure around repeated production evaluation: agent-neutral execution, deterministic behavioral evidence, private task variants, hidden evaluators, versioned rollout traces, and customer-specific environments. The public demo suite proves the contract; it is not presented as a replacement for those research benchmarks.
+
+GamePhanes 聚焦可持续生产评测所需的基础设施：与 Agent 无关的执行层、确定性行为证据、私有任务变体、隐藏评测器、版本化 Rollout 轨迹和客户定制环境。公开 Demo Suite 用于证明契约可运行，而不是取代上述研究 Benchmark。
 
 ## Golden Demo / 黄金 Demo
 
@@ -223,14 +259,18 @@ GamePhanes is currently evaluation-first. It does not yet include a specific LLM
 
 GamePhanes 当前以 evaluation-first 为边界，尚未接入具体大模型、自动编码循环、Artifact Graph、截图理解或资产生成。
 
+The public `v0.1` runner provides deterministic reference evaluation. Hosted hidden evaluation and rollout data services are product direction, not capabilities claimed by this release.
+
+公开的 `v0.1` Runner 当前提供确定性参考评测；托管隐藏评测与 Rollout 数据服务属于产品方向，不是本版本已经交付的能力。
+
 ## Roadmap / 路线图
 
-- `M0 - Environment`：Task contract, Godot runner, event protocol, rule evaluator / 任务契约、Godot runner、事件协议、规则评测；
-- `M1 - Coding Agent`：Controlled file tools and repair loop / 受控文件工具、Godot 项目检查、实现与修复循环；
-- `M2 - Playtest`：Input DSL, screenshots, Node state, time-series assertions / 键鼠动作 DSL、截图、Node 状态和时间序列断言；
-- `M3 - GamePhanes-Bench`：Six showcase slices including the Golden Demo; expand toward 10 core tasks and baselines / 已提供包含黄金 Demo 在内的六款展示切片，继续扩展到 10 个核心任务和 baseline；
-- `M4 - Project State`：Scene/Script/Resource Artifact Graph and long-task ablations / Scene/Script/Resource Artifact Graph 与长任务消融；
-- `M5 - Assets and 3D`：Asset retrieval, adaptation, animation, and Godot 3D / 资产检索、适配、动画和 Godot 3D。
+- `M0 - Executable Environment`：Task contract, Godot runner, event protocol, rule evaluator / 任务契约、Godot Runner、事件协议、规则评测；
+- `M1 - GamePhanes-Bench`：Expand from six showcase slices to modification, repair, and feature tasks with agent baselines / 从六个展示切片扩展到修改、修复与功能实现任务，并建立 Agent Baseline；
+- `M2 - Rich Observation`：Input DSL, screenshots, node state, video, and time-series assertions / 键鼠动作 DSL、截图、Node 状态、视频与时间序列断言；
+- `M3 - Hidden Evaluation`：Private task variants, isolated workers, evaluator versioning, and anti-overfitting checks / 私有任务变体、隔离 Worker、评测器版本管理与抗过拟合检查；
+- `M4 - Rollout Data`：Versioned action traces, failed attempts, repair trajectories, cost metadata, and failure labels / 版本化动作轨迹、失败尝试、修复过程、成本元数据与失败标签；
+- `M5 - Interactive Software`：Engine-neutral contracts and expansion beyond Godot to additional interactive runtimes / 保持引擎中立契约，并从 Godot 扩展到更多交互运行时。
 
 ## License / 许可证
 

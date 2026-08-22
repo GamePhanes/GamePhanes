@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="GamePhanes builds, plays, tests, and repairs Godot games with deterministic evidence.">
+    <meta name="description" content="GamePhanes is Godot-first evaluation and rollout infrastructure for game coding agents.">
     <meta name="theme-color" content="#090d12">
-    <meta property="og:title" content="GamePhanes - Build. Play. Prove.">
-    <meta property="og:description" content="An open-source game coding agent environment and benchmark for Godot.">
+    <meta property="og:title" content="GamePhanes - Evaluation infrastructure for game coding agents">
+    <meta property="og:description" content="Run agent-built games, test real interactions, and capture reproducible behavioral evidence.">
     <meta property="og:image" content="https://gamephanes.github.io/assets/starfall-protocol.png">
     <meta property="og:type" content="website">
-    <title>GamePhanes - Build. Play. Prove.</title>
+    <title>GamePhanes - Evaluation infrastructure for game coding agents</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -34,18 +34,18 @@
         <img class="hero-image" src="assets/starfall-protocol.png" alt="Starfall Protocol running inside the GamePhanes playtest environment" data-i18n-alt="heroImageAlt">
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-inner">
-          <p class="eyebrow" data-i18n="heroEyebrow">Open-source autonomous game engineering</p>
+          <p class="eyebrow" data-i18n="heroEyebrow">Game coding agent infrastructure</p>
           <h1 id="hero-title">GamePhanes</h1>
-          <p class="hero-statement" data-i18n="heroStatement">Build. Play. Prove.</p>
-          <p class="hero-copy" data-i18n="heroCopy">A Godot-first coding agent environment that turns game requirements into runnable projects, real playtests, and reproducible evidence.</p>
+          <p class="hero-statement" data-i18n="heroStatement">Evaluate behavior. Capture rollouts.</p>
+          <p class="hero-copy" data-i18n="heroCopy">Godot-first evaluation infrastructure for game coding agents, designed for private tasks, hidden grading, and training-ready repair trajectories.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes" data-i18n="viewGithub">View on GitHub</a>
             <a class="button button-secondary" href="#benchmark" data-i18n="seeBenchmark">See the benchmark</a>
           </div>
         </div>
-        <div class="run-strip" aria-label="Latest verified run" data-i18n-aria="runLabel">
+        <div class="run-strip" aria-label="Latest public demo run" data-i18n-aria="runLabel">
           <div>
-            <span class="run-label" data-i18n="latestRun">LATEST RUN</span>
+            <span class="run-label" data-i18n="latestRun">LATEST PUBLIC DEMO</span>
             <strong>golden_starfall_protocol_001</strong>
           </div>
           <div><span class="status-dot"></span><strong data-i18n="buildPass">BUILD PASS</strong></div>
@@ -123,7 +123,7 @@
       <section class="systems" aria-labelledby="systems-title">
         <div class="section-inner systems-heading">
           <p class="section-kicker" data-i18n="systemsKicker">Designed for agents</p>
-          <h2 id="systems-title" data-i18n="systemsTitle">The missing runtime layer for game coding agents.</h2>
+          <h2 id="systems-title" data-i18n="systemsTitle">Run the artifact. Test the interaction. Score the behavior.</h2>
         </div>
         <div class="system-row">
           <div class="system-index">01</div>
@@ -139,6 +139,16 @@
           <div class="system-index">03</div>
           <div><h3 data-i18n="systemAssertionsTitle">Deterministic assertions</h3><p data-i18n="systemAssertionsCopy">Movement, velocity, score, health, and other state can be evaluated without an opaque model judge.</p></div>
           <code>velocity_y &lt; 0</code>
+        </div>
+        <div class="system-row">
+          <div class="system-index">04</div>
+          <div><h3 data-i18n="systemHiddenTitle">Hidden evaluation direction</h3><p data-i18n="systemHiddenCopy">Private task variants and benchmark-owned evaluators will measure generalization without exposing answers.</p></div>
+          <code>task@version -&gt; private score</code>
+        </div>
+        <div class="system-row">
+          <div class="system-index">05</div>
+          <div><h3 data-i18n="systemRolloutTitle">Rollout data direction</h3><p data-i18n="systemRolloutCopy">Actions, patches, runtime evidence, failures, and costs form training-ready repair trajectories.</p></div>
+          <code>{ actions, evidence, score }</code>
         </div>
       </section>
 
@@ -178,20 +188,20 @@
       <section class="roadmap" aria-labelledby="roadmap-title">
         <div class="section-inner">
           <p class="section-kicker" data-i18n="roadmapKicker">Roadmap</p>
-          <h2 id="roadmap-title" data-i18n="roadmapTitle">Small core. Serious trajectory.</h2>
+          <h2 id="roadmap-title" data-i18n="roadmapTitle">From public contract to private evaluation.</h2>
           <div class="roadmap-line">
             <div class="milestone active"><span>M0</span><strong data-i18n="milestoneEnvironment">Environment</strong><small data-i18n="milestoneNow">Available now</small></div>
-            <div class="milestone"><span>M1</span><strong data-i18n="milestoneAgent">Coding Agent</strong><small data-i18n="milestoneRepair">Repair loop</small></div>
-            <div class="milestone"><span>M2</span><strong data-i18n="milestonePlaytest">Playtest DSL</strong><small data-i18n="milestoneVision">Vision + state</small></div>
-            <div class="milestone"><span>M3</span><strong>GamePhanes-Bench</strong><small data-i18n="milestoneTasks">10 verified tasks</small></div>
+            <div class="milestone"><span>M1</span><strong data-i18n="milestoneAgent">GamePhanes-Bench</strong><small data-i18n="milestoneRepair">Agent baselines</small></div>
+            <div class="milestone"><span>M2</span><strong data-i18n="milestonePlaytest">Rich observation</strong><small data-i18n="milestoneVision">Vision + state</small></div>
+            <div class="milestone"><span>M3</span><strong data-i18n="milestoneHidden">Hidden evaluation</strong><small data-i18n="milestoneTasks">Private task variants</small></div>
           </div>
         </div>
       </section>
 
       <section class="closing" aria-labelledby="closing-title">
         <div class="section-inner">
-          <p class="section-kicker" data-i18n="closingKicker">MIT licensed. Godot-first. Built in public.</p>
-          <h2 id="closing-title" data-i18n="closingTitle">Help build the benchmark games can actually pass.</h2>
+          <p class="section-kicker" data-i18n="closingKicker">Open contract. Hidden evaluation. Better agents.</p>
+          <h2 id="closing-title" data-i18n="closingTitle">Build the evaluation layer for interactive software.</h2>
           <a class="button button-primary" href="https://github.com/GamePhanes/GamePhanes" data-i18n="closingButton">Explore GamePhanes on GitHub</a>
         </div>
       </section>
@@ -200,7 +210,7 @@
     <footer>
       <div class="section-inner footer-inner">
         <span>GamePhanes</span>
-        <span data-i18n="footerTagline">Open-source autonomous game engineering.</span>
+        <span data-i18n="footerTagline">Evaluation and rollout infrastructure for game coding agents.</span>
         <span id="copyright">2026</span>
       </div>
     </footer>

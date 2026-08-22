@@ -45,6 +45,32 @@ Temporary project copy / 临时工程副本
 Rule evaluator -> JSON report / 规则评测器 -> JSON 报告
 ```
 
+## Evaluation Surfaces / 评测分层
+
+GamePhanes separates an inspectable public contract from evaluation material that must remain private to preserve benchmark integrity.
+
+GamePhanes 将可检查的公开契约与必须保密的评测材料分开，以维持 Benchmark 的有效性：
+
+```text
+Public contract / 公开契约
+  Task schema + local runner + example projects + reference harnesses
+  任务格式 + 本地 Runner + 示例工程 + 参考 Harness
+                         |
+                         v
+Production evaluation / 生产评测
+  Private task variants + hidden harnesses + isolated workers
+  私有任务变体 + 隐藏 Harness + 隔离 Worker
+                         |
+                         v
+Rollout dataset / Rollout 数据集
+  Actions + patches + runtime evidence + scores + failure labels + costs
+  动作 + Patch + 运行证据 + 评分 + 失败标签 + 成本
+```
+
+Public tasks make the interface auditable and help agent developers integrate. Hidden variants measure generalization and prevent agents from optimizing against published answers. Both surfaces use versioned task, environment, and evaluator identifiers so scores remain comparable.
+
+公开任务让接口可审计，也便于 Agent 开发者接入；隐藏变体用于衡量泛化能力，并防止 Agent 针对公开答案优化。两类评测都使用版本化的任务、环境和评测器标识，使分数保持可比较。
+
 ## Asset Layer / 资产层
 
 Assets enter the system through a versioned manifest before an Agent can place them in a scene.
@@ -74,11 +100,11 @@ Engine logs may appear before, after, or between events. The parser only consume
 
 引擎日志可以出现在事件之前、之后或中间。解析器只消费带此前缀的行，并单独报告格式错误的协议消息。
 
-## Planned Agent Loop / 计划中的 Agent 闭环
+## Agent Integration and Rollouts / Agent 接入与 Rollout
 
-The next layer will use the existing runner as an oracle.
+Coding agents use the runner as a behavioral oracle. GamePhanes remains agent-agnostic and records the complete interaction needed for evaluation and post-training.
 
-下一层 Agent 将把现有 runner 作为行为验证器：
+Coding Agent 将 Runner 作为行为验证器。GamePhanes 不绑定具体 Agent，并记录评测与后训练所需的完整交互：
 
 ```text
 GameSpec -> Task Graph -> Patch -> Validate -> Playtest -> Diagnose
@@ -86,7 +112,7 @@ GameSpec -> Task Graph -> Patch -> Validate -> Playtest -> Diagnose
                               +-------- Repair --------+
 ```
 
-Each repair iteration will retain / 每轮修复都会保留：
+Each iteration will retain / 每轮都会保留：
 
 - changed artifacts / 发生变化的工程产物；
 - build and runtime logs / 构建与运行时日志；
@@ -94,9 +120,9 @@ Each repair iteration will retain / 每轮修复都会保留：
 - screenshots and state snapshots / 截图与状态快照；
 - token, time and tool-call costs / Token、时间和工具调用成本。
 
-This record becomes both Agent context and benchmark evidence.
+This versioned record can become Agent context, benchmark evidence, supervised repair data, or an RL trajectory.
 
-这些记录既是 Agent 上下文，也是 benchmark 评测证据。
+这些版本化记录既可以作为 Agent 上下文和 Benchmark 证据，也可以成为监督修复数据或 RL 轨迹。
 
 ## Benchmark Integrity / Benchmark 完整性
 

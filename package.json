@@ -1,7 +1,7 @@
 {
   "name": "@gamephanes/core",
   "version": "0.1.0",
-  "description": "An open-source game coding agent environment and benchmark for Godot.",
+  "description": "Godot-first evaluation and rollout infrastructure for game coding agents.",
   "homepage": "https://gamephanes.github.io/",
   "repository": {
     "type": "git",
