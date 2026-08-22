@@ -8,13 +8,15 @@ import { runGodotTask } from "./godot/runner.js";
 import { loadTask, resolveTaskPath } from "./core/task.js";
 import { loadManifest } from "./assets/manifest.js";
 import { TrajectoryRecorder, validateTrajectory } from "./trajectory/recorder.js";
+import { hashProject, initializeWorkspace } from "./core/workspace.js";
 
 const HELP = `GamePhanes - build, playtest, and evaluate Godot games
 
 Usage:
   gamephanes doctor [--godot PATH]
   gamephanes validate <task.json>
-  gamephanes run <task.json> [--godot PATH] [--report PATH] [--trajectory PATH] [--agent ID]
+  gamephanes task init <task.json> --workspace PATH
+  gamephanes run <task.json> [--project PATH] [--godot PATH] [--report PATH] [--trajectory PATH] [--agent ID]
   gamephanes trajectory validate <trajectory.json>
   gamephanes assets validate <manifest.json>
   gamephanes assets list <manifest.json>
@@ -26,6 +28,18 @@ function parseOptions(args, definitions) {
 
 function printJson(value) {
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+}
+
+function processEvidence(result) {
+  if (!result) return null;
+  return {
+    exit_code: result.exitCode ?? null,
+    timed_out: result.timedOut ?? false,
+    output_exceeded: result.outputExceeded ?? false,
+    duration_ms: result.durationMs ?? null,
+    stdout: result.stdout ?? "",
+    stderr: result.stderr ?? "",
+  };
 }
 
 async function doctor(args) {
@@ -50,9 +64,29 @@ function validate(args) {
   printJson({ valid: true, task_id: task.id, taxonomy: task.taxonomy, task_path: taskPath });
 }
 
+function task(args) {
+  const { values, positionals } = parseOptions(args, { workspace: { type: "string" } });
+  if (positionals.length !== 2 || positionals[0] !== "init") {
+    throw new Error("task expects init followed by a task file");
+  }
+  if (!values.workspace) throw new Error("task init requires --workspace PATH");
+  const { task: definition, taskDirectory, taskPath } = loadTask(positionals[1]);
+  const projectPath = resolveTaskPath(taskDirectory, definition.project.path, "project");
+  const result = initializeWorkspace({ task: definition, projectPath, workspacePath: values.workspace });
+  printJson({
+    initialized: true,
+    task_id: definition.id,
+    task_path: taskPath,
+    workspace_path: result.workspacePath,
+    starter_sha256: result.starterHash,
+    instruction_path: result.instructionPath,
+  });
+}
+
 async function run(args) {
   const { values, positionals } = parseOptions(args, {
     godot: { type: "string" },
+    project: { type: "string" },
     report: { type: "string" },
     trajectory: { type: "string" },
     agent: { type: "string" },
@@ -60,7 +94,9 @@ async function run(args) {
   if (positionals.length !== 1) throw new Error("run expects one task file");
 
   const { task, taskDirectory } = loadTask(positionals[0]);
-  const projectPath = resolveTaskPath(taskDirectory, task.project.path, "project");
+  const projectPath = values.project
+    ? resolveTaskPath(process.cwd(), values.project, "candidate project")
+    : resolveTaskPath(taskDirectory, task.project.path, "project");
   const harnessPath = resolveTaskPath(taskDirectory, task.evaluation.harness, "harness");
   const godotPath = findGodot(values.godot);
   if (!godotPath) throw new Error("Godot was not found. Set GAMEPHANES_GODOT or pass --godot PATH.");
@@ -78,7 +114,13 @@ async function run(args) {
   const report = {
     schema_version: 1,
     task_id: task.id,
+    task_version: task.registry?.version ?? "local",
+    evaluator_version: "gamephanes-local-evaluator==1",
     created_at: new Date().toISOString(),
+    candidate: {
+      source: values.project ? "agent_workspace" : "task_reference",
+      project_sha256: hashProject(projectPath),
+    },
     build_success: buildSuccess,
     runtime_success: runtimeSuccess,
     functional_score: evaluation.score,
@@ -88,8 +130,8 @@ async function run(args) {
     protocol_errors: execution.protocolErrors,
     execution: {
       sandboxed: execution.sandboxed,
-      validation_ms: execution.validation.durationMs,
-      playtest_ms: execution.playtest?.durationMs ?? null,
+      validation: processEvidence(execution.validation),
+      playtest: processEvidence(execution.playtest),
     },
   };
 
@@ -172,6 +214,7 @@ export async function main(args) {
   switch (command) {
     case "doctor": return doctor(rest);
     case "validate": return validate(rest);
+    case "task": return task(rest);
     case "run": return run(rest);
     case "assets": return assets(rest);
     case "trajectory": return trajectory(rest);

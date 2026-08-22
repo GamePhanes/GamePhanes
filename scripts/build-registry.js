@@ -41,7 +41,7 @@ function projectUrl(task) {
 }
 
 function taskCommand(fileName) {
-  return `node ./bin/gamephanes.js run ./benchmark/tasks/${fileName} \\` + "\n  --godot /path/to/godot";
+  return `node ./bin/gamephanes.js task init ./benchmark/tasks/${fileName} --workspace ./workspace\nnode ./bin/gamephanes.js run ./benchmark/tasks/${fileName} --project ./workspace --godot /path/to/godot`;
 }
 
 function renderBadges(task) {

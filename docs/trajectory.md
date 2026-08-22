@@ -48,6 +48,20 @@ The public schema is versioned and JSON-serializable. Each step has one actor, o
 
 ## Public API / 公开 API
 
+An Agent episode starts with an isolated workspace. The starter is copied from the task definition and the evaluator is injected only into a temporary evaluation copy. The public CLI equivalent is:
+
+Agent Episode 从隔离工作区开始。Starter 从任务定义复制，评测器只在评测时注入临时副本。公开 CLI 的等价流程是：
+
+```powershell
+node ./bin/gamephanes.js task init ./benchmark/tasks/repair-neon-relay-jump.json --workspace ./workspace
+# Agent reads .gamephanes/instruction.json and edits ./workspace.
+node ./bin/gamephanes.js run ./benchmark/tasks/repair-neon-relay-jump.json --project ./workspace --godot C:\path\to\godot.exe --report ./reports/episode.json
+```
+
+The report records the task and evaluator versions, candidate project fingerprint, build evidence, runtime evidence, structured events, and assertion results. `--trajectory` adds the evaluator probe trace; the Agent must use `CodingAgentAdapter` to record its own terminal and patch actions.
+
+报告会记录任务版本、评测版本、候选工程指纹、构建证据、运行时证据、结构化事件和断言结果。`--trajectory` 会额外保存 evaluator probe 轨迹；Agent 自身的 Terminal 和 Patch 动作仍需通过 `CodingAgentAdapter` 记录。
+
 ```js
 import { CodingAgentAdapter, TrajectoryRecorder } from "../src/trajectory/recorder.js";
 

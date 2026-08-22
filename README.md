@@ -158,9 +158,11 @@ Requirements / 环境要求：
 npm test
 node ./bin/gamephanes.js validate ./benchmark/tasks/platformer-basic.json
 node ./bin/gamephanes.js doctor --godot C:\path\to\godot.exe
-node ./bin/gamephanes.js run ./benchmark/tasks/platformer-basic.json `
+node ./bin/gamephanes.js task init ./benchmark/tasks/repair-neon-relay-jump.json --workspace ./workspace
+node ./bin/gamephanes.js run ./benchmark/tasks/repair-neon-relay-jump.json `
+  --project ./workspace `
   --godot C:\path\to\godot.exe `
-  --report ./reports/platformer-basic.json
+  --report ./reports/repair-neon-relay-jump.json
 ```
 
 Or set the environment variable / 也可以设置环境变量：

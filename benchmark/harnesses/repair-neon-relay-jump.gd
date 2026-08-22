@@ -6,6 +6,7 @@ var elapsed := 0.0
 var start_x := 0.0
 var jumped := false
 var shard_count := 0
+var moved := false
 
 
 func _initialize() -> void:
@@ -18,6 +19,9 @@ func _initialize() -> void:
 
 func _process(delta: float) -> bool:
 	elapsed += delta
+	if not moved and game.player_x - start_x > 35:
+		moved = true
+		emit_event("player_moved", {"delta_x": game.player_x - start_x})
 	if not jumped and game.player_x > 170:
 		jumped = true
 		Input.action_press("jump")

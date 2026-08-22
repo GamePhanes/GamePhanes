@@ -3,10 +3,11 @@ import os from "node:os";
 import path from "node:path";
 import { parseEvents } from "../evaluation/protocol.js";
 import { runProcess } from "../runtime/process.js";
+import { copyProject } from "../core/workspace.js";
 
 function prepareSandbox(projectPath, harnessPath) {
   const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), "gamephanes-"));
-  fs.cpSync(projectPath, sandbox, { recursive: true });
+  copyProject(projectPath, sandbox);
   const harnessDirectory = path.join(sandbox, ".gamephanes");
   fs.rmSync(harnessDirectory, { recursive: true, force: true });
   fs.mkdirSync(harnessDirectory, { recursive: true });
