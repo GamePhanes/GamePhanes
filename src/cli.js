@@ -7,13 +7,15 @@ import { findGodot } from "./godot/discovery.js";
 import { runGodotTask } from "./godot/runner.js";
 import { loadTask, resolveTaskPath } from "./core/task.js";
 import { loadManifest } from "./assets/manifest.js";
+import { TrajectoryRecorder, validateTrajectory } from "./trajectory/recorder.js";
 
 const HELP = `GamePhanes - build, playtest, and evaluate Godot games
 
 Usage:
   gamephanes doctor [--godot PATH]
   gamephanes validate <task.json>
-  gamephanes run <task.json> [--godot PATH] [--report PATH]
+  gamephanes run <task.json> [--godot PATH] [--report PATH] [--trajectory PATH] [--agent ID]
+  gamephanes trajectory validate <trajectory.json>
   gamephanes assets validate <manifest.json>
   gamephanes assets list <manifest.json>
 `;
@@ -52,6 +54,8 @@ async function run(args) {
   const { values, positionals } = parseOptions(args, {
     godot: { type: "string" },
     report: { type: "string" },
+    trajectory: { type: "string" },
+    agent: { type: "string" },
   });
   if (positionals.length !== 1) throw new Error("run expects one task file");
 
@@ -80,6 +84,7 @@ async function run(args) {
     functional_score: evaluation.score,
     total_score: Number(totalScore.toFixed(4)),
     assertions: evaluation.results,
+    events: execution.events,
     protocol_errors: execution.protocolErrors,
     execution: {
       sandboxed: execution.sandboxed,
@@ -88,6 +93,32 @@ async function run(args) {
     },
   };
 
+  let trajectoryPath;
+  if (values.trajectory) {
+    const trajectory = new TrajectoryRecorder({
+      taskId: task.id,
+      agent: values.agent ?? "evaluator",
+      trajectoryType: "evaluator_probe",
+      environment: { engine: "godot", runner: "gamephanes", runner_version: 1 },
+      metadata: { source: "gamephanes run", note: "Evaluator-controlled probe; not a gameplay-control rollout." },
+    });
+    trajectory.recordFeedback({
+      report,
+      execution,
+      cost: {
+        validation_ms: execution.validation.durationMs,
+        playtest_ms: execution.playtest?.durationMs ?? null,
+      },
+    });
+    trajectory.finish({
+      status: report.total_score === 1 ? "passed" : "failed",
+      finalScore: report.total_score,
+      summary: { build_success: buildSuccess, runtime_success: runtimeSuccess },
+    });
+    trajectoryPath = trajectory.write(values.trajectory);
+    report.trajectory_path = trajectoryPath;
+  }
+
   if (values.report) {
     const reportPath = path.resolve(values.report);
     fs.mkdirSync(path.dirname(reportPath), { recursive: true });
@@ -95,6 +126,22 @@ async function run(args) {
   }
   printJson(report);
   if (report.total_score < 1) process.exitCode = 2;
+}
+
+function trajectory(args) {
+  const { positionals } = parseOptions(args, {});
+  if (positionals.length !== 2 || positionals[0] !== "validate") {
+    throw new Error("trajectory expects validate followed by a trajectory file");
+  }
+  const trajectoryPath = path.resolve(positionals[1]);
+  let parsed;
+  try {
+    parsed = JSON.parse(fs.readFileSync(trajectoryPath, "utf8"));
+  } catch (error) {
+    throw new Error(`cannot read trajectory ${trajectoryPath}: ${error.message}`);
+  }
+  validateTrajectory(parsed);
+  printJson({ valid: true, trajectory_path: trajectoryPath, episode_id: parsed.episode_id, steps: parsed.steps.length });
 }
 
 function assets(args) {
@@ -127,6 +174,7 @@ export async function main(args) {
     case "validate": return validate(rest);
     case "run": return run(rest);
     case "assets": return assets(rest);
+    case "trajectory": return trajectory(rest);
     case "help":
     case "--help":
     case "-h":

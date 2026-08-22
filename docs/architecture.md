@@ -131,6 +131,10 @@ Each iteration will retain / 每轮都会保留：
 - screenshots and state snapshots / 截图与状态快照；
 - token, time and tool-call costs / Token、时间和工具调用成本。
 
+The public `TrajectoryRecorder` and `CodingAgentAdapter` implement this contract without owning the model loop. An external coding agent can record its tool calls and patches, then append the evaluator report as the next step. `gamephanes run --trajectory` records only the evaluator side as an `evaluator_probe` trace.
+
+公开的 `TrajectoryRecorder` 和 `CodingAgentAdapter` 已实现这套契约，但不接管模型循环。外部 Coding Agent 可以记录自己的工具调用和 Patch，再把评测报告追加为下一步；`gamephanes run --trajectory` 只记录评测器一侧，并标记为 `evaluator_probe` 轨迹。
+
 This versioned record can become Agent context, benchmark evidence, supervised repair data, or a post-training/RL trajectory for coding-agent repair. It should not be described as a gameplay-control trajectory.
 
 这些版本化记录既可以作为 Agent 上下文和 Benchmark 证据，也可以成为 Coding Agent 修复的监督数据或后训练/RL 轨迹，不应描述成游戏操作轨迹。

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "trajectory_type": "coding_agent",
+  "episode_id": "ep_platformer_example_001",
+  "task_id": "platformer_basic_001",
+  "agent": "example-agent",
+  "environment": {
+    "engine": "godot",
+    "version": "4.x",
+    "runner": "gamephanes"
+  },
+  "metadata": {
+    "purpose": "sanitized public contract example"
+  },
+  "started_at": "2026-08-22T00:00:00.000Z",
+  "finished_at": "2026-08-22T00:00:03.000Z",
+  "status": "failed",
+  "final_score": 0.4,
+  "summary": {
+    "next_action": "repair_jump_velocity"
+  },
+  "steps": [
+    {
+      "step": 0,
+      "timestamp": "2026-08-22T00:00:00.100Z",
+      "actor": "agent",
+      "action": {
+        "type": "read_file",
+        "input": {
+          "path": "scripts/player.gd"
+        }
+      },
+      "observation": {
+        "source": "candidate_project"
+      },
+      "result": {
+        "status": "ok",
+        "output": {
+          "content_sha256": "public-example-only"
+        }
+      },
+      "reward": 0
+    },
+    {
+      "step": 1,
+      "timestamp": "2026-08-22T00:00:01.000Z",
+      "actor": "agent",
+      "action": {
+        "type": "apply_patch",
+        "input": {
+          "files": [
+            "scripts/player.gd"
+          ],
+          "patch_sha256": "public-example-only"
+        }
+      },
+      "observation": {
+        "source": "agent_plan"
+      },
+      "result": {
+        "status": "ok"
+      },
+      "reward": 0
+    },
+    {
+      "step": 2,
+      "timestamp": "2026-08-22T00:00:02.500Z",
+      "actor": "evaluator",
+      "action": {
+        "type": "run_playtest",
+        "input": {
+          "task_id": "platformer_basic_001"
+        }
+      },
+      "observation": {
+        "events": [
+          {
+            "type": "ready"
+          }
+        ],
+        "failed_assertions": [
+          "jump_velocity"
+        ]
+      },
+      "result": {
+        "total_score": 0.4
+      },
+      "reward": 0.4
+    }
+  ]
+}

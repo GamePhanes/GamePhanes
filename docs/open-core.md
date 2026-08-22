@@ -19,13 +19,13 @@ Public tasks exist for integration, debugging, research, and independent verific
 
 公开任务用于接入、调试、研究和独立复现。其 Harness 有意公开，不能被当作隐藏评测。
 
-## Public When Introduced / 推出时保持开源
+## Public Interfaces / 公开接口
 
-The following interfaces are not all implemented in `v0.1`, but will remain public when introduced:
+The following interfaces are public. Some are deliberately low-level so external Agent frameworks can own the model loop while using the same data contract:
 
-以下接口并未全部在 `v0.1` 中实现，但推出时仍将保持开源：
+这些接口在 `v0.1` 中公开，后续扩展也将保持开源：
 
-- rollout schemas and sanitized rollout examples / Rollout Schema 与脱敏 Rollout 示例；
+- rollout schemas, validation, and sanitized rollout examples / Rollout Schema、校验与脱敏 Rollout 示例；
 - agent adapters and submission interfaces / Agent Adapter 与提交接口；
 - benchmark versioning, baseline methodology, and score aggregation rules / Benchmark 版本规则、Baseline 方法与分数聚合规则；
 - generic worker manifests and reproducibility tooling that contain no private tasks / 不包含私有任务的通用 Worker Manifest 与复现工具。

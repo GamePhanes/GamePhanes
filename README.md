@@ -6,7 +6,7 @@
 >
 > **面向游戏 Coding Agent 的运行时反馈、评测与 Rollout 基础设施。** GamePhanes 让 Agent 修改游戏工程，再通过真实运行时交互和可复现证据反馈代码是否工作。
 
-[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Open-core boundary / 开源边界](docs/open-core.md)
+[Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Trajectory contract / 轨迹契约](docs/trajectory.md) · [Open-core boundary / 开源边界](docs/open-core.md)
 
 ![Starfall Protocol running in GamePhanes](docs/assets/starfall-protocol.png)
 
@@ -43,6 +43,7 @@ The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 - Godot headless import and runtime execution / Godot headless 导入和运行；
 - Structured runtime events over NDJSON logs / 基于 NDJSON 日志的结构化运行时事件；
 - Deterministic assertions and scoring without an LLM judge / 不依赖 LLM Judge 的确定性断言与评分报告；
+- A model-agnostic Coding Agent Adapter and validated trajectory recorder / 与模型无关的 Coding Agent Adapter 和经过校验的轨迹记录器；
 - Six polished 2D/3D showcase slices with external Playtests / 六款带独立 Playtest 的精致 2D/3D 游戏切片。
 
 ## Open Core and Production Layer / 开源核心与生产层
@@ -265,13 +266,13 @@ The local runner isolates project files and execution time; it is not an OS-leve
 
 当前 runner 提供的是临时工程副本和执行时间限制，并非操作系统级安全沙箱。Godot 子进程仍继承当前用户权限和网络访问能力。运行不受信任的 Agent 工程时，应使用容器或权限隔离的 worker。
 
-GamePhanes is currently evaluation-first. It does not yet include a specific LLM, automatic coding loop, Artifact Graph, screenshot understanding, or asset generation.
+GamePhanes is currently evaluation-first. The public recorder accepts tool calls, patches, and evaluator feedback from an external coding loop, but it does not own a specific LLM or automatic coding loop. It also does not yet include an Artifact Graph, screenshot understanding, or asset generation.
 
 GamePhanes 当前以 evaluation-first 为边界，尚未接入具体大模型、自动编码循环、Artifact Graph、截图理解或资产生成。
 
 The public `v0.1` runner provides deterministic reference evaluation. Hosted hidden evaluation and rollout data services are product direction, not capabilities claimed by this release.
 
-公开的 `v0.1` Runner 当前提供确定性参考评测；托管隐藏评测与 Rollout 数据服务属于产品方向，不是本版本已经交付的能力。
+公开的 `v0.1` Runner 当前提供确定性参考评测与本地轨迹记录；托管隐藏评测与生产级 Rollout 数据服务属于产品方向，不是本版本已经交付的能力。
 
 ## Roadmap / 路线图
 
