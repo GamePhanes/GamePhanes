@@ -3,6 +3,7 @@
   "id": "showcase_tiny_bastion_001",
   "title": "Tiny Bastion",
   "description": "Build two towers, call the wave, and defend the miniature keep.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "progression_economy", "task_type": "reference_environment" },
   "project": { "path": "../../examples/tiny-bastion" },
   "requirements": [
     { "id": "build", "description": "Gold can be spent to build towers." },

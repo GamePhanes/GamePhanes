@@ -3,6 +3,7 @@
   "id": "showcase_last_signal_001",
   "title": "Last Signal",
   "description": "Reposition the field transmitter and clear four threats with directed pulses.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "combat", "task_type": "reference_environment" },
   "project": { "path": "../../examples/last-signal" },
   "requirements": [
     { "id": "field_movement", "description": "The operator can reposition in the field." },

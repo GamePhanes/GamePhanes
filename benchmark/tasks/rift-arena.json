@@ -3,6 +3,7 @@
   "id": "showcase_rift_arena_001",
   "title": "Rift Arena",
   "description": "Enter a 3D arena, strike the rift warden, and stabilize the breach.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "combat", "task_type": "reference_environment" },
   "project": { "path": "../../examples/rift-arena" },
   "requirements": [
     { "id": "movement_3d", "description": "The player can move in the 3D arena." },

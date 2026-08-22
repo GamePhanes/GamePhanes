@@ -3,6 +3,7 @@
   "id": "showcase_neon_relay_001",
   "title": "Neon Relay",
   "description": "Run a neon course, jump, collect three energy shards, and synchronize the relay.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "movement", "task_type": "reference_environment" },
   "project": { "path": "../../examples/neon-relay" },
   "requirements": [
     { "id": "runner_moves", "description": "The runner moves through the course." },

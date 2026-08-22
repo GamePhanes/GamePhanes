@@ -21,6 +21,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a href="#workflow" data-i18n="navWorkflow">Workflow</a>
+        <a href="#taxonomy" data-i18n="navTaxonomy">Taxonomy</a>
         <a href="#showcase" data-i18n="navShowcase">Showcase</a>
         <a href="#benchmark" data-i18n="navBenchmark">Benchmark</a>
         <a href="architecture.md" data-i18n="navArchitecture">Architecture</a>
@@ -67,6 +68,77 @@
           <div class="metric"><strong>6</strong><span data-i18n="metricSlices">Playable slices</span></div>
           <div class="metric"><strong>0</strong><span data-i18n="metricErrors">Protocol errors</span></div>
           <div class="metric"><strong>100%</strong><span data-i18n="metricScore">Functional score</span></div>
+        </div>
+      </section>
+
+      <section class="taxonomy" id="taxonomy" aria-labelledby="taxonomy-title">
+        <div class="section-inner taxonomy-heading">
+          <div>
+            <p class="section-kicker" data-i18n="taxonomyKicker">Benchmark taxonomy</p>
+            <h2 id="taxonomy-title" data-i18n="taxonomyTitle">100 tasks across six engineering domains.</h2>
+          </div>
+          <div>
+            <span class="taxonomy-target" data-i18n="taxonomyTarget">TARGET MIX · NOT RELEASED COUNT</span>
+            <p class="section-lead" data-i18n="taxonomyLead">Domains describe where the work happens. Task types separately describe whether the Agent fixes, builds, debugs, optimizes, or delivers.</p>
+          </div>
+        </div>
+        <div class="section-inner taxonomy-map">
+          <article class="taxonomy-domain taxonomy-span-5">
+            <header><h3 data-i18n="domainGameplay">GAMEPLAY SYSTEMS</h3><strong>28</strong></header>
+            <div class="taxonomy-items">
+              <div class="taxonomy-item" style="--weight: 6"><span data-i18n="taxMovement">Movement</span><small>6</small></div>
+              <div class="taxonomy-item" style="--weight: 6"><span data-i18n="taxCombat">Combat</span><small>6</small></div>
+              <div class="taxonomy-item" style="--weight: 5"><span data-i18n="taxPhysics">Physics</span><small>5</small></div>
+              <div class="taxonomy-item" style="--weight: 5"><span data-i18n="taxAiNavigation">AI &amp; Navigation</span><small>5</small></div>
+              <div class="taxonomy-item" style="--weight: 6"><span data-i18n="taxProgression">Progression &amp; Economy</span><small>6</small></div>
+            </div>
+          </article>
+          <article class="taxonomy-domain taxonomy-span-4">
+            <header><h3 data-i18n="domainRuntime">ENGINE &amp; RUNTIME</h3><strong>22</strong></header>
+            <div class="taxonomy-items">
+              <div class="taxonomy-item" style="--weight: 6"><span data-i18n="taxSceneLifecycle">Scene Lifecycle</span><small>6</small></div>
+              <div class="taxonomy-item" style="--weight: 5"><span data-i18n="taxEngineApis">Engine APIs</span><small>5</small></div>
+              <div class="taxonomy-item" style="--weight: 4"><span data-i18n="taxStateSignals">State &amp; Signals</span><small>4</small></div>
+              <div class="taxonomy-item" style="--weight: 4"><span data-i18n="taxPerformance">Performance</span><small>4</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxCompatibility">Platform Compatibility</span><small>3</small></div>
+            </div>
+          </article>
+          <article class="taxonomy-domain taxonomy-span-3">
+            <header><h3 data-i18n="domainUi">UI &amp; INTERACTION</h3><strong>16</strong></header>
+            <div class="taxonomy-items">
+              <div class="taxonomy-item" style="--weight: 5"><span data-i18n="taxInputControls">Input &amp; Controls</span><small>5</small></div>
+              <div class="taxonomy-item" style="--weight: 4"><span data-i18n="taxHudMenus">HUD &amp; Menus</span><small>4</small></div>
+              <div class="taxonomy-item" style="--weight: 4"><span data-i18n="taxCameraFeedback">Camera &amp; Feedback</span><small>4</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxAccessibility">Accessibility</span><small>3</small></div>
+            </div>
+          </article>
+          <article class="taxonomy-domain taxonomy-domain-compact taxonomy-span-4">
+            <header><h3 data-i18n="domainContent">CONTENT &amp; DESIGN</h3><strong>14</strong></header>
+            <div class="taxonomy-items">
+              <div class="taxonomy-item" style="--weight: 4"><span data-i18n="taxLevelDesign">Level Design</span><small>4</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxProcedural">Procedural Content</span><small>3</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxAssets">Asset Integration</span><small>3</small></div>
+              <div class="taxonomy-item" style="--weight: 2"><span data-i18n="taxNarrative">Narrative &amp; Dialogue</span><small>2</small></div>
+              <div class="taxonomy-item" style="--weight: 2"><span data-i18n="taxAudio">Audio Integration</span><small>2</small></div>
+            </div>
+          </article>
+          <article class="taxonomy-domain taxonomy-domain-compact taxonomy-span-5">
+            <header><h3 data-i18n="domainArchitecture">ARCHITECTURE &amp; DATA</h3><strong>12</strong></header>
+            <div class="taxonomy-items">
+              <div class="taxonomy-item" style="--weight: 4"><span data-i18n="taxScenesResources">Scenes &amp; Resources</span><small>4</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxSaveLoad">Save &amp; Load</span><small>3</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxDataDriven">Data-driven Systems</span><small>3</small></div>
+              <div class="taxonomy-item" style="--weight: 2"><span data-i18n="taxModularity">Modularity &amp; Dependencies</span><small>2</small></div>
+            </div>
+          </article>
+          <article class="taxonomy-domain taxonomy-domain-compact taxonomy-span-3">
+            <header><h3 data-i18n="domainDelivery">DELIVERY &amp; QUALITY</h3><strong>8</strong></header>
+            <div class="taxonomy-items">
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxRegression">Regression Safety</span><small>3</small></div>
+              <div class="taxonomy-item" style="--weight: 3"><span data-i18n="taxTests">Tests &amp; Instrumentation</span><small>3</small></div>
+              <div class="taxonomy-item" style="--weight: 2"><span data-i18n="taxBuildExport">Build &amp; Packaging</span><small>2</small></div>
+            </div>
+          </article>
         </div>
       </section>
 

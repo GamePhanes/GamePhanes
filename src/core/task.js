@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { validateTaskTaxonomy } from "./taxonomy.js";
 
 const OPERATORS = new Set(["exists", "==", "!=", ">", ">=", "<", "<=", "includes"]);
 
@@ -28,6 +29,7 @@ export function validateTask(input) {
   requireString(input.id, "id");
   requireString(input.title, "title");
   requireString(input.description, "description");
+  validateTaskTaxonomy(input.taxonomy);
   requireString(input.project?.path, "project.path");
   requireString(input.evaluation?.harness, "evaluation.harness");
 

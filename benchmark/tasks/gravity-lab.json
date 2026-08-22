@@ -3,6 +3,7 @@
   "id": "showcase_gravity_lab_001",
   "title": "Gravity Lab",
   "description": "Invert chamber polarity, stabilize the suspended core, and cross the unlocked exit.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "physics", "task_type": "reference_environment" },
   "project": { "path": "../../examples/gravity-lab" },
   "requirements": [
     { "id": "polarity", "description": "The player can invert chamber gravity." },

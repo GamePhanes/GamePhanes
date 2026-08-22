@@ -3,6 +3,11 @@
   "id": "platformer_basic_001",
   "title": "Basic Platformer Movement",
   "description": "Verify that the player can move, jump, collect a coin, and update the score.",
+  "taxonomy": {
+    "domain": "gameplay_systems",
+    "subdomain": "movement",
+    "task_type": "reference_environment"
+  },
   "project": {
     "path": "../../examples/platformer-basic"
   },

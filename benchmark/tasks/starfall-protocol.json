@@ -3,6 +3,7 @@
   "id": "golden_starfall_protocol_001",
   "title": "Starfall Protocol Golden Demo",
   "description": "Survive a drone encounter, choose a protocol upgrade, and defeat the Oracle in a polished deterministic vertical slice.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "progression_economy", "task_type": "reference_environment" },
   "project": { "path": "../../examples/starfall-protocol" },
   "requirements": [
     { "id": "arena_combat", "description": "The pilot can move and fire at data-driven enemy archetypes." },

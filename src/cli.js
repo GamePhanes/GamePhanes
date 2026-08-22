@@ -47,7 +47,7 @@ function validate(args) {
   const { task, taskDirectory, taskPath } = loadTask(positionals[0]);
   resolveTaskPath(taskDirectory, task.project.path, "project");
   resolveTaskPath(taskDirectory, task.evaluation.harness, "harness");
-  printJson({ valid: true, task_id: task.id, task_path: taskPath });
+  printJson({ valid: true, task_id: task.id, taxonomy: task.taxonomy, task_path: taskPath });
 }
 
 async function run(args) {

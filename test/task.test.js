@@ -7,6 +7,7 @@ const validTask = {
   id: "sample",
   title: "Sample",
   description: "A sample task",
+  taxonomy: { domain: "engine_runtime", subdomain: "engine_apis", task_type: "bug_fix" },
   project: { path: "project" },
   requirements: [{ id: "runs", description: "It runs" }],
   evaluation: {
@@ -30,4 +31,10 @@ test("validateTask requires a comparison field and value", () => {
   const task = structuredClone(validTask);
   task.evaluation.assertions[0].operator = ">";
   assert.throws(() => validateTask(task), /field must be/);
+});
+
+test("validateTask rejects a subdomain outside its domain", () => {
+  const task = structuredClone(validTask);
+  task.taxonomy.subdomain = "combat";
+  assert.throws(() => validateTask(task), /subdomain is not supported/);
 });
