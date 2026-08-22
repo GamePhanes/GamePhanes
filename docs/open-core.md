@@ -56,9 +56,10 @@ GamePhanes keeps evaluation understandable without publishing the exam answers:
 
 ## Product Surfaces / 产品形态
 
+- **GamePhanes Bench**: Terminal-Bench-style task workspaces for building and repairing interactive software / 面向交互软件构建与修复的 Terminal-Bench 风格任务工作空间；
 - **GamePhanes Eval**: hidden evaluation, regression suites, and private leaderboards / 隐藏评测、回归测试集与私有排行榜；
 - **GamePhanes Environments**: executable Godot tasks and customer-specific environments / 可执行 Godot 任务与客户定制环境；
-- **GamePhanes Rollouts**: versioned success, failure, and repair trajectories for post-training / 用于后训练的版本化成功、失败与修复轨迹。
+- **GamePhanes Rollouts**: versioned terminal commands, patches, runtime feedback, and repair trajectories / 版本化 Terminal 命令、Patch、运行时反馈与修复轨迹。
 
 The public `v0.1` release currently implements the local deterministic evaluation foundation. Hosted hidden evaluation and production rollout datasets are product direction, not capabilities claimed by this release.
 

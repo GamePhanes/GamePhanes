@@ -1,7 +1,7 @@
 {
   "name": "@gamephanes/core",
   "version": "0.1.0",
-  "description": "Godot-first evaluation and rollout infrastructure for game coding agents.",
+  "description": "Terminal-Bench-style benchmark runner for interactive software coding agents.",
   "homepage": "https://gamephanes.github.io/",
   "repository": {
     "type": "git",

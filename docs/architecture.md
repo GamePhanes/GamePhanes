@@ -6,7 +6,8 @@
 2. **Deterministic before subjective / 先确定性，再主观判断**：能用状态断言验证的需求不交给 LLM Judge。
 3. **Evidence before claims / 证据胜过结论**：Agent 必须通过日志、事件、截图或状态证明功能工作。
 4. **One agent, structured tools first / 单 Agent，结构化工具优先**：首版保持单一控制循环，按需增加工具，而不是预设大量角色。
-5. **Godot-first, engine-neutral contracts / Godot 优先、契约保持引擎中立**：执行器聚焦 Godot，task、event 和 report contract 尽量不绑定引擎内部格式。
+5. **Terminal-first, runtime-aware / Terminal 优先、运行时感知**：Agent 通过 Terminal 操作任务工作空间，评测器通过真实运行时反馈验证结果。
+6. **Godot-first, engine-neutral contracts / Godot 优先、契约保持引擎中立**：执行器聚焦 Godot，task、event 和 report contract 尽量不绑定引擎内部格式。
 
 ## Golden Demo Contract / 黄金 Demo 契约
 
@@ -70,6 +71,33 @@ Rollout dataset / Rollout 数据集
 Public tasks make the interface auditable and help agent developers integrate. Hidden variants measure generalization and prevent agents from optimizing against published answers. Both surfaces use versioned task, environment, and evaluator identifiers so scores remain comparable.
 
 公开任务让接口可审计，也便于 Agent 开发者接入；隐藏变体用于衡量泛化能力，并防止 Agent 针对公开答案优化。两类评测都使用版本化的任务、环境和评测器标识，使分数保持可比较。
+
+## Terminal-Bench Task Lifecycle / Terminal-Bench 任务生命周期
+
+The intended benchmark unit is a sealed task workspace. A task gives the Agent a starter project and a goal; the Agent operates through a restricted Terminal session until it submits or times out. The evaluator then runs the project with benchmark-owned probes and hidden assertions.
+
+目标 Benchmark 单位是一个封闭任务工作空间。任务向 Agent 提供初始工程和目标；Agent 通过受限 Terminal 会话操作，直到提交或超时；评测器随后使用 Benchmark 管理的探针和隐藏断言运行工程。
+
+```text
+Provision task -> Open terminal session -> Agent commands -> Submit project
+      |                  |                      |                    |
+      +-- reset ---------+------ audit ---------+---- runtime eval ---+
+                                                        |
+                                              score + trajectory
+```
+
+The current public release exposes the task/evaluation contracts and records external Terminal commands, but it does not yet claim to provide the container-backed session gateway. That gateway must enforce filesystem boundaries, process/network policy, quotas, reset semantics, and protected evaluator files before private benchmark tasks are exposed.
+
+当前公开版本已经提供任务/评测契约，并能记录外部 Terminal 命令，但尚未宣称提供容器级 Session Gateway。私有 Benchmark 任务开放前，该 Gateway 必须落实文件系统边界、进程与网络策略、资源配额、重置语义和评测文件保护。
+
+Useful task families / 任务类型：
+
+- bug repair / Bug 修复；
+- feature implementation / 功能实现；
+- runtime debugging / 运行时调试；
+- interaction repair / 交互修复；
+- regression repair / 回归修复；
+- design completion / 设计需求落地。
 
 ## Asset Layer / 资产层
 

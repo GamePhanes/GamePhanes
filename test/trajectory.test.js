@@ -20,6 +20,12 @@ test("TrajectoryRecorder captures coding actions, patches, and evaluator feedbac
     output: { content: "extends CharacterBody2D" },
     cost: { duration_ms: 4, tool_calls: 1 },
   });
+  adapter.recordTerminalCommand({
+    command: "godot --headless --path . --editor --quit",
+    stdout: "Project imported",
+    exitCode: 0,
+    cost: { duration_ms: 80, tool_calls: 1 },
+  });
   adapter.recordPatch({
     files: ["scripts/player.gd"],
     patch: "@@ -1 +1 @@\n-extends Node2D\n+extends CharacterBody2D",
@@ -35,11 +41,12 @@ test("TrajectoryRecorder captures coding actions, patches, and evaluator feedbac
   const trajectory = adapter.finish({ status: "failed", finalScore: 0.8, summary: { reason: "jump assertion failed" } });
 
   assert.equal(trajectory.trajectory_type, "coding_agent");
-  assert.equal(trajectory.steps.length, 3);
+  assert.equal(trajectory.steps.length, 4);
   assert.equal(trajectory.steps[0].action.type, "read_file");
-  assert.equal(trajectory.steps[1].artifacts.patches[0].sha256.length, 64);
-  assert.equal(trajectory.steps[2].actor, "evaluator");
-  assert.equal(trajectory.steps[2].reward, 0.8);
+  assert.equal(trajectory.steps[1].action.type, "terminal_command");
+  assert.equal(trajectory.steps[2].artifacts.patches[0].sha256.length, 64);
+  assert.equal(trajectory.steps[3].actor, "evaluator");
+  assert.equal(trajectory.steps[3].reward, 0.8);
   assert.doesNotThrow(() => validateTrajectory(trajectory));
 });
 

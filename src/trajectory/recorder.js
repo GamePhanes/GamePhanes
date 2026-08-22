@@ -5,6 +5,7 @@ import crypto from "node:crypto";
 export const TRAJECTORY_SCHEMA_VERSION = 1;
 
 export const CODING_AGENT_ACTIONS = Object.freeze([
+  "terminal_command",
   "read_file",
   "write_file",
   "apply_patch",
@@ -176,6 +177,18 @@ export class TrajectoryRecorder {
     });
   }
 
+  recordTerminalCommand({ command, stdout = "", stderr = "", exitCode = null, observation = {}, result = {}, cost } = {}) {
+    requireString(command, "command");
+    return this.recordToolCall({
+      tool: "terminal_command",
+      input: { command },
+      output: { stdout, stderr, exit_code: exitCode },
+      observation,
+      result,
+      cost,
+    });
+  }
+
   recordPatch({ files = [], patch, result = {}, observation = {}, cost } = {}) {
     if (!Array.isArray(files)) throw new Error("files must be an array");
     const patchText = patch ?? "";
@@ -242,6 +255,10 @@ export class CodingAgentAdapter {
 
   recordToolCall(input) {
     return this.recorder.recordToolCall(input);
+  }
+
+  recordTerminalCommand(input) {
+    return this.recorder.recordTerminalCommand(input);
   }
 
   recordPatch(input) {

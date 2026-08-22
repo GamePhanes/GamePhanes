@@ -1,8 +1,8 @@
-# Coding Agent Trajectory Contract / Coding Agent 轨迹契约
+# Terminal Coding Agent Trajectory Contract / Terminal Coding Agent 轨迹契约
 
-GamePhanes records the coding loop, not a gameplay policy loop. A trajectory connects an Agent's engineering actions to the runtime evidence produced by the modified project:
+GamePhanes records the Terminal coding loop, not a gameplay policy loop. A trajectory connects an Agent's shell commands, file changes, and engineering actions to the runtime evidence produced by the modified project:
 
-GamePhanes 记录的是 Coding Agent 的工程循环，而不是游戏操作策略循环。轨迹把 Agent 的工程动作和修改后工程产生的运行时证据连接起来：
+GamePhanes 记录的是 Terminal Coding Agent 的工程循环，而不是游戏操作策略循环。轨迹把 Agent 的 Shell 命令、文件变化和工程动作与修改后工程产生的运行时证据连接起来：
 
 ```text
 edit -> build/run -> runtime feedback -> diagnose -> repair
@@ -63,6 +63,12 @@ agent.recordToolCall({
   input: { path: "scripts/player.gd" },
   output: { content: "..." },
 });
+agent.recordTerminalCommand({
+  command: "godot --headless --path . --editor --quit",
+  stdout: "Project imported",
+  stderr: "",
+  exitCode: 0,
+});
 agent.recordPatch({
   files: ["scripts/player.gd"],
   patch: "@@ ...",
@@ -72,9 +78,9 @@ agent.finish({ status: "passed", finalScore: 1 });
 recorder.write("./trajectory.json");
 ```
 
-Supported Agent actions are `read_file`, `write_file`, `apply_patch`, `run_godot`, `run_playtest`, `inspect_scene`, `take_screenshot`, and `repair`. Player controls such as `press_key`, `move_player`, or `attack` are intentionally rejected as Agent actions.
+Supported Agent actions include `terminal_command`, `read_file`, `write_file`, `apply_patch`, `run_godot`, `run_playtest`, `inspect_scene`, `take_screenshot`, and `repair`. Player controls such as `press_key`, `move_player`, or `attack` are intentionally rejected as Agent actions.
 
-支持的 Agent 动作包括 `read_file`、`write_file`、`apply_patch`、`run_godot`、`run_playtest`、`inspect_scene`、`take_screenshot` 和 `repair`。`press_key`、`move_player`、`attack` 等玩家控制动作会被有意拒绝，不能作为 Coding Agent 动作记录。
+支持的 Agent 动作包括 `terminal_command`、`read_file`、`write_file`、`apply_patch`、`run_godot`、`run_playtest`、`inspect_scene`、`take_screenshot` 和 `repair`。`press_key`、`move_player`、`attack` 等玩家控制动作会被有意拒绝，不能作为 Coding Agent 动作记录。
 
 ## Evaluator Probe / 评测器探针
 

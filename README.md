@@ -1,10 +1,10 @@
 # GamePhanes
 
-> **Evaluation and rollout infrastructure for game coding agents.**
+> **Terminal-Bench for interactive software coding agents.**
 >
-> A Godot-first runtime feedback layer for evaluating agent-modified games through real interaction and reproducible evidence.
+> A Godot-first benchmark runner for putting coding agents in task workspaces, capturing terminal trajectories, and evaluating real runtime behavior.
 >
-> **面向游戏 Coding Agent 的运行时反馈、评测与 Rollout 基础设施。** GamePhanes 让 Agent 修改游戏工程，再通过真实运行时交互和可复现证据反馈代码是否工作。
+> **面向交互软件 Coding Agent 的 Terminal-Bench。** GamePhanes 将 Agent 放进游戏工程任务空间，记录 Terminal 轨迹，并通过真实运行时反馈评估结果。
 
 [Project homepage / 项目主页](https://gamephanes.github.io/) · [Showcase / 游戏展示](#showcase--游戏展示) · [Architecture / 架构](docs/architecture.md) · [Trajectory contract / 轨迹契约](docs/trajectory.md) · [Open-core boundary / 开源边界](docs/open-core.md)
 
@@ -12,14 +12,18 @@
 
 ## What is GamePhanes? / 项目简介
 
-Traditional code benchmarks stop at tests. Interactive software must also launch, accept input, change runtime state, and produce the intended user-visible result. GamePhanes supplies that missing runtime feedback loop for coding agents.
+Traditional terminal benchmarks evaluate command-line workspaces. Interactive software adds another requirement: the artifact must launch, accept input, change runtime state, and produce the intended user-visible result. GamePhanes extends the terminal-task loop with an executable game runtime and deterministic behavioral evaluation.
 
-传统代码 Benchmark 通常止于测试；交互软件还必须真正启动、响应输入、改变运行时状态并呈现预期结果。GamePhanes 提供的正是这个缺失的运行时反馈环节：
+传统 Terminal Benchmark 通常评估命令行工作空间；交互软件还必须真正启动、响应输入、改变运行时状态并呈现预期结果。GamePhanes 将 Terminal 任务循环延伸到可执行游戏运行时和确定性行为评测：
 
 ```text
 Understand -> Plan -> Build -> Run -> Exercise -> Observe -> Repair -> Evaluate
 理解需求   -> 规划 -> 构建 -> 运行 -> 执行验证 -> 观测 -> 修复 -> 评测
 ```
+
+The benchmark unit is a task workspace. An agent receives a starter project and a goal, works through a restricted terminal session, and submits the modified project. The evaluator owns the probing inputs and hidden checks; the agent does not need to learn a player policy.
+
+Benchmark 的基本单位是一个任务工作空间。Agent 获得初始工程和目标，在受限 Terminal 会话中完成工作并提交修改后的工程；交互探针和隐藏检查由评测器控制，Agent 不需要学习玩家操作策略。
 
 GamePhanes is agent-agnostic: it does not need to own the coding model or agent loop. A coding agent modifies a candidate project; GamePhanes runs the result, drives evaluator-controlled interactions, records runtime feedback, and produces a machine-readable score for the next repair step.
 
@@ -44,6 +48,7 @@ The current `v0.1` foundation provides / 当前 `v0.1` 基础版本提供：
 - Structured runtime events over NDJSON logs / 基于 NDJSON 日志的结构化运行时事件；
 - Deterministic assertions and scoring without an LLM judge / 不依赖 LLM Judge 的确定性断言与评分报告；
 - A model-agnostic Coding Agent Adapter and validated trajectory recorder / 与模型无关的 Coding Agent Adapter 和经过校验的轨迹记录器；
+- Terminal command trajectory records with stdout, stderr, exit codes, and costs / 包含 stdout、stderr、退出码和成本的 Terminal 命令轨迹记录；
 - Six polished 2D/3D showcase slices with external Playtests / 六款带独立 Playtest 的精致 2D/3D 游戏切片。
 
 ## Open Core and Production Layer / 开源核心与生产层
@@ -52,13 +57,13 @@ The public repository is the trust layer: task contracts, the local runner, exam
 
 开源仓库承担“可信基础层”：任务契约、本地 Runner、示例工程、参考 Harness、确定性断言和可复现 Demo Suite 都可以检查与扩展。
 
-The production direction builds on that foundation with private task suites, hidden evaluators, versioned rollout traces, failure taxonomies, and customer-specific environments. These layers are intended for model evaluation, post-training data, and RL rather than being published as benchmark answers.
+The production direction builds on that foundation with sealed Terminal sessions, private task suites, hidden evaluators, versioned rollout traces, failure taxonomies, and customer-specific environments. These layers are intended for coding-agent evaluation and post-training data rather than being published as benchmark answers.
 
-生产层将在此基础上提供私有任务集、隐藏评测器、版本化 Rollout 轨迹、失败分类和客户定制环境，用于模型评测、后训练数据与 RL；这些内容不会作为公开 Benchmark 答案发布。
+生产层将在此基础上提供封闭 Terminal Session、私有任务集、隐藏评测器、版本化 Rollout 轨迹、失败分类和客户定制环境，用于 Coding Agent 评测与后训练数据；这些内容不会作为公开 Benchmark 答案发布。
 
 | Layer / 层 | Public repository / 开源仓库 | Production direction / 生产方向 |
 |---|---|---|
-| Environment / 环境 | Runner, task schema, example projects / Runner、任务格式、示例工程 | Isolated workers, quotas, engine images / 隔离 Worker、资源配额、引擎镜像 |
+| Environment / 环境 | Runner, task schema, trajectory recorder, example projects / Runner、任务格式、轨迹记录器、示例工程 | Sealed Terminal sessions, isolated workers, quotas, engine images / 封闭 Terminal Session、隔离 Worker、资源配额、引擎镜像 |
 | Evaluation / 评测 | Reference harnesses and deterministic assertions / 参考 Harness 与确定性断言 | Hidden tasks, private evaluators, anti-overfitting checks / 隐藏任务、私有评测器、抗过拟合检查 |
 | Data / 数据 | Example reports and reproducible runs / 示例报告与可复现运行 | Successful and failed rollouts, repair trajectories, failure labels / 成功与失败 Rollout、修复轨迹、失败标签 |
 
@@ -266,9 +271,9 @@ The local runner isolates project files and execution time; it is not an OS-leve
 
 当前 runner 提供的是临时工程副本和执行时间限制，并非操作系统级安全沙箱。Godot 子进程仍继承当前用户权限和网络访问能力。运行不受信任的 Agent 工程时，应使用容器或权限隔离的 worker。
 
-GamePhanes is currently evaluation-first. The public recorder accepts tool calls, patches, and evaluator feedback from an external coding loop, but it does not own a specific LLM or automatic coding loop. It also does not yet include an Artifact Graph, screenshot understanding, or asset generation.
+GamePhanes is currently evaluation-first. The public recorder accepts terminal commands, patches, and evaluator feedback from an external coding loop, but `v0.1` does not yet provide a container-backed Terminal Session or own a specific LLM/automatic coding loop. It also does not yet include an Artifact Graph, screenshot understanding, or asset generation.
 
-GamePhanes 当前以 evaluation-first 为边界，尚未接入具体大模型、自动编码循环、Artifact Graph、截图理解或资产生成。
+GamePhanes 当前以 evaluation-first 为边界，公开记录器已经支持 Terminal 命令、Patch 和评测反馈；但 `v0.1` 尚未提供容器级 Terminal Session，也未接入具体大模型、自动编码循环、Artifact Graph、截图理解或资产生成。
 
 The public `v0.1` runner provides deterministic reference evaluation. Hosted hidden evaluation and rollout data services are product direction, not capabilities claimed by this release.
 
@@ -277,11 +282,11 @@ The public `v0.1` runner provides deterministic reference evaluation. Hosted hid
 ## Roadmap / 路线图
 
 - `M0 - Executable Environment`：Task contract, Godot runner, event protocol, rule evaluator / 任务契约、Godot Runner、事件协议、规则评测；
-- `M1 - GamePhanes-Bench`：Expand from six showcase slices to modification, repair, and feature tasks with agent baselines / 从六个展示切片扩展到修改、修复与功能实现任务，并建立 Agent Baseline；
-- `M2 - Rich Observation`：Input DSL, screenshots, node state, video, and time-series assertions / 键鼠动作 DSL、截图、Node 状态、视频与时间序列断言；
-- `M3 - Hidden Evaluation`：Private task variants, isolated workers, evaluator versioning, and anti-overfitting checks / 私有任务变体、隔离 Worker、评测器版本管理与抗过拟合检查；
-- `M4 - Rollout Data`：Versioned action traces, failed attempts, repair trajectories, cost metadata, and failure labels / 版本化动作轨迹、失败尝试、修复过程、成本元数据与失败标签；
-- `M5 - Interactive Software`：Engine-neutral contracts and expansion beyond Godot to additional interactive runtimes / 保持引擎中立契约，并从 Godot 扩展到更多交互运行时。
+- `M1 - Terminal Session`：Task provisioning, restricted shell access, command audit, reset, and resource limits / 任务准备、受限 Shell、命令审计、重置与资源限制；
+- `M2 - GamePhanes-Bench`：Modification, repair, and feature tasks with agent baselines / 修改、修复与功能实现任务，并建立 Agent Baseline；
+- `M3 - Rich Observation`：Screenshots, node state, video, and time-series assertions / 截图、Node 状态、视频与时间序列断言；
+- `M4 - Hidden Evaluation`：Private task variants, isolated workers, evaluator versioning, and anti-overfitting checks / 私有任务变体、隔离 Worker、评测器版本管理与抗过拟合检查；
+- `M5 - Rollout Data`：Versioned terminal traces, failed attempts, repair trajectories, cost metadata, and failure labels / 版本化 Terminal 轨迹、失败尝试、修复过程、成本元数据与失败标签；
 
 ## License / 许可证
 
