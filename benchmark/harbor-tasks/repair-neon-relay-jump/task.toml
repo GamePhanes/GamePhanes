@@ -1,0 +1,33 @@
+schema_version = "1.1"
+
+artifacts = [
+    "/app/project.godot",
+    "/app/main.tscn",
+    "/app/scripts/",
+]
+
+[task]
+name = "game-terminal-bench/repair-neon-relay-jump"
+description = "Repair a broken phase jump in a Godot platformer without breaking shard collection or relay completion."
+authors = [{ name = "GamePhanes", email = "hello@gamephanes.dev" }]
+
+[metadata]
+author_name = "GamePhanes"
+author_organization = "GamePhanes"
+difficulty = "medium"
+category = "Software"
+subcategory = "Game Development"
+tags = ["godot", "2d", "bug-fix", "movement", "runtime-evaluation"]
+expert_time_estimate_hours = 0.5
+
+[verifier]
+timeout_sec = 120.0
+
+[agent]
+timeout_sec = 900.0
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
