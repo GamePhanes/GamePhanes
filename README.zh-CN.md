@@ -192,6 +192,6 @@ MIT
 
 GitHub 也会通过 **Cite this repository** 展示结构化引用元数据。
 
-## Star History / Star 历史
+## GitHub Stars 随时间变化
 
-[![Star History Chart](https://api.star-history.com/svg?repos=GamePhanes/GamePhanes&type=Date)](https://www.star-history.com/#GamePhanes/GamePhanes&Date)
+[![GitHub Stars 随时间变化](https://api.star-history.com/svg?repos=GamePhanes/GamePhanes&type=Date)](https://www.star-history.com/#GamePhanes/GamePhanes&Date)

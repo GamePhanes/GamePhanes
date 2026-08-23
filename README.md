@@ -192,6 +192,6 @@ If you use Game Terminal-Bench in research, evaluation, or agent training, pleas
 
 GitHub also exposes the structured citation metadata through **Cite this repository**.
 
-## Star History
+## GitHub Stars Over Time
 
-[![Star History Chart](https://api.star-history.com/svg?repos=GamePhanes/GamePhanes&type=Date)](https://www.star-history.com/#GamePhanes/GamePhanes&Date)
+[![GitHub Stars Over Time](https://api.star-history.com/svg?repos=GamePhanes/GamePhanes&type=Date)](https://www.star-history.com/#GamePhanes/GamePhanes&Date)
