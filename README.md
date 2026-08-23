@@ -1,6 +1,6 @@
 # Game Terminal-Bench
 
-> **SWE-bench for interactive software.**
+> **Terminal-Bench for interactive software coding agents.**
 >
 > A Harbor-compatible benchmark for coding agents that build, debug, and repair games and other interactive applications through terminal workspaces and executable runtime feedback.
 
@@ -175,3 +175,23 @@ Play the six reference environments on the [GamePhanes homepage](https://gamepha
 ## License
 
 MIT
+
+## Citation
+
+If you use Game Terminal-Bench in research, evaluation, or agent training, please cite the repository:
+
+```bibtex
+@software{game_terminal_bench_2026,
+  author  = {Zi, Chenyi},
+  title   = {Game Terminal-Bench},
+  year    = {2026},
+  url     = {https://github.com/GamePhanes/GamePhanes},
+  license = {MIT}
+}
+```
+
+GitHub also exposes the structured citation metadata through **Cite this repository**.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=GamePhanes/GamePhanes&type=Date)](https://www.star-history.com/#GamePhanes/GamePhanes&Date)

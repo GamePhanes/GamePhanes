@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "Game Terminal-Bench"
+message: "If you use Game Terminal-Bench in research, evaluation, or agent training, please cite this repository."
+type: software
+authors:
+  - family-names: "Zi"
+    given-names: "Chenyi"
+    affiliation: "GamePhanes"
+repository-code: "https://github.com/GamePhanes/GamePhanes"
+url: "https://gamephanes.github.io/"
+license: "MIT"
+version: "0.1.0"
+date-released: "2026-08-23"

@@ -1,6 +1,6 @@
 # Game Terminal-Bench
 
-> **面向交互软件的 SWE-bench。**
+> **面向交互软件 Coding Agent 的 Terminal-Bench。**
 >
 > 一个兼容 Harbor 的 Benchmark，评估 Coding Agent 如何通过 Terminal 工作区和可执行的运行时反馈，构建、调试和修复游戏及其他交互应用。
 
@@ -175,3 +175,23 @@ docker run --rm `
 ## 许可证
 
 MIT
+
+## Citation / 引用
+
+如果你在研究、评测或 Agent 训练中使用 Game Terminal-Bench，请引用本仓库：
+
+```bibtex
+@software{game_terminal_bench_2026,
+  author  = {Zi, Chenyi},
+  title   = {Game Terminal-Bench},
+  year    = {2026},
+  url     = {https://github.com/GamePhanes/GamePhanes},
+  license = {MIT}
+}
+```
+
+GitHub 也会通过 **Cite this repository** 展示结构化引用元数据。
+
+## Star History / Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=GamePhanes/GamePhanes&type=Date)](https://www.star-history.com/#GamePhanes/GamePhanes&Date)
