@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource path="res://scripts/status_bars.gd" type="Script" id="1_status"]
+
+[node name="BattleStatus" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 720.0
+offset_bottom = 1280.0
+script = ExtResource("1_status")
+
+[node name="HpBar" type="Control" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 72.0
+offset_right = 158.0
+offset_bottom = 78.0
+mouse_filter = 2
+
+[node name="Track" type="ColorRect" parent="HpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.117647, 0.054902, 0.0627451, 1)
+
+[node name="HpFill" type="ColorRect" parent="HpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.419608, 0.0862745, 0.113725, 1)
+
+[node name="MpBar" type="Control" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 84.0
+offset_right = 158.0
+offset_bottom = 90.0
+mouse_filter = 2
+
+[node name="Track" type="ColorRect" parent="MpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0470588, 0.0745098, 0.133333, 1)
+
+[node name="MpFill" type="ColorRect" parent="MpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0862745, 0.184314, 0.419608, 1)

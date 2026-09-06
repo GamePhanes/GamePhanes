@@ -1,0 +1,10 @@
+# The GitHub release is intentionally minimal: publish only the root README
+# and the curated example task. Local paper, data, scripts, and build files
+# remain available for development but are excluded from the upload set.
+*
+!.gitignore
+!README.md
+!release/
+!release/tasks/
+!release/tasks/godot-battle-status-bars-gloss/
+!release/tasks/godot-battle-status-bars-gloss/**

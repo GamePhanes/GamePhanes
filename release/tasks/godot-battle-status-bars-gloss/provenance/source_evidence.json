@@ -1,0 +1,45 @@
+{
+  "schema_version": "gameforgebench.source-binding.v1",
+  "source_id": "019fe14c-1a55-7c82-b2eb-dfe864697791",
+  "raw_sha256": "f7051f319de40ebca22721c54e9ef29720034e627f5a1e2d2c5b36edeaee19de",
+  "redacted_sha256": "2130d311efa34d52b5f1995aff2280fdad3cd8cfdf7c0c651c9ba35d42141e32",
+  "direct_intent": {
+    "content_index": 8,
+    "message_id": "msg_019fe187-f036-7f70-9da5-d4b8ca889253",
+    "exact_text": "为血条、法力条设计光泽感，当前几乎融于背景了"
+  },
+  "edit_inventory": {
+    "content_index": 9,
+    "message_id": "msg_019fe187-f036-7f70-9da5-d4c8c6946852",
+    "required_fragments": [
+      "assets/ui/battle/battle_status_fill_1.png",
+      "assets/ui/battle/battle_status_fill_2.png",
+      "scenes/components/battle/battle_unit_view.tscn",
+      "scripts/components/battle_unit_view.gd",
+      "scripts/managers/ui_manager.gd",
+      "test/battle_status_ui_check.gd"
+    ]
+  },
+  "verification": {
+    "call_content_index": 33,
+    "call_id": "call_3uGtRdyf2hXjsIDKk1d1Cwii",
+    "output_content_index": 37,
+    "output_id": "fco_019fe189-6df3-7d80-81c5-731c4053df4f",
+    "required_fragments": [
+      "Godot Engine v4.6.1.stable.official",
+      "BATTLE_SCENE_STATIC_CHECK PASS",
+      "BATTLE_PAGE_REGRESSION_CHECK PASS",
+      "?? assets/ui/battle/battle_status_fill_1.png",
+      "?? assets/ui/battle/battle_status_fill_2.png",
+      "M scenes/components/battle/battle_unit_view.tscn",
+      "M scripts/components/battle_unit_view.gd",
+      "M scripts/managers/ui_manager.gd"
+    ]
+  },
+  "visual_capture": {
+    "call_content_index": 40,
+    "call_id": "call_nuRVPCrARik6zXVNJq59Ee7g",
+    "output_content_index": 41,
+    "fingerprint": "sha256:99c5b465310dba0f39bbdeff3a6d8a10e5e0fcadea45176f756ef5d6d1eef626"
+  }
+}

@@ -1,0 +1,39 @@
+name: godot-battle-status-bars-gloss
+description: Integrate supplied glossy HP/MP textures into a real Godot battle HUD while preserving its compact layout and bounded ratio updates.
+engine: godot
+runtime_adapter: godot
+engine_version: 4.6.1
+version: 7
+difficulty_band: easy
+agent_workspace: godot_project
+allowed_output_paths:
+  - Main.tscn
+  - scripts/status_bars.gd
+forbidden_paths:
+  - project.godot
+  - assets
+  - tests
+  - solution
+  - environment
+  - provenance
+deliverables:
+  - Main.tscn
+  - scripts/status_bars.gd
+validation:
+  - Godot 4.6.1 imports and parses the project
+  - hidden native runtime and texture probes pass
+real_behavior_contract:
+  starter_object: "Main.tscn battle HUD with fixed 62x6 HpBar/MpBar controls, flat ColorRect fills, supplied 124x12 glossy Texture2D resources, and a read-only provenance input"
+  multi_step_events:
+    - "instantiate the battle HUD at full HP/MP and inspect its native Godot nodes"
+    - "set partial HP/MP values and observe independent TextureRect width transitions"
+    - "repeat the update, then apply below-zero, above-max, and non-positive-max boundaries"
+    - "instantiate the scene again and verify default layout and texture bindings survive lifecycle reload"
+  state_transition: "native TextureRect widths transition from 62px full to independent 25%/75% ratios, then to clamped 0%/100%"
+  boundary_behavior: "negative values clamp to zero, values above max clamp to max, non-positive max becomes one, and repeated updates do not drift layout"
+  observation: "Godot runtime observes scene node classes, Texture2D resource paths and pixels, fixed container geometry, fill widths, snapshots, and a second scene instance"
+  runtime_adapter: godot
+mcp:
+  role: provenance_interface_metadata_only
+  agent_facing_required: false
+  reason: "the authentic source edit used ordinary Godot project files, native tests, and visual capture; no editor-only MCP operation is required"

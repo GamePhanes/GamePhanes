@@ -1,0 +1,10 @@
+[application]
+config/name="Battle Status Bars"
+run/main_scene="res://Main.tscn"
+
+[display]
+window/size/viewport_width=720
+window/size/viewport_height=1280
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

@@ -1,0 +1,39 @@
+version: 7
+real_behavior_contract:
+  starter_object: "Main.tscn battle HUD with fixed 62x6 HpBar/MpBar controls, flat ColorRect fills, and supplied 124x12 glossy Texture2D resources"
+  multi_step_events:
+    - "full HUD instance -> partial independent HP/MP update"
+    - "repeated update -> invalid/boundary update"
+    - "first instance freed -> second instance loaded"
+  state_transition: "native TextureRect widths move 62px -> 15.5px/46.5px -> 0px/62px"
+  boundary_behavior: "negative, above-max, non-positive-max, repeated-update, and lifecycle reload cases are checked"
+  observation: "Godot 4.6.1 reads native node types, resource paths, texture pixels, scene geometry, runtime ratios, snapshot values, and second-instance state; the redacted seed digest remains read-only input"
+  runtime_adapter: godot
+checks:
+  - id: godot_project_parse
+    type: command
+    path: project.godot
+    expected: GODOT_PROJECT_PARSE_OK
+    description: Godot 4.6.1 imports and parses the project without script or scene errors
+  - id: glossy_scene_binding
+    type: file_contains
+    path: Main.tscn
+    expected: TextureRect
+    description: both flat fills are replaced with TextureRect nodes bound to the canonical supplied textures
+  - id: protected_workspace
+    type: integrity_probe
+    path: Main.tscn
+    expected: image_owned_baseline_match
+    description: project settings, texture assets, file set, and every path outside the two allowed outputs remain image-owned; the provenance digest is read-only input and is not a deliverable
+  - id: godot_status_runtime
+    type: godot_probe
+    path: Main.tscn
+    expected: GAMEFORGEBENCH_GODOT_STATUS_RUNTIME_OK
+    timeout: 120
+    description: hidden native sequence checks fixed layout, independent ratios, idempotent updates, clamping, and second-instance lifecycle state
+  - id: godot_gloss_visual
+    type: godot_probe
+    path: Main.tscn
+    expected: GAMEFORGEBENCH_GODOT_GLOSS_VISUAL_OK
+    timeout: 120
+    description: hidden native texture inspection checks canonical paths, 124x12 source size, upper highlight, lower shadow, and distinct HP/MP chroma

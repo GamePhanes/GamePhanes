@@ -1,0 +1,26 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "godot-battle-status-bars-gloss"
+description = "Integrate supplied glossy HP/MP textures into a native Godot HUD while preserving layout and ratio behavior."
+keywords = ["godot", "ui", "texture", "runtime"]
+
+[metadata]
+difficulty = "easy"
+category = "game-engine-development"
+
+[verifier]
+timeout_sec = 600.0
+
+[agent]
+timeout_sec = 900.0
+
+[environment]
+build_timeout_sec = 900.0
+docker_image = "gameforgebench-002-godot-status:v7"
+cpus = 2
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+allow_internet = false
