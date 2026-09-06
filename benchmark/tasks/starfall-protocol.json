@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "golden_starfall_protocol_001",
+  "title": "Starfall Protocol Golden Demo",
+  "description": "Survive a drone encounter, choose a protocol upgrade, and defeat the Oracle in a polished deterministic vertical slice.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "progression_economy", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "starfall-protocol",
+    "version": "gamephanes-public==0.1",
+    "kind": "reference_environment",
+    "evaluator_visibility": "public_reference",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "combat", "progression", "runtime-evaluation"],
+    "author": "GamePhanes",
+    "image": "starfall-protocol.png",
+    "play_path": "play/starfall-protocol/"
+  },
+  "project": { "path": "../../examples/starfall-protocol" },
+  "requirements": [
+    { "id": "arena_combat", "description": "The pilot can move and fire at data-driven enemy archetypes." },
+    { "id": "upgrade_choice", "description": "Clearing the first encounter opens a protocol upgrade choice." },
+    { "id": "boss_phase", "description": "Selecting an upgrade transitions into an Oracle boss encounter." },
+    { "id": "victory_state", "description": "The Oracle can be defeated and the mission reports a complete state." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/starfall-protocol.gd",
+    "timeout_seconds": 20,
+    "assertions": [
+      { "id": "ready", "event": "game_ready", "field": "enemies", "operator": ">=", "value": 5 },
+      { "id": "encounter", "event": "encounter_cleared", "field": "defeated", "operator": ">=", "value": 5 },
+      { "id": "upgrade", "event": "upgrade_selected", "field": "upgrade", "operator": "==", "value": "overclock" },
+      { "id": "boss", "event": "boss_phase_verified", "field": "health", "operator": "==", "value": 18 },
+      { "id": "victory", "event": "starfall_complete", "field": "boss_health", "operator": "==", "value": 0 },
+      { "id": "complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}

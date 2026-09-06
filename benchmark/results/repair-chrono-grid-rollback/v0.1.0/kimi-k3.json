@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "benchmark": "Game Terminal-Bench",
+  "task": "game-terminal-bench/repair-chrono-grid-rollback",
+  "task_version": "0.1.0",
+  "run_date": "2026-08-24",
+  "runner": {
+    "name": "harbor",
+    "version": "0.22.0"
+  },
+  "agent": {
+    "name": "openai-compatible-tool-agent",
+    "version": "0.1.0",
+    "model": "kimi-k3",
+    "temperature": 1,
+    "max_tokens_per_response": 4096
+  },
+  "result": {
+    "trials": 1,
+    "completed_trials": 1,
+    "errored_trials": 0,
+    "reward_mean": 1.0,
+    "verifier_exit_code": 0,
+    "verifier_output": "repair-chrono-grid-rollback: all deterministic rollback assertions passed"
+  },
+  "trajectory": {
+    "turns": 16,
+    "tool_calls": 16,
+    "truncations_continued": 2,
+    "input_tokens": 124850,
+    "cached_tokens": 109824,
+    "output_tokens": 21511,
+    "finish_reason": "stop",
+    "sha256": "ce02284fc81f4023e0d1f4bf7037553174316b40519a03754e697e1a85c87218"
+  },
+  "timing_seconds": {
+    "environment_setup": 1.963511,
+    "agent_setup": 0.000082,
+    "agent_execution": 610.216293,
+    "verifier": 2.335128,
+    "job_total": 762.628097
+  },
+  "reproducibility_notes": [
+    "The model made and tested substantive code changes before ending normally.",
+    "The adapter continued two responses that ended with finish_reason=length instead of treating them as completed trials.",
+    "The CPU quota was omitted in the server-side task copy because rootless Docker could not apply NanoCPUs.",
+    "The API credential and raw trajectory are not present in the public repository."
+  ],
+  "raw_archive": {
+    "published": false,
+    "sha256": "786d0d9d39b67ca94f0c124c45d7f8e3f6c588f4f84d61504308f2bd82cf3cc9"
+  }
+}

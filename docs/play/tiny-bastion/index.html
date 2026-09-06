@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#090d12">
+    <title>Tiny Bastion - Play on GamePhanes</title>
+    <link rel="stylesheet" href="../player.css">
+  </head>
+  <body data-controls-en="B to build, Space to start the wave" data-controls-zh="B 建塔，空格开始波次" data-touch-controls="[{&quot;actionName&quot;:&quot;build_tower&quot;,&quot;code&quot;:&quot;KeyB&quot;,&quot;key&quot;:&quot;b&quot;,&quot;label&quot;:&quot;BUILD&quot;,&quot;labelZh&quot;:&quot;建塔&quot;,&quot;ariaEn&quot;:&quot;Build tower&quot;,&quot;ariaZh&quot;:&quot;建造防御塔&quot;,&quot;action&quot;:true},{&quot;actionName&quot;:&quot;start_wave&quot;,&quot;code&quot;:&quot;Space&quot;,&quot;key&quot;:&quot; &quot;,&quot;label&quot;:&quot;WAVE&quot;,&quot;labelZh&quot;:&quot;开战&quot;,&quot;ariaEn&quot;:&quot;Start wave&quot;,&quot;ariaZh&quot;:&quot;开始波次&quot;,&quot;action&quot;:true}]">
+    <header class="player-header">
+      <a class="back-link" href="../../#showcase" data-label="back">Back to showcase</a>
+      <div class="game-identity">
+        <span>GAMEPHANES / PLAY</span>
+        <h1>Tiny Bastion</h1>
+      </div>
+      <p class="controls-copy" data-controls-copy>B to build, Space to start the wave</p>
+      <div class="player-actions">
+        <button type="button" data-reload aria-label="Reload game" title="Reload game">↻</button>
+        <button type="button" data-fullscreen aria-label="Enter fullscreen" title="Enter fullscreen">⛶</button>
+      </div>
+    </header>
+    <main class="player-main">
+      <section class="game-stage" data-stage>
+        <div class="loading-state" data-loading>
+          <span class="loading-mark">GP</span>
+          <strong data-loading-title>Loading Godot engine...</strong>
+          <progress class="loading-progress" data-loading-progress></progress>
+          <span class="loading-detail" data-loading-detail aria-live="polite"></span>
+        </div>
+        <iframe id="game-frame" src="game.html" title="Tiny Bastion game" allow="autoplay; fullscreen" data-game-frame></iframe>
+      </section>
+      <nav class="touch-controls" data-touch-controls-container aria-label="Touch game controls"></nav>
+    </main>
+    <script src="../player.js"></script>
+  </body>
+</html>

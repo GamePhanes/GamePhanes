@@ -1,0 +1,7 @@
+*.sh text eol=lf
+*.py text eol=lf
+*.gd text eol=lf
+*.toml text eol=lf
+*.godot text eol=lf
+*.tscn text eol=lf
+Dockerfile text eol=lf

@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "id": "showcase_tiny_bastion_001",
+  "title": "Tiny Bastion",
+  "description": "Build two towers, call the wave, and defend the miniature keep.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "progression_economy", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "tiny-bastion",
+    "version": "gamephanes-public==0.1",
+    "kind": "reference_environment",
+    "evaluator_visibility": "public_reference",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "economy", "wave-simulation", "tower-defense"],
+    "author": "GamePhanes",
+    "image": "tiny-bastion.png",
+    "play_path": "play/tiny-bastion/"
+  },
+  "project": { "path": "../../examples/tiny-bastion" },
+  "requirements": [
+    { "id": "build", "description": "Gold can be spent to build towers." },
+    { "id": "wave", "description": "The player can start an enemy wave." },
+    { "id": "defend", "description": "Towers defeat the wave before it reaches the keep." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/tiny-bastion.gd",
+    "timeout_seconds": 15,
+    "assertions": [
+      { "id": "build", "event": "towers_built", "field": "count", "operator": "==", "value": 2 },
+      { "id": "wave", "event": "wave_started", "field": "towers", "operator": "==", "value": 2 },
+      { "id": "defend", "event": "bastion_defended", "field": "defeated", "operator": "==", "value": 5 },
+      { "id": "health", "event": "bastion_defended", "field": "base_health", "operator": "==", "value": 5 },
+      { "id": "complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+config_version=5
+
+[application]
+config/name="Starfall Protocol"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/size/window_width_override=960
+window/size/window_height_override=540
+window/stretch/mode="canvas_items"
+
+[input]
+move_left={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":65)]}
+move_right={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":68)]}
+move_up={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":87)]}
+move_down={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":83)]}
+fire={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":32)]}
+dash={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":16)]}
+interact={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":69)]}
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.012,0.016,0.03,1)

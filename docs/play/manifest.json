@@ -1,0 +1,40 @@
+{
+  "games": [
+    {
+      "slug": "starfall-protocol",
+      "title": "Starfall Protocol / 星坠协议",
+      "path": "./starfall-protocol/",
+      "pack_bytes": 20776
+    },
+    {
+      "slug": "neon-relay",
+      "title": "Neon Relay",
+      "path": "./neon-relay/",
+      "pack_bytes": 9912
+    },
+    {
+      "slug": "last-signal",
+      "title": "Last Signal",
+      "path": "./last-signal/",
+      "pack_bytes": 9736
+    },
+    {
+      "slug": "gravity-lab",
+      "title": "Gravity Lab",
+      "path": "./gravity-lab/",
+      "pack_bytes": 8040
+    },
+    {
+      "slug": "tiny-bastion",
+      "title": "Tiny Bastion",
+      "path": "./tiny-bastion/",
+      "pack_bytes": 8264
+    },
+    {
+      "slug": "rift-arena",
+      "title": "Rift Arena",
+      "path": "./rift-arena/",
+      "pack_bytes": 10824
+    }
+  ]
+}

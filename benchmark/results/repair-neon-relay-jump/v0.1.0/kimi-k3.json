@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "benchmark": "Game Terminal-Bench",
+  "task": "game-terminal-bench/repair-neon-relay-jump",
+  "task_version": "0.1.0",
+  "run_date": "2026-08-24",
+  "runner": {
+    "name": "harbor",
+    "version": "0.22.0"
+  },
+  "agent": {
+    "name": "openai-compatible-tool-agent",
+    "version": "0.1.0",
+    "model": "kimi-k3",
+    "temperature": 1
+  },
+  "result": {
+    "trials": 1,
+    "completed_trials": 1,
+    "errored_trials": 0,
+    "reward_mean": 1.0,
+    "verifier_exit_code": 0,
+    "verifier_output": "repair-neon-relay-jump: all runtime assertions passed"
+  },
+  "trajectory": {
+    "turns": 14,
+    "tool_calls": 13,
+    "input_tokens": 64744,
+    "cached_tokens": 55552,
+    "output_tokens": 4000,
+    "finish_reason": "stop"
+  },
+  "timing_seconds": {
+    "environment_setup": 1.716484,
+    "agent_setup": 0.000083,
+    "agent_execution": 231.163864,
+    "verifier": 4.01598,
+    "job_total": 249.400801
+  },
+  "environment": {
+    "operating_system": "Ubuntu 22.04",
+    "docker_version": "28.2.2",
+    "docker_mode": "rootless",
+    "godot_version": "4.3"
+  },
+  "reproducibility_notes": [
+    "The model loop ran in the Harbor host process through the dependency-free GamePhanes OpenAI-compatible tool adapter.",
+    "Every terminal command executed through Harbor inside the isolated task container at /app.",
+    "The CPU quota was omitted in the server-side task copy because rootless Docker could not apply NanoCPUs; task logic, starter project, verifier, memory limit, and storage limit were unchanged.",
+    "The API credential is not present in this summary or the public repository."
+  ],
+  "raw_archive": {
+    "published": false,
+    "sha256": "e30752d648d689d51f49ede7dcee0cd80ef20e825d12c8691323e133f9e91e9a"
+  }
+}

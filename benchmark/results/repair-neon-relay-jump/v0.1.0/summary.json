@@ -1,0 +1,49 @@
+{
+  "schema_version": "1.0",
+  "benchmark": "Game Terminal-Bench",
+  "task": "game-terminal-bench/repair-neon-relay-jump",
+  "task_version": "0.1.0",
+  "source_revision": "0ae4be25c0b42a1bbdbaae56747e780e3521368e",
+  "run_date": "2026-08-24",
+  "runner": {
+    "name": "harbor",
+    "version": "0.22.0"
+  },
+  "environment": {
+    "operating_system": "Ubuntu 22.04",
+    "docker_version": "28.2.2",
+    "docker_mode": "rootless",
+    "godot_version": "4.3"
+  },
+  "results": [
+    {
+      "agent": "oracle",
+      "trials": 1,
+      "completed_trials": 1,
+      "errored_trials": 0,
+      "reward_mean": 1.0
+    },
+    {
+      "agent": "nop",
+      "trials": 1,
+      "completed_trials": 1,
+      "errored_trials": 0,
+      "reward_mean": 0.0
+    }
+  ],
+  "direct_verifier_checks": {
+    "starter_exit_code": 1,
+    "starter_failure": "jump did not produce upward velocity",
+    "oracle_exit_code": 0,
+    "oracle_result": "all runtime assertions passed"
+  },
+  "reproducibility_notes": [
+    "The server used a regional mirror for the ubuntu:22.04 base image because its configured Docker mirror returned HTTP 403.",
+    "The CPU quota was omitted for this run because rootless Docker could not apply NanoCPUs. The task's memory and storage limits remained configured.",
+    "Task logic, starter project, Oracle solution, and verifier were unchanged."
+  ],
+  "raw_archive": {
+    "published": false,
+    "sha256": "d9771df9a696b953127b3739cb635fccea116a78dc769613b7b83bc4a4a9996e"
+  }
+}

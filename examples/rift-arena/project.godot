@@ -1,0 +1,24 @@
+config_version=5
+
+[application]
+config/name="Rift Arena"
+run/main_scene="res://main.tscn"
+
+[display]
+window/size/viewport_width=960
+window/size/viewport_height=540
+window/size/window_width_override=960
+window/size/window_height_override=540
+window/stretch/mode="canvas_items"
+
+[input]
+move_left={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":65)]}
+move_right={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":68)]}
+move_forward={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":87)]}
+move_back={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":83)]}
+attack={"deadzone":0.5,"events":[Object(InputEventKey,"physical_keycode":32)]}
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.018,0.012,0.035,1)

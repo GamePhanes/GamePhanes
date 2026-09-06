@@ -1,0 +1,25 @@
+{
+  "job_name": "kinetic-vault-k3-v0.1.0",
+  "jobs_dir": "/mnt/hdb/chenyizi/game-terminal-bench/jobs",
+  "n_concurrent_trials": 1,
+  "agents": [
+    {
+      "import_path": "integrations.harbor.openai_tool_agent:OpenAICompatibleToolAgent",
+      "model_name": "openai/kimi-k3",
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "OPENAI_BASE_URL": "${OPENAI_BASE_URL}",
+        "OPENAI_TEMPERATURE": "1",
+        "OPENAI_MAX_TOKENS": "4096",
+        "OPENAI_TIMEOUT_SEC": "240",
+        "OPENAI_MAX_TURNS": "40",
+        "OPENAI_MAX_TRUNCATIONS": "6"
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "path": "benchmark/harbor-tasks/repair-kinetic-vault-controller"
+    }
+  ]
+}

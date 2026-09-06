@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "repair_neon_relay_jump_001",
+  "title": "Repair Neon Relay Jump",
+  "description": "The runner can move and collect shards, but the phase jump no longer lifts the player. Restore the intended jump behavior without breaking shard collection or relay completion.",
+  "taxonomy": {
+    "domain": "gameplay_systems",
+    "subdomain": "movement",
+    "task_type": "bug_fix"
+  },
+  "registry": {
+    "slug": "repair-neon-relay-jump",
+    "version": "gamephanes-development==0.1",
+    "kind": "coding_challenge",
+    "evaluator_visibility": "public_development",
+    "difficulty": "medium",
+    "tags": ["godot", "2d", "bug-fix", "movement", "regression"],
+    "author": "GamePhanes",
+    "image": "neon-relay.png"
+  },
+  "project": { "path": "../../examples/neon-relay-repair-jump" },
+  "requirements": [
+    { "id": "jump_lifts_runner", "description": "After the runner has moved, pressing the phase-jump input produces an upward velocity." },
+    { "id": "shards_remain_collectible", "description": "The runner can still collect all three energy shards." },
+    { "id": "relay_remains_completable", "description": "The runner can reach the relay after collecting all three shards." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/repair-neon-relay-jump.gd",
+    "timeout_seconds": 15,
+    "assertions": [
+      { "id": "game_ready", "event": "game_ready", "operator": "exists" },
+      { "id": "runner_moved", "event": "player_moved", "field": "delta_x", "operator": ">", "value": 35 },
+      { "id": "jump_restored", "event": "player_jumped", "field": "velocity_y", "operator": "<", "value": 0 },
+      { "id": "all_shards", "event": "relay_finished", "field": "shards", "operator": "==", "value": 3 },
+      { "id": "relay_complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}

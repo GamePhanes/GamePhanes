@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Invert chamber polarity, stabilize the suspended core, and cross the unlocked exit.">
+    <title>Gravity Lab - GamePhanes Registry</title>
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../styles.css">
+  </head>
+  <body class="registry-page">
+    <header class="site-header registry-site-header">
+    <a class="brand" href="../../" aria-label="GamePhanes home">
+      <span class="brand-mark" aria-hidden="true">GP</span>
+      <span>GamePhanes</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="../../registry/">Registry</a>
+      <a href="../../#taxonomy">Taxonomy</a>
+      <a href="../../architecture.md">Architecture</a>
+      <a class="nav-action" href="https://github.com/GamePhanes/GamePhanes">GitHub</a>
+    </nav>
+  </header>
+    <main class="task-detail">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../../">Home</a><span>/</span><a href="../">Registry</a><span>/</span><strong>gravity-lab</strong>
+      </nav>
+      <header class="task-detail-header">
+        <h1>Gravity Lab</h1>
+        <div class="task-version">gamephanes-public==0.1</div>
+        <div class="task-source-links">
+          <a href="https://github.com/GamePhanes/GamePhanes/blob/main/benchmark/tasks/gravity-lab.json">Task JSON</a>
+          <a href="https://github.com/GamePhanes/GamePhanes/tree/main/examples/gravity-lab">Project source</a>
+          <button type="button" data-copy-text="showcase_gravity_lab_001">Copy task ID</button>
+        </div>
+        <div class="registry-badges">
+      <span>Gameplay Systems</span>
+      <span>Physics</span>
+      <span>Reference environment</span>
+      <span>Public evaluator</span>
+      <span>unrated</span>
+    </div>
+      </header>
+
+      <section class="task-detail-section" aria-labelledby="usage-title">
+        <h2 id="usage-title">Usage</h2>
+        <div class="task-command">
+          <pre><code>node ./bin/gamephanes.js task init ./benchmark/tasks/gravity-lab.json --workspace ./workspace
+node ./bin/gamephanes.js run ./benchmark/tasks/gravity-lab.json --project ./workspace --godot /path/to/godot</code></pre>
+          <button type="button" data-copy-text="node ./bin/gamephanes.js task init ./benchmark/tasks/gravity-lab.json --workspace ./workspace
+node ./bin/gamephanes.js run ./benchmark/tasks/gravity-lab.json --project ./workspace --godot /path/to/godot">Copy command</button>
+        </div>
+      </section>
+
+      <section class="task-detail-section" aria-labelledby="demo-title">
+        <h2 id="demo-title">Runtime evidence</h2>
+        <div class="task-evidence">
+          <img src="../../assets/gravity-lab.png" alt="Gravity Lab runtime capture">
+          <div>
+            <p>This executable Godot project is the feedback surface for the task. Evaluator-controlled inputs probe the candidate project; the Coding Agent acts through terminal commands and code changes.</p>
+            <a class="button button-primary" href="../../play/gravity-lab/">Play environment</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="task-detail-section task-instruction" aria-labelledby="instruction-title">
+        <h2 id="instruction-title">Instruction</h2>
+        <p>Invert chamber polarity, stabilize the suspended core, and cross the unlocked exit.</p>
+        <h3>Success criteria</h3>
+        <ul><li><strong>polarity</strong><span>The player can invert chamber gravity.</span></li>
+<li><strong>core</strong><span>The core reaches the upper stabilizer.</span></li>
+<li><strong>exit</strong><span>A stabilized core unlocks the chamber exit.</span></li></ul>
+      </section>
+
+      <section class="task-detail-section" aria-labelledby="evaluation-title">
+        <h2 id="evaluation-title">Evaluation contract</h2>
+        <dl class="task-facts">
+          <div><dt>Task ID</dt><dd>showcase_gravity_lab_001</dd></div>
+          <div><dt>Runtime</dt><dd>Godot 4.x</dd></div>
+          <div><dt>Timeout</dt><dd>15 seconds</dd></div>
+          <div><dt>Assertions</dt><dd>4 deterministic checks</dd></div>
+          <div><dt>Harness</dt><dd>External, benchmark-owned</dd></div>
+          <div><dt>Agent action</dt><dd>Terminal commands and project edits</dd></div>
+        </dl>
+      </section>
+
+      <section class="task-detail-section" aria-labelledby="tags-title">
+        <h2 id="tags-title">Tags</h2>
+        <div class="registry-tags task-tags"><span>godot</span><span>2d</span><span>physics</span><span>state-signals</span><span>puzzle</span></div>
+        <p class="task-author">Created by GamePhanes</p>
+      </section>
+
+      <p class="reference-notice">PUBLIC REFERENCE ENVIRONMENT. THIS PAGE DOCUMENTS THE OPEN CONTRACT; SEALED STARTERS, HIDDEN ASSERTIONS, AND PRODUCTION ROLLOUTS ARE NOT PUBLISHED HERE.</p>
+    </main>
+    <footer><div class="section-inner footer-inner"><span>GamePhanes</span><span>Terminal-Bench for interactive software coding agents.</span><span data-copyright></span></div></footer>
+    <script src="../../registry.js"></script>
+  </body>
+</html>

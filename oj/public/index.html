@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game OJ</title>
+<style>
+  :root { --ink:#142120; --mint:#7ee5c4; --paper:#f4f1e8; --coral:#ee715e; }
+  * { box-sizing:border-box } body { margin:0; font:16px Georgia,serif; background:radial-gradient(circle at 90% 0,#d8f2e8,transparent 34rem),var(--paper); color:var(--ink) }
+  main { max-width:850px; margin:0 auto; padding:12vh 24px } h1 { font:700 clamp(3rem,10vw,6rem)/.9 Georgia,serif; margin:0 0 24px; letter-spacing:-.06em } .card { background:#fffdf7; border:2px solid var(--ink); box-shadow:8px 8px 0 var(--mint); padding:24px; margin:22px 0 } input,button { font:inherit; padding:10px; border:1px solid var(--ink) } input { width:100%; margin:8px 0 } button { background:var(--coral); color:#fff; cursor:pointer; font-weight:bold } pre { background:#172222; color:#d7f7eb; padding:16px; overflow:auto; min-height:80px; white-space:pre-wrap } small { color:#53605e }
+</style>
+<main>
+  <h1>Game OJ</h1>
+  <section class="card">
+    <strong>ZIP 提交格式</strong>
+    <pre>my-task.zip
+├── task.toml
+├── instruction.md
+├── environment/project/project.godot
+├── environment/Dockerfile
+├── tests/test.sh
+└── solution/solve.sh</pre>
+    <label>题目包 ZIP<input id="file" type="file" accept=".zip,application/zip"></label>
+    <button id="submit">提交评测</button>
+  </section>
+  <section class="card"><strong id="status">等待提交</strong><pre id="log">评测日志会显示在这里。</pre></section>
+  <section class="card">
+    <strong>管理员审核</strong>
+    <label>管理员密码<input id="adminPassword" type="password"></label>
+    <button id="loadReviews">加载可审核提交</button>
+    <label>提交 ID<input id="reviewId" placeholder="从审核队列复制提交 ID"></label>
+    <button id="downloadArchive">下载提交 ZIP</button>
+    <pre id="reviews">这里只显示已复现问题且修复验证通过的提交。</pre>
+    <pre id="source">下载的 ZIP 将包含用户原始提交内容。</pre>
+  </section>
+</main>
+<script>
+const taskId = 'repair-neon-relay-jump';
+const status = document.querySelector('#status'), log = document.querySelector('#log');
+document.querySelector('#submit').onclick = async () => {
+  const file = document.querySelector('#file').files[0];
+  if (!file) return alert('请选择 ZIP。');
+  status.textContent = '正在上传'; log.textContent = '';
+  const response = await fetch(`/api/submissions?task=${taskId}`, { method:'POST', headers:{ 'Content-Type':'application/zip' }, body:file });
+  const body = await response.json();
+  if (!response.ok) { status.textContent = '提交失败'; log.textContent = body.error; return; }
+  poll(body.id);
+};
+async function poll(id) { const response = await fetch(`/api/submissions/${id}`); const job = await response.json(); if (!response.ok) { status.textContent = '读取失败'; log.textContent = job.error; return; } status.textContent = `状态：${job.status}`; log.textContent = job.log || '任务排队中...'; if (['queued','preparing','running'].includes(job.status)) setTimeout(() => poll(id), 1000); }
+document.querySelector('#loadReviews').onclick = async () => {
+  const password = document.querySelector('#adminPassword').value;
+  const response = await fetch('/api/admin/submissions', { headers:{ 'X-Admin-Password':password } });
+  const jobs = await response.json();
+  if (!response.ok) { reviews.textContent = jobs.error; return; }
+  const reviewable = jobs.filter(job =>
+    job.status === 'pending_review' &&
+    job.validation?.originalProblemDetected === true &&
+    job.validation?.solutionPasses === true
+  );
+  reviews.textContent = reviewable.map(job =>
+    `${job.id}\n状态: 待审核 | 自动验证: 已复现问题，修复后通过\n${job.log ?? ''}\n`
+  ).join('\n---\n') || '暂无可审核提交';
+};
+document.querySelector('#downloadArchive').onclick = async () => {
+  const password = document.querySelector('#adminPassword').value, id = document.querySelector('#reviewId').value.trim();
+  if (!id) return alert('请输入提交 ID。');
+  const response = await fetch(`/api/admin/submissions/${id}/archive`, { headers:{ 'X-Admin-Password':password } });
+  if (!response.ok) { const body = await response.json(); source.textContent = body.error; return; }
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(await response.blob());
+  link.download = `${id}.zip`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  source.textContent = 'ZIP 下载已开始。';
+};
+</script>
+</html>

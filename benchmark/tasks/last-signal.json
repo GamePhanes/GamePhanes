@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "showcase_last_signal_001",
+  "title": "Last Signal",
+  "description": "Reposition the field transmitter and clear four threats with directed pulses.",
+  "taxonomy": { "domain": "gameplay_systems", "subdomain": "combat", "task_type": "reference_environment" },
+  "registry": {
+    "slug": "last-signal",
+    "version": "gamephanes-public==0.1",
+    "kind": "reference_environment",
+    "evaluator_visibility": "public_reference",
+    "difficulty": "unrated",
+    "tags": ["godot", "2d", "combat", "input", "state"],
+    "author": "GamePhanes",
+    "image": "last-signal.png",
+    "play_path": "play/last-signal/"
+  },
+  "project": { "path": "../../examples/last-signal" },
+  "requirements": [
+    { "id": "field_movement", "description": "The operator can reposition in the field." },
+    { "id": "pulse_combat", "description": "A pulse removes the nearest active threat." },
+    { "id": "signal_secure", "description": "Clearing all threats secures the channel." }
+  ],
+  "evaluation": {
+    "harness": "../harnesses/last-signal.gd",
+    "timeout_seconds": 15,
+    "assertions": [
+      { "id": "ready", "event": "game_ready", "field": "threats", "operator": "==", "value": 4 },
+      { "id": "combat", "event": "threat_cleared", "field": "count", "operator": ">=", "value": 1 },
+      { "id": "secured", "event": "signal_secured", "field": "defeated", "operator": "==", "value": 4 },
+      { "id": "complete", "event": "playtest_complete", "field": "success", "operator": "==", "value": true }
+    ]
+  }
+}

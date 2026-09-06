@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "benchmark": "Game Terminal-Bench",
+  "task": "game-terminal-bench/repair-kinetic-vault-controller",
+  "task_version": "0.1.0",
+  "run_date": "2026-08-24",
+  "runner": {
+    "name": "harbor",
+    "version": "0.22.0"
+  },
+  "agent": {
+    "name": "openai-compatible-tool-agent",
+    "version": "0.1.0",
+    "model": "kimi-k3",
+    "temperature": 1,
+    "max_tokens_per_response": 4096
+  },
+  "result": {
+    "trials": 1,
+    "completed_trials": 1,
+    "errored_trials": 0,
+    "reward_mean": 0.0,
+    "verifier_exit_code": 1,
+    "passed_assertions": 16,
+    "total_assertions": 18,
+    "failed_assertions": [
+      "jump is accepted on final coyote tick",
+      "buffered jump fires on landing boundary"
+    ]
+  },
+  "trajectory": {
+    "turns": 30,
+    "tool_calls": 30,
+    "truncations_continued": 2,
+    "input_tokens": 517661,
+    "cached_tokens": 483904,
+    "output_tokens": 32660,
+    "finish_reason": "stop",
+    "sha256": "1739b2ab8420582df33991b69832375cad688e41176f37d2dfe6cb61c0c91200"
+  },
+  "artifact": {
+    "controller_sha256": "09050d7d0f89b8388c91ef3a90c9a4abd092629317e7e2d33838a83cf124362c"
+  },
+  "timing_seconds": {
+    "environment_setup": 3.164477,
+    "agent_setup": 0.00008,
+    "agent_execution": 1182.607328,
+    "verifier": 0.586002,
+    "job_total": 1199.447612
+  },
+  "reproducibility_notes": [
+    "The model made and tested substantive code changes, completed 30 turns, and ended normally with finish_reason=stop.",
+    "The result has no infrastructure exception and is a verifier failure, not a setup, gateway, timeout, or truncation failure.",
+    "The CPU quota was omitted in the server-side task copy because rootless Docker could not apply NanoCPUs.",
+    "The API credential and raw trajectory are not present in the public repository."
+  ],
+  "raw_archive": {
+    "published": false,
+    "sha256": "8cadb4b0396d612e03a3659716ab9f1d72e85430b9ef5068ff2d971ee0650d82"
+  }
+}

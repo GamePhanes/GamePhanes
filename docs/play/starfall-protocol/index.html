@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#090d12">
+    <title>Starfall Protocol / 星坠协议 - Play on GamePhanes</title>
+    <link rel="stylesheet" href="../player.css">
+  </head>
+  <body data-controls-en="WASD move, Shift dash, Space fire, E select" data-controls-zh="WASD 移动，Shift 冲刺，空格射击，E 选择" data-touch-controls="[{&quot;actionName&quot;:&quot;move_up&quot;,&quot;code&quot;:&quot;KeyW&quot;,&quot;key&quot;:&quot;w&quot;,&quot;label&quot;:&quot;↑&quot;,&quot;ariaEn&quot;:&quot;Move up&quot;,&quot;ariaZh&quot;:&quot;向上移动&quot;},{&quot;actionName&quot;:&quot;move_left&quot;,&quot;code&quot;:&quot;KeyA&quot;,&quot;key&quot;:&quot;a&quot;,&quot;label&quot;:&quot;←&quot;,&quot;ariaEn&quot;:&quot;Move left&quot;,&quot;ariaZh&quot;:&quot;向左移动&quot;},{&quot;actionName&quot;:&quot;move_down&quot;,&quot;code&quot;:&quot;KeyS&quot;,&quot;key&quot;:&quot;s&quot;,&quot;label&quot;:&quot;↓&quot;,&quot;ariaEn&quot;:&quot;Move down&quot;,&quot;ariaZh&quot;:&quot;向下移动&quot;},{&quot;actionName&quot;:&quot;move_right&quot;,&quot;code&quot;:&quot;KeyD&quot;,&quot;key&quot;:&quot;d&quot;,&quot;label&quot;:&quot;→&quot;,&quot;ariaEn&quot;:&quot;Move right&quot;,&quot;ariaZh&quot;:&quot;向右移动&quot;},{&quot;actionName&quot;:&quot;fire&quot;,&quot;code&quot;:&quot;Space&quot;,&quot;key&quot;:&quot; &quot;,&quot;label&quot;:&quot;FIRE&quot;,&quot;labelZh&quot;:&quot;射击&quot;,&quot;ariaEn&quot;:&quot;Fire&quot;,&quot;ariaZh&quot;:&quot;射击&quot;,&quot;action&quot;:true},{&quot;actionName&quot;:&quot;dash&quot;,&quot;code&quot;:&quot;ShiftLeft&quot;,&quot;key&quot;:&quot;Shift&quot;,&quot;label&quot;:&quot;DASH&quot;,&quot;labelZh&quot;:&quot;冲刺&quot;,&quot;ariaEn&quot;:&quot;Dash&quot;,&quot;ariaZh&quot;:&quot;冲刺&quot;,&quot;action&quot;:true},{&quot;actionName&quot;:&quot;interact&quot;,&quot;code&quot;:&quot;KeyE&quot;,&quot;key&quot;:&quot;e&quot;,&quot;label&quot;:&quot;SELECT&quot;,&quot;labelZh&quot;:&quot;选择&quot;,&quot;ariaEn&quot;:&quot;Select upgrade&quot;,&quot;ariaZh&quot;:&quot;选择升级&quot;,&quot;action&quot;:true}]">
+    <header class="player-header">
+      <a class="back-link" href="../../#showcase" data-label="back">Back to showcase</a>
+      <div class="game-identity">
+        <span>GAMEPHANES / PLAY</span>
+        <h1>Starfall Protocol / 星坠协议</h1>
+      </div>
+      <p class="controls-copy" data-controls-copy>WASD move, Shift dash, Space fire, E select</p>
+      <div class="player-actions">
+        <button type="button" data-reload aria-label="Reload game" title="Reload game">↻</button>
+        <button type="button" data-fullscreen aria-label="Enter fullscreen" title="Enter fullscreen">⛶</button>
+      </div>
+    </header>
+    <main class="player-main">
+      <section class="game-stage" data-stage>
+        <div class="loading-state" data-loading>
+          <span class="loading-mark">GP</span>
+          <strong data-loading-title>Loading Godot engine...</strong>
+          <progress class="loading-progress" data-loading-progress></progress>
+          <span class="loading-detail" data-loading-detail aria-live="polite"></span>
+        </div>
+        <iframe id="game-frame" src="game.html" title="Starfall Protocol / 星坠协议 game" allow="autoplay; fullscreen" data-game-frame></iframe>
+      </section>
+      <nav class="touch-controls" data-touch-controls-container aria-label="Touch game controls"></nav>
+    </main>
+    <script src="../player.js"></script>
+  </body>
+</html>

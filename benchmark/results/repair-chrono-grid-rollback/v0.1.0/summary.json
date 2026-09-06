@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "benchmark": "Game Terminal-Bench",
+  "task": "game-terminal-bench/repair-chrono-grid-rollback",
+  "task_version": "0.1.0",
+  "run_date": "2026-08-24",
+  "runner": {
+    "name": "harbor",
+    "version": "0.22.0"
+  },
+  "environment": {
+    "operating_system": "Ubuntu 22.04",
+    "docker_version": "28.2.2",
+    "docker_mode": "rootless",
+    "godot_version": "4.3"
+  },
+  "results": [
+    {
+      "agent": "oracle",
+      "trials": 1,
+      "completed_trials": 1,
+      "errored_trials": 0,
+      "reward_mean": 1.0
+    },
+    {
+      "agent": "nop",
+      "trials": 1,
+      "completed_trials": 1,
+      "errored_trials": 0,
+      "reward_mean": 0.0
+    }
+  ],
+  "direct_verifier_checks": {
+    "starter_exit_code": 1,
+    "starter_failed_assertions": 6,
+    "oracle_exit_code": 0,
+    "oracle_result": "all deterministic rollback assertions passed"
+  },
+  "reproducibility_notes": [
+    "The CPU quota was omitted in the server-side task copy because rootless Docker could not apply NanoCPUs.",
+    "Task logic, starter project, Oracle solution, verifier, memory limit, and storage limit were unchanged."
+  ],
+  "raw_archive": {
+    "published": false,
+    "sha256": "fa50979679efee11b1104b2cfd22f396bd607f9038b18de477688278e6c05fd1"
+  }
+}

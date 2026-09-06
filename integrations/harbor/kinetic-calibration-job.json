@@ -1,0 +1,14 @@
+{
+  "job_name": "kinetic-vault-calibration-v0.1.0",
+  "jobs_dir": "/mnt/hdb/chenyizi/game-terminal-bench/jobs",
+  "n_concurrent_trials": 1,
+  "agents": [
+    { "name": "oracle" },
+    { "name": "nop" }
+  ],
+  "tasks": [
+    {
+      "path": "benchmark/harbor-tasks/repair-kinetic-vault-controller"
+    }
+  ]
+}

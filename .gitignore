@@ -1,10 +1,21 @@
-# The GitHub release is intentionally minimal: publish only the root README
-# and the curated example task. Local paper, data, scripts, and build files
-# remain available for development but are excluded from the upload set.
-*
-!.gitignore
-!README.md
-!release/
-!release/tasks/
-!release/tasks/godot-battle-status-bars-gloss/
-!release/tasks/godot-battle-status-bars-gloss/**
+# Godot editor/import cache (recreated automatically).
+.godot/
+
+# GamePhanes reports and local environment files.
+reports/
+benchmark/harbor-runs/
+.env
+.env.*
+
+# Node dependencies and OS metadata.
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+
+# Game OJ runtime state. Keep passwords and submitted projects out of Git.
+oj/.env
+oj/server.log
+oj/server.pid
+oj-data/
